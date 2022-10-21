@@ -15,13 +15,23 @@ export default function Cadastro() {
   const [email, setEmail] = useState();
   const [usuario, setUsuario] = useState();
   const [senha, setSenha] = useState();
+  const [status, setStatus] = useState();
   const user = {
     nome: nome,
     email: email,
     usuario: usuario,
     senha: senha,
   }
-  console.log(user)
+  const cadUser= () => {
+    let cadUser = AsyncStorage.setItem(nome, JSON.stringify(user))
+    if(cadUser){
+      navigation.navigate("Login")
+    }else{
+      setStatus("Não foi possivel cadastrar o usuario")
+    }
+  }
+
+  
   return (
     <>
       <View style={style.container}>
@@ -61,9 +71,7 @@ export default function Cadastro() {
         </View>
         <TouchableOpacity
           style={style.button}
-          onPress={() => {
-            navigation.navigate("Escolha");
-          }}
+          onPress={cadUser}
         >
           <Text style={style.textButton}>Cadastrar</Text>
         </TouchableOpacity>
@@ -78,6 +86,7 @@ export default function Cadastro() {
             </Text>
           </Text>
         </TouchableOpacity>
+        <Text>{status}</Text>
       </View>
     </>
   );
