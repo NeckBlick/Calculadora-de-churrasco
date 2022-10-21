@@ -7,10 +7,15 @@ import {
 } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../Contexs/Auth";
 
 
 export default function Login() {
   const navigation = useNavigation();
+  const [usuario, setUsuario] = useState()
+  const [senha, setSenha] = useState()
+  const { Logar }= useContext(AuthContext)
   return (
     <>
       <View style={style.container}>
@@ -25,9 +30,7 @@ export default function Login() {
         </View>
         <TouchableOpacity
           style={style.button}
-          onPress={() => {
-            navigation.navigate("Escolha");
-          }}
+          // onPress={Logar("L)}
         >
           <Text style={style.textButton}>Logar</Text>
         </TouchableOpacity>

@@ -33,7 +33,7 @@ export default function TelaInicial() {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate("Escolha");
+          navigation.navigate("Participante");
         }}
       >
         <Text style={style.textCalcular}>Calcular o churrasco sem logar</Text>
