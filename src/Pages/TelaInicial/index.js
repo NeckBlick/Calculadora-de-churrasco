@@ -32,9 +32,7 @@ export default function TelaInicial() {
         <Text style={style.textButton}>Cadastro</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => {
-          navigation.navigate("Participante");
-        }}
+        onPress={() => navigation.navigate("Participante")}
       >
         <Text style={style.textCalcular}>Calcular o churrasco sem logar</Text>
       </TouchableOpacity>
