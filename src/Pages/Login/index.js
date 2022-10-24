@@ -9,6 +9,8 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Contexs/Auth";
+import  Icon  from 'react-native-vector-icons/FontAwesome';
+
 
 
 export default function Login() {
@@ -20,7 +22,7 @@ export default function Login() {
     <>
       <View style={style.container}>
         <TouchableOpacity style={style.buttonBack} onPress={() => navigation.navigate("TelaInicial")}>
-            <Text>Voltar</Text>
+        <Icon name='arrow-left' size={20} color="#000"/>
         </TouchableOpacity>
         <Text style={style.title}>Login</Text>
         <View>

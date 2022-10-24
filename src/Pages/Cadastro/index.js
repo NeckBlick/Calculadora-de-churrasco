@@ -8,6 +8,8 @@ import {
 import { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import  Icon  from 'react-native-vector-icons/FontAwesome';
+
 
 export default function Cadastro() {
   const navigation = useNavigation();
@@ -39,7 +41,7 @@ export default function Cadastro() {
           style={style.buttonBack}
           onPress={() => navigation.navigate("TelaInicial")}
         >
-          <Text>Voltar</Text>
+          <Icon name='arrow-left' size={20} color="#000"/>
         </TouchableOpacity>
         <Text style={style.title}>Cadastro</Text>
         <View>

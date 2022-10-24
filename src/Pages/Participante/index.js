@@ -1,9 +1,9 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { useNavigation } from "@react-navigation/native";
-import iconMen from '../../Img/face-man.png'
-import iconWoman from '../../Img/face-woman.png'
+import  Icon  from 'react-native-vector-icons/FontAwesome';
 import CardPessoas from '../../Components/Pessoas';
+
 
 export default function Participante() {
   const navigation = useNavigation()
@@ -12,21 +12,23 @@ export default function Participante() {
         <View style={style.header}>
         <TouchableOpacity
             style={style.botaoVoltar}
-            onPress={() => navigation.navigate("TelaInicial")}
+            onPress={() => navigation.goBack()}
             >
-            <Text>Voltar</Text>
+            <Icon name='arrow-left' size={20} color="#000"/>
             </TouchableOpacity>
             <Text style={style.title}>Participantes do churrasco</Text>
             <Text>(Clique para adicionar um participante)</Text>
         </View>
         <View style={style.containerPessoa}>
-            <CardPessoas icon={iconMen}/>
-            <CardPessoas icon={iconWoman}/>
-            <CardPessoas icon={iconMen}/>
+            <CardPessoas icon="male"/>
+            <CardPessoas icon="female"/>
+            <CardPessoas icon="child"/>
+            
         </View>
+        
         <TouchableOpacity
-          style={style.button}
-          onPress={navigation.navigate("Bebidas")}
+          style={style.buttonParticipante}
+          onPress={() => {navigation.navigate("Bebidas")}}
         >
           <Text style={style.textButton}>Avançar</Text>
         </TouchableOpacity>
@@ -60,7 +62,7 @@ const style = StyleSheet.create({
         alignItems:'center',
         
     },
-    button: {
+    buttonParticipante: {
       backgroundColor: "#E95811",
       padding: 10,
       borderRadius: 15,
