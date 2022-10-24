@@ -8,6 +8,7 @@ import TelaInicial from "./src/Pages/TelaInicial";
 import Cadastro from "./src/Pages/Cadastro";
 import AuthProvider from "./src/Contexs/Auth";
 import Participante from "./src/Pages/Participante";
+import Bebidas from "./src/Pages/Bebidas";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -38,6 +39,11 @@ export default function App() {
           <Stack.Screen
             name="Participante"
             component={Participante}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Bebidas"
+            component={Bebidas}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

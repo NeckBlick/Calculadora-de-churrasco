@@ -1,39 +1,25 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { useNavigation } from "@react-navigation/native";
-import iconMen from '../../Img/face-man.png'
-import iconWoman from '../../Img/face-woman.png'
-import CardPessoas from '../../Components/Pessoas';
+import { useNavigation } from '@react-navigation/native';
 
-export default function Participante() {
-  const navigation = useNavigation()
+export default function Bebidas() {
+    const navigation = useNavigation()
   return (
     <View style={style.container}>
         <View style={style.header}>
         <TouchableOpacity
             style={style.botaoVoltar}
-            onPress={() => navigation.navigate("TelaInicial")}
+            onPress={() => navigation.navigate("Participante")}
             >
             <Text>Voltar</Text>
             </TouchableOpacity>
-            <Text style={style.title}>Participantes do churrasco</Text>
-            <Text>(Clique para adicionar um participante)</Text>
+            <Text style={style.title}>Escolha as bebidas</Text>
+            <Text>(Clique para selecionar as bebidas)</Text>
         </View>
-        <View style={style.containerPessoa}>
-            <CardPessoas icon={iconMen}/>
-            <CardPessoas icon={iconWoman}/>
-            <CardPessoas icon={iconMen}/>
-        </View>
-        <TouchableOpacity
-          style={style.button}
-          onPress={navigation.navigate("Bebidas")}
-        >
-          <Text style={style.textButton}>Avançar</Text>
-        </TouchableOpacity>
+        
     </View>
   )
 }
-
 const style = StyleSheet.create({
     container: {
       width: "100%",
