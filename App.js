@@ -10,6 +10,7 @@ import AuthProvider from "./src/Contexs/Auth";
 import Participante from "./src/Pages/Participante";
 import EscolhaCarnes from "./src/Pages/EscolhaCarnes";
 import Bebidas from './src/Pages/Bebidas/index'
+import Receitas from './src/Pages/Receitas'
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -50,6 +51,11 @@ export default function App() {
           <Stack.Screen
             name="Carnes"
             component={EscolhaCarnes}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Receitas"
+            component={Receitas}
             options={{ headerShown: false }}
           />
 

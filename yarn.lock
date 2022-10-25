@@ -4482,7 +4482,7 @@
   "resolved" "https://registry.npmjs.org/eventemitter3/-/eventemitter3-4.0.7.tgz"
   "version" "4.0.7"
 
-"events@^3.0.0":
+"events@^3.0.0", "events@^3.2.0":
   "integrity" "sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q=="
   "resolved" "https://registry.npmjs.org/events/-/events-3.3.0.tgz"
   "version" "3.3.0"
@@ -4548,6 +4548,13 @@
     "md5-file" "^3.2.3"
     "path-browserify" "^1.0.0"
     "url-parse" "^1.5.9"
+
+"expo-av@~12.0.4":
+  "integrity" "sha512-wq3wx6J1aacZEPZce9TK1+o4YTAOWyb5cJ4CqfsgHcXeUdHyO3qbva/5uecigpEYlCxOlWYFhAz2T0dQ7nWSpQ=="
+  "resolved" "https://registry.npmjs.org/expo-av/-/expo-av-12.0.4.tgz"
+  "version" "12.0.4"
+  dependencies:
+    "@expo/config-plugins" "~5.0.0"
 
 "expo-checkbox@^2.2.0":
   "integrity" "sha512-vuLVnQS1UqzjKod/obfAC3XmozEDw1N338xKel1BqB/AclgpQVxCVhyPJRNsT3kScwrjNb4UXn3H0qJneTX/fg=="
@@ -5747,7 +5754,7 @@
     "has" "^1.0.3"
     "side-channel" "^1.0.4"
 
-"invariant@^2.2.4":
+"invariant@^2.2.4", "invariant@2.2.4":
   "integrity" "sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA=="
   "resolved" "https://registry.npmjs.org/invariant/-/invariant-2.2.4.tgz"
   "version" "2.2.4"
@@ -8489,17 +8496,17 @@
   "resolved" "https://registry.npmjs.org/qrcode-terminal/-/qrcode-terminal-0.11.0.tgz"
   "version" "0.11.0"
 
+"qs@^6.5.1", "qs@6.7.0":
+  "integrity" "sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ=="
+  "resolved" "https://registry.npmjs.org/qs/-/qs-6.7.0.tgz"
+  "version" "6.7.0"
+
 "qs@6.11.0":
   "integrity" "sha512-MvjoMCJwEarSbUYk5O+nmoSzSutSsTwF85zcHPQ9OrlFoZOYIjaqBAJIqIXjptyD5vThxGq52Xu/MaJzRkIk4Q=="
   "resolved" "https://registry.npmjs.org/qs/-/qs-6.11.0.tgz"
   "version" "6.11.0"
   dependencies:
     "side-channel" "^1.0.4"
-
-"qs@6.7.0":
-  "integrity" "sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ=="
-  "resolved" "https://registry.npmjs.org/qs/-/qs-6.7.0.tgz"
-  "version" "6.7.0"
 
 "query-string@^7.0.0":
   "integrity" "sha512-MplouLRDHBZSG9z7fpuAAcI7aAYjDLhtsiVZsevsfaHWDS2IDdORKbSd1kWUA+V4zyva/HZoSfpwnYMMQDhb0w=="
@@ -8705,7 +8712,14 @@
     "prop-types" "^15.7.2"
     "yargs" "^16.1.1"
 
-"react-native-web@^0.18.9":
+"react-native-web-webview@^1.0.2", "react-native-web-webview@>=1.0.2":
+  "integrity" "sha512-oNAYNuqUqeqTuAAdIejzDqvUtYA+k5lrvhUYmASdUznZNmyIaoQFA6OKoA4K9F3wdMvark42vUXkUWIp875ewg=="
+  "resolved" "https://registry.npmjs.org/react-native-web-webview/-/react-native-web-webview-1.0.2.tgz"
+  "version" "1.0.2"
+  dependencies:
+    "qs" "^6.5.1"
+
+"react-native-web@*", "react-native-web@^0.18.9":
   "integrity" "sha512-BaV5Mpe7u9pN5vTRDW2g+MLh6PbPBJZpXRQM3Jr2cNv7hNa3sxCGh9T+NcW6wOFzf/+USrdrEPI1M9wNyr7vyA=="
   "resolved" "https://registry.npmjs.org/react-native-web/-/react-native-web-0.18.9.tgz"
   "version" "0.18.9"
@@ -8718,7 +8732,22 @@
     "postcss-value-parser" "^4.2.0"
     "styleq" "^0.1.2"
 
-"react-native@*", "react-native@^0.0.0-0 || 0.60 - 0.70 || 1000.0.0", "react-native@0.69.6":
+"react-native-webview@^11.23.0", "react-native-webview@>=7.0.0":
+  "integrity" "sha512-mGrgsMnYcQONvQy59xpBn87sKqkCsSkqIDRo+c2Ov4ISYl1j90wFBs+qViVJRWdoNHVuoCAZ4nZkJ65mhDpHhA=="
+  "resolved" "https://registry.npmjs.org/react-native-webview/-/react-native-webview-11.23.0.tgz"
+  "version" "11.23.0"
+  dependencies:
+    "escape-string-regexp" "2.0.0"
+    "invariant" "2.2.4"
+
+"react-native-youtube-iframe@^2.2.2":
+  "integrity" "sha512-og2KW21kCwAHKcnWoyWWBYC6J2Xtqjjwpghhoy9G6zfwZkr8Ej27BbQIAKM/TheJJUZ5/YUrqsgqAdnFYDx5TQ=="
+  "resolved" "https://registry.npmjs.org/react-native-youtube-iframe/-/react-native-youtube-iframe-2.2.2.tgz"
+  "version" "2.2.2"
+  dependencies:
+    "events" "^3.2.0"
+
+"react-native@*", "react-native@^0.0.0-0 || 0.60 - 0.70 || 1000.0.0", "react-native@>=0.60", "react-native@0.69.6":
   "integrity" "sha512-wwXpqM+12kdEYdBZCJUb5SBu95CzgejrwFeYJ78RzHZV/Sj6DBRekbsHGrDDsY4R25QXALQxy4DQYQCObVvWjA=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.69.6.tgz"
   "version" "0.69.6"
@@ -8777,7 +8806,7 @@
   dependencies:
     "clsx" "^1.1.1"
 
-"react@*", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17.0.2 || ^18.0.0", "react@^18.0.0", "react@>=16", "react@>=17.0.0", "react@18.0.0":
+"react@*", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17.0.2 || ^18.0.0", "react@^18.0.0", "react@>=16", "react@>=16.8.6", "react@>=17.0.0", "react@18.0.0":
   "integrity" "sha512-x+VL6wbT4JRVPm7EGxXhZ8w8LTROaxPXOqhlGyVSrv0sB1jkyFGgXxJ8LVoPRLvPR6/CIZGFmfzqUa2NYeMr2A=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.0.0.tgz"
   "version" "18.0.0"
