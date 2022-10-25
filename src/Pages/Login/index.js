@@ -26,9 +26,14 @@ export default function Login() {
         </TouchableOpacity>
         <Text style={style.title}>Login</Text>
         <View>
-            
-          <TextInput style={style.input} placeholder="Usuário" />
-          <TextInput style={style.input} secureTextEntry={true} placeholder="Senha" />
+          <View style={{position:"relative"}}>
+            <Icon name="user" size={20} color="#000" style={style.userIcon} />
+            <TextInput style={style.input} placeholder="Usuário" />
+          </View>
+          <View style={{position:"relative"}}>
+            <Icon name="lock" size={20} color="#000" style={style.userIcon} />
+            <TextInput style={style.input} secureTextEntry={true} placeholder="Senha" />
+          </View>
         </View>
         <TouchableOpacity
           style={style.button}
@@ -89,7 +94,7 @@ const style = StyleSheet.create({
     backgroundColor: "rgba(241, 241, 241, 0.8);",
     width: 300,
     padding:8,
-    paddingLeft: 15,
+    paddingLeft: 40,
     marginBottom: 20,
     borderRadius: 15,
     fontSize: 14,
@@ -106,5 +111,10 @@ const style = StyleSheet.create({
     position:"absolute",
     top:45,
     left:30
+  },
+  userIcon:{
+    position:"absolute",
+    left:15,
+    top:8
   }
 });

@@ -45,24 +45,39 @@ export default function Cadastro() {
         </TouchableOpacity>
         <Text style={style.title}>Cadastro</Text>
         <View>
-          <TextInput
-            style={style.input}
-            placeholder="Nome"
-            
-            onChangeText={setNome}
-          />
+          <View style={{position:"relative", alignItems:"center"}}>
+          <Icon name="user-circle" size={20} color="#000" style={style.userIcon} />
+
+            <TextInput
+              style={style.input}
+              placeholder="Nome"
+              
+              onChangeText={setNome}
+            />
+          </View>
+          <View style={{position:"relative"}}>
+          <Icon name="envelope" size={20} color="#000" style={style.userIcon} />
+
           <TextInput
             style={style.input}
             placeholder="Email"
             name="email"
             onChangeText={setEmail}
           />
+          </View>
+          <View style={{position:"relative"}}>
+          <Icon name="user" size={20} color="#000" style={style.userIcon} />
+
           <TextInput
             style={style.input}
             placeholder="Usuário"
             name="user"
             onChangeText={setUsuario}
           />
+          </View>
+          <View style={{position:"relative"}}>
+          <Icon name="lock" size={20} color="#000" style={style.userIcon} />
+
           <TextInput
             style={style.input}
             secureTextEntry={true}
@@ -70,6 +85,7 @@ export default function Cadastro() {
             name="senha"
             onChangeText={setSenha}
           />
+          </View>
         </View>
         <TouchableOpacity
           style={style.button}
@@ -132,7 +148,7 @@ const style = StyleSheet.create({
     backgroundColor: "rgba(241, 241, 241, 0.8);",
     width: 300,
     padding: 8,
-    paddingLeft: 15,
+    paddingLeft: 40,
     marginBottom: 20,
     borderRadius: 15,
     fontSize: 14,
@@ -150,4 +166,9 @@ const style = StyleSheet.create({
     top: 45,
     left: 30,
   },
+  userIcon:{
+    position:"absolute",
+    left:15,
+    top:8
+  }
 });

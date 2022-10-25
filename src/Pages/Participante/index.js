@@ -28,7 +28,7 @@ export default function Participante() {
         
         <TouchableOpacity
           style={style.buttonParticipante}
-          onPress={() => {navigation.navigate("Bebidas")}}
+          onPress={() => {navigation.navigate("Carnes")}}
         >
           <Text style={style.textButton}>Avançar</Text>
         </TouchableOpacity>

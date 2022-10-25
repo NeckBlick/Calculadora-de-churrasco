@@ -8,6 +8,7 @@ import TelaInicial from "./src/Pages/TelaInicial";
 import Cadastro from "./src/Pages/Cadastro";
 import AuthProvider from "./src/Contexs/Auth";
 import Participante from "./src/Pages/Participante";
+import EscolhaCarnes from "./src/Pages/EscolhaCarnes";
 import Bebidas from './src/Pages/Bebidas/index'
 
 export default function App() {
@@ -19,12 +20,12 @@ export default function App() {
           <Stack.Screen
             name="TelaInicial"
             component={TelaInicial}
-            options={{ headerShown: false }}
+            options={{ headerShown: false}}
           />
           <Stack.Screen
             name="Login"
             component={Login}
-            options={{ headerShown: false }}
+            options={{ headerShown: false   }}
           />
           <Stack.Screen
             name="Cadastro"
@@ -44,6 +45,11 @@ export default function App() {
           <Stack.Screen
             name="Bebidas"
             component={Bebidas}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Carnes"
+            component={EscolhaCarnes}
             options={{ headerShown: false }}
           />
 
