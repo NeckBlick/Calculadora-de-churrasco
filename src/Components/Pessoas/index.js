@@ -5,7 +5,7 @@ import  Icon  from 'react-native-vector-icons/FontAwesome';
 export default function CardPessoas({ icon }) {
   const [count, setCount] = useState(0);
   return (
-    <View style={style.container}>
+    <View style={style.containerCard}>
       <View style={style.iconContainer}>
         <Icon name={icon} size={45} color={"#000"}/>
       </View>
@@ -25,7 +25,7 @@ export default function CardPessoas({ icon }) {
 }
 
 const style = StyleSheet.create({
-  container: {
+  containerCard: {
     width: 300,
     height: 60,
     flexDirection: "row",
