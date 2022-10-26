@@ -20,20 +20,19 @@ export default function Participante() {
       autoHide: true,
     });
   };
-  console.log(child)
+  console.log(child);
   return (
     <View style={style.container}>
-        <Toast
+      <Toast
         ref={(ref) => {
           Toast.setRef(ref);
         }}
-      />  
+      />
       <View style={style.header}>
         <TouchableOpacity
           style={style.botaoVoltar}
           onPress={() => navigation.goBack()}
         >
-         
           <Icon name="arrow-left" size={20} color="#000" />
         </TouchableOpacity>
         <Text style={style.title}>Participantes do churrasco</Text>
@@ -72,22 +71,22 @@ export default function Participante() {
               <Text style={style.icon}>+</Text>
             </TouchableOpacity>
           </View>
-
         </View>
-      
-          <View style={style.containerCard}>
-            <View style={style.iconContainer}>
-              <Icon name="child" size={45} color={"#000"} />
-            </View>
-            <View style={style.buttonContainer}>
-              <TouchableOpacity onPress={() => setChild(child - 1)}>
-                <Text style={style.icon}>-</Text>
-              </TouchableOpacity>
-              <Text style={{ color: "white", fontSize: 32 }}>
-                {child < 0 ? setChild(0) && child : child}
-              </Text>
-              <TouchableOpacity onPress={() => {
-                setChild(child + 1)
+
+        <View style={style.containerCard}>
+          <View style={style.iconContainer}>
+            <Icon name="child" size={45} color={"#000"} />
+          </View>
+          <View style={style.buttonContainer}>
+            <TouchableOpacity onPress={() => setChild(child - 1)}>
+              <Text style={style.icon}>-</Text>
+            </TouchableOpacity>
+            <Text style={{ color: "white", fontSize: 32 }}>
+              {child < 0 ? setChild(0) && child : child}
+            </Text>
+            <TouchableOpacity
+              onPress={() => {
+                setChild(child + 1);
                 Toast.show({
                   type: "info",
                   position: "top",
@@ -97,17 +96,15 @@ export default function Participante() {
                   autoHide: true,
                   onShow: () => {},
                   onHide: () => {},
-                })
-                } }>
-                <Text style={style.icon}>+</Text>
-              </TouchableOpacity>
-            </View>
+                });
+              }}
+            >
+              <Text style={style.icon}>+</Text>
+            </TouchableOpacity>
           </View>
+        </View>
       </View>
-      
-      
-      
-      
+
       <TouchableOpacity
         style={style.buttonParticipante}
         onPress={() => {
