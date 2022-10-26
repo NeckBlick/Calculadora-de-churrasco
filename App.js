@@ -9,8 +9,9 @@ import Cadastro from "./src/Pages/Cadastro";
 import AuthProvider from "./src/Contexs/Auth";
 import Participante from "./src/Pages/Participante";
 import EscolhaCarnes from "./src/Pages/EscolhaCarnes";
-import Bebidas from './src/Pages/Bebidas/index'
-import Receitas from './src/Pages/Receitas'
+import Bebidas from './src/Pages/Bebidas/index';
+import Receitas from './src/Pages/Receitas';
+import Duracao from './src/Pages/Duracao';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -51,6 +52,11 @@ export default function App() {
           <Stack.Screen
             name="Carnes"
             component={EscolhaCarnes}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Duracao"
+            component={Duracao}
             options={{ headerShown: false }}
           />
           <Stack.Screen

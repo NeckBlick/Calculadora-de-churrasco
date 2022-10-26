@@ -27,6 +27,7 @@ export default function Receitas (){
 				<Text style={style.title}>Sugestão de receitas</Text>
 			</View>
 			<View style={style.containervideo}>
+      <Text style={style.titulo_video}>Receita com linguiça saborosa</Text>
 				<YoutubePlayer
 					height={300}
 					ref={controlRef}
@@ -54,7 +55,7 @@ const style = StyleSheet.create({
 	},
     header:{
         width: "100%",
-        height: 200,
+        height: 90,
         alignItems:'center',
         justifyContent:"center"
     },
@@ -92,4 +93,11 @@ const style = StyleSheet.create({
       color: "#fff",
       lineHeight: 24,
     },
+    titulo_video:{
+      fontSize: 20,
+      color: "#fff",
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      marginBottom: 50,
+    }
 });
