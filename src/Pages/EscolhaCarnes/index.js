@@ -32,8 +32,6 @@ export default function EscolhaCarnes() {
 
 	return (
 		<View style={style.container}>
-			{/* botão de voltar */}
-
 			<View style={style.header}>
 				<TouchableOpacity
 					style={style.botaoVoltar}

@@ -12,6 +12,7 @@ import EscolhaCarnes from "./src/Pages/EscolhaCarnes";
 import Bebidas from './src/Pages/Bebidas/index';
 import Receitas from './src/Pages/Receitas';
 import Duracao from './src/Pages/Duracao';
+import Rateio from "./src/Pages/Rateio";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -62,6 +63,11 @@ export default function App() {
           <Stack.Screen
             name="Receitas"
             component={Receitas}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Rateio"
+            component={Rateio}
             options={{ headerShown: false }}
           />
 
