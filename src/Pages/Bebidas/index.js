@@ -51,7 +51,7 @@ function Bebidas() {
         </View>
         <TouchableOpacity
           style={style.buttonBebidas}
-          onPress={() => {navigation.push("TelaInicial");}}
+          onPress={() => {navigation.push("Localizacao");}}
         >
           <Text style={style.textButton}>Avançar</Text>
         </TouchableOpacity>

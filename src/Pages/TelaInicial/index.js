@@ -14,28 +14,10 @@ export default function TelaInicial() {
   return (
     <View style={style.container}>
       <Image source={Logo} alt="Logo" style={style.logo} />
-
-      <TouchableOpacity
-        style={style.button}
-        onPress={() => {
-          navigation.navigate("Login");
-        }}
-      >
-        <Text style={style.textButton}>Login</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={style.button}
-        onPress={() => {
-          navigation.navigate("Cadastro");
-        }}
-      >
-        <Text style={style.textButton}>Cadastro</Text>
-      </TouchableOpacity>
-      
       <TouchableOpacity
         onPress={() => {navigation.navigate("Participante");}}
       >
-        <Text style={style.textCalcular}>Calcular o churrasco sem logar</Text>
+        <Text style={style.textCalcular}>Calcular seu churrasco</Text>
       </TouchableOpacity>
     </View>
   );
@@ -73,8 +55,8 @@ const style = StyleSheet.create({
     lineHeight: 24,
   },
   textCalcular: {
-    fontWeight: "400",
-    fontSize: 18,
+    fontWeight: "500",
+    fontSize: 28,
     color: "#fff",
     lineHeight: 24,
     marginTop:20
