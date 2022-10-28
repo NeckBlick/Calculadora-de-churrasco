@@ -2,38 +2,28 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
 
-import Login from "./src/Pages/Login";
+
 import Perfil from "./src/Pages/Perfil";
 import TelaInicial from "./src/Pages/TelaInicial";
-import Cadastro from "./src/Pages/Cadastro";
-import AuthProvider from "./src/Contexs/Auth";
 import Participante from "./src/Pages/Participante";
 import EscolhaCarnes from "./src/Pages/EscolhaCarnes";
+
 import Bebidas from './src/Pages/Bebidas/index';
 import Receitas from './src/Pages/Receitas';
 import Duracao from './src/Pages/Duracao';
 import Rateio from "./src/Pages/Rateio";
+import Localizacao from "./src/Pages/Localizacao";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
-      <AuthProvider>
+      
         <Stack.Navigator>
           <Stack.Screen
             name="TelaInicial"
             component={TelaInicial}
             options={{ headerShown: false}}
-          />
-          <Stack.Screen
-            name="Login"
-            component={Login}
-            options={{ headerShown: false   }}
-          />
-          <Stack.Screen
-            name="Cadastro"
-            component={Cadastro}
-            options={{ headerShown: false }}
           />
           <Stack.Screen
             name="Perfil"
@@ -56,6 +46,7 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
+
             name="Duracao"
             component={Duracao}
             options={{ headerShown: false }}
@@ -68,11 +59,15 @@ export default function App() {
           <Stack.Screen
             name="Rateio"
             component={Rateio}
+               options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Localizacao"
+            component={Localizacao}
             options={{ headerShown: false }}
           />
 
         </Stack.Navigator>
-      </AuthProvider>
     </NavigationContainer>
   );
 }
