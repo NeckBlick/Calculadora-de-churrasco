@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from '@react-navigation/native';
 import  Icon  from 'react-native-vector-icons/FontAwesome';
 import CardBebida from '../../Components/CardBebida';
@@ -16,6 +17,17 @@ function Bebidas() {
     const [refrigerente, setRefrigerente] = useState(false)
     const [cerveja, setCerveja] = useState(false)
 
+    var dataBebidas = {
+			 Agua: agua,
+       Suco: suco,
+       Refrigerante: refrigerente,
+       Cerveja: cerveja,
+		};
+
+    const guardarBanco = () => {
+			let true_keys = Object.keys(dataBebidas).filter((key) => dataBebidas[key]);
+			AsyncStorage.setItem("Bebidas", true_keys);
+		};
     
   return (
     <View style={style.container}>
@@ -51,8 +63,10 @@ function Bebidas() {
         </View>
         <TouchableOpacity
           style={style.buttonBebidas}
-          onPress={() => {navigation.push("Duracao");}}
-
+          onPress={() => {
+            guardarBanco();
+            navigation.push("Duracao");
+          }}
         >
           <Text style={style.textButton}>Avançar</Text>
         </TouchableOpacity>
