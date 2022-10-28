@@ -30,7 +30,7 @@ export default function Localizacao() {
       <TouchableOpacity
         style={style.buttonBebidas}
         onPress={() => {
-          navigation.push("TelaInicial");
+          navigation.push("Resultado");
         }}
       >
         <Text style={style.textButton}>Avançar</Text>

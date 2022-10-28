@@ -13,6 +13,7 @@ import Receitas from './src/Pages/Receitas';
 import Duracao from './src/Pages/Duracao';
 import Rateio from "./src/Pages/Rateio";
 import Localizacao from "./src/Pages/Localizacao";
+import Resultado from "./src/Pages/Resultado";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -64,6 +65,11 @@ export default function App() {
           <Stack.Screen
             name="Localizacao"
             component={Localizacao}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Resultado"
+            component={Resultado}
             options={{ headerShown: false }}
           />
 
