@@ -1,8 +1,8 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React, { useRef, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import CardPessoas from "../../Components/Pessoas";
 import Toast from "react-native-toast-message";
 
 export default function Participante() {
@@ -10,6 +10,20 @@ export default function Participante() {
   const [female, setFemale] = useState(0);
   const [child, setChild] = useState(0);
   const navigation = useNavigation();
+
+  var dataPart = [
+    {sexo: "homem", quantidade: male },
+    {sexo: "mulher", quantidade: female },
+    {sexo: "crianca", quantidade: child }
+  ]
+
+
+const guardarBanco = () => {
+	let qtdPessoa = dataPart.filter(item => item.quantidade > 0 );
+          
+  qtdPessoa.length > 0 ? AsyncStorage.setItem("Paritipantes", JSON.stringify(qtdPessoa)) && navigation.navigate("Carnes") : ""
+};
+
   const showMessage = () => {
     Toast.show({
       type: "info",
@@ -108,7 +122,7 @@ export default function Participante() {
       <TouchableOpacity
         style={style.buttonParticipante}
         onPress={() => {
-          navigation.navigate("Carnes");
+          guardarBanco();
         }}
       >
         <Text style={style.textButton}>Avançar</Text>

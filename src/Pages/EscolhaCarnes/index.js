@@ -1,34 +1,52 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Checkbox from "expo-checkbox";
 import Vaca from "../../Img/vaca.png";
 import Galo from "../../Img/frango.png";
 import Porco from "../../Img/suino.png";
-import Seta from "../../Img/arrow-left.png";
 import Paozinho from "../../Img/pao.png";
 
 export default function EscolhaCarnes() {
 	const navigation = useNavigation();
 
 	//bovinos
-	const [isBov1, setBov1] = useState(false);
-	const [isBov2, setBov2] = useState(false);
-	const [isBov3, setBov3] = useState(false);
+	const [isPicanha, setPicanha] = useState(false);
+	const [isContra, setContra] = useState(false);
+	const [isCoxao, setCoxao] = useState(false);
 
 	//frango
-	const [isFrango1, setFrango1] = useState(false);
-	const [isFrango2, setFrango2] = useState(false);
-	const [isFrango3, setFrango3] = useState(false);
+	const [isAsa, setAsa] = useState(false);
+	const [isCoxa, setCoxa] = useState(false);
+	const [isCoracao, setCoracao] = useState(false);
 
 	//suino
-	const [isPorco1, setPorco1] = useState(false);
-	const [isPorco2, setPorco2] = useState(false);
-	const [isPorco3, setPorco3] = useState(false);
+	const [isLinguica, setLinguica] = useState(false);
+	const [isBisteca, setBisteca] = useState(false);
+	const [isCostela, setCostela] = useState(false);
 
 	//pao de alho
 	const [isPao, setPao] = useState(false);
+
+	var dataCarnes = {
+		Picanha: isPicanha,
+		ContraFile: isContra,
+		CoxaoMole: isCoxao,
+		Asa: isAsa,
+		Coxa: isCoxa,
+		Coracao: isCoracao,
+		Linguica: isLinguica,
+		Bisteca: isBisteca,
+		Costela: isCostela,
+		PãodeAlho: isPao
+	}
+
+	const guardarBanco = () => {
+		let true_keys = Object.keys(dataCarnes).filter(key => dataCarnes[key])
+		AsyncStorage.setItem("carnes", true_keys)
+	}
 
 	return (
 		<View style={style.container}>
@@ -42,7 +60,6 @@ export default function EscolhaCarnes() {
 				<Text style={style.title}>Escolha os tipos de carne</Text>
 				<Text>(Clique para selecionar os tipos de carne)</Text>
 			</View>
-
 			<View style={style.tipo}>
 				<View style={style.card}>
 					<Image source={Vaca} alt="Vaca" style={style.animal} />
@@ -54,11 +71,11 @@ export default function EscolhaCarnes() {
 					<View style={style.escolha}>
 						<Checkbox
 							style={style.checkbox}
-							value={isBov1}
-							onValueChange={setBov1}
-							color={isBov1 ? "#04CB00" : undefined}
+							value={isPicanha}
+							onValueChange={setPicanha}
+							color={isPicanha ? "#04CB00" : undefined}
 						/>
-						<TouchableOpacity onPress={() => setBov1(!isBov1)}>
+						<TouchableOpacity onPress={() => setPicanha(!isPicanha)}>
 							<Text style={style.nome}>Picanha</Text>
 						</TouchableOpacity>
 					</View>
@@ -66,11 +83,11 @@ export default function EscolhaCarnes() {
 					<View style={style.escolha}>
 						<Checkbox
 							style={style.checkbox}
-							value={isBov2}
-							onValueChange={setBov2}
-							color={isBov2 ? "#04CB00" : undefined}
+							value={isContra}
+							onValueChange={setContra}
+							color={isContra ? "#04CB00" : undefined}
 						/>
-						<TouchableOpacity onPress={() => setBov2(!isBov2)}>
+						<TouchableOpacity onPress={() => setContra(!isContra)}>
 							<Text style={style.nome}>Contra Fíle</Text>
 						</TouchableOpacity>
 					</View>
@@ -78,17 +95,16 @@ export default function EscolhaCarnes() {
 					<View style={style.escolha}>
 						<Checkbox
 							style={style.checkbox}
-							value={isBov3}
-							onValueChange={setBov3}
-							color={isBov3 ? "#04CB00" : undefined}
+							value={isCoxao}
+							onValueChange={setCoxao}
+							color={isCoxao ? "#04CB00" : undefined}
 						/>
-						<TouchableOpacity onPress={() => setBov3(!isBov3)}>
+						<TouchableOpacity onPress={() => setCoxao(!isCoxao)}>
 							<Text style={style.nome}>Coxão Mole</Text>
 						</TouchableOpacity>
 					</View>
 				</View>
 			</View>
-
 			<View style={style.tipo}>
 				<View style={style.card}>
 					<Image source={Galo} alt="galo caríjo" style={style.animal} />
@@ -99,11 +115,11 @@ export default function EscolhaCarnes() {
 					<View style={style.escolha}>
 						<Checkbox
 							style={style.checkbox}
-							value={isFrango1}
-							onValueChange={setFrango1}
-							color={isFrango1 ? "#04CB00" : undefined}
+							value={isAsa}
+							onValueChange={setAsa}
+							color={isAsa ? "#04CB00" : undefined}
 						/>
-						<TouchableOpacity onPress={() => setFrango1(!isFrango1)}>
+						<TouchableOpacity onPress={() => setAsa(!isAsa)}>
 							<Text style={style.nome}>Asinha</Text>
 						</TouchableOpacity>
 					</View>
@@ -111,11 +127,11 @@ export default function EscolhaCarnes() {
 					<View style={style.escolha}>
 						<Checkbox
 							style={style.checkbox}
-							value={isFrango2}
-							onValueChange={setFrango2}
-							color={isFrango2 ? "#04CB00" : undefined}
+							value={isCoxa}
+							onValueChange={setCoxa}
+							color={isCoxa ? "#04CB00" : undefined}
 						/>
-						<TouchableOpacity onPress={() => setFrango2(!isFrango2)}>
+						<TouchableOpacity onPress={() => setCoxa(!isCoxa)}>
 							<Text style={style.nome}>Coxa</Text>
 						</TouchableOpacity>
 					</View>
@@ -123,17 +139,16 @@ export default function EscolhaCarnes() {
 					<View style={style.escolha}>
 						<Checkbox
 							style={style.checkbox}
-							value={isFrango3}
-							onValueChange={setFrango3}
-							color={isFrango3 ? "#04CB00" : undefined}
+							value={isCoracao}
+							onValueChange={setCoracao}
+							color={isCoracao ? "#04CB00" : undefined}
 						/>
-						<TouchableOpacity onPress={() => setFrango3(!isFrango3)}>
+						<TouchableOpacity onPress={() => setCoracao(!isCoracao)}>
 							<Text style={style.nome}>Coração</Text>
 						</TouchableOpacity>
 					</View>
 				</View>
 			</View>
-
 			<View style={style.tipo}>
 				<View style={style.card}>
 					<Image source={Porco} alt="porco" style={style.animal} />
@@ -144,33 +159,33 @@ export default function EscolhaCarnes() {
 					<View style={style.escolha}>
 						<Checkbox
 							style={style.checkbox}
-							value={isPorco1}
-							onValueChange={setPorco1}
-							color={isPorco1 ? "#04CB00" : undefined}
+							value={isLinguica}
+							onValueChange={setLinguica}
+							color={isLinguica ? "#04CB00" : undefined}
 						/>
-						<TouchableOpacity onPress={() => setPorco1(!isPorco1)}>
+						<TouchableOpacity onPress={() => setLinguica(!isLinguica)}>
 							<Text style={style.nome}>Linguiça</Text>
 						</TouchableOpacity>
 					</View>
 					<View style={style.escolha}>
 						<Checkbox
 							style={style.checkbox}
-							value={isPorco2}
-							onValueChange={setPorco2}
-							color={isPorco2 ? "#04CB00" : undefined}
+							value={isBisteca}
+							onValueChange={setBisteca}
+							color={isBisteca ? "#04CB00" : undefined}
 						/>
-						<TouchableOpacity onPress={() => setPorco2(!isPorco2)}>
+						<TouchableOpacity onPress={() => setBisteca(!isBisteca)}>
 							<Text style={style.nome}>Bisteca</Text>
 						</TouchableOpacity>
 					</View>
 					<View style={style.escolha}>
 						<Checkbox
 							style={style.checkbox}
-							value={isPorco3}
-							onValueChange={setPorco3}
-							color={isPorco3 ? "#04CB00" : undefined}
+							value={isCostela}
+							onValueChange={setCostela}
+							color={isCostela ? "#04CB00" : undefined}
 						/>
-						<TouchableOpacity onPress={() => setPorco3(!isPorco3)}>
+						<TouchableOpacity onPress={() => setCostela(!isCostela)}>
 							<Text style={style.nome}>Costela</Text>
 						</TouchableOpacity>
 					</View>
@@ -191,6 +206,7 @@ export default function EscolhaCarnes() {
 			<TouchableOpacity
 				style={style.buttonBebidas}
 				onPress={() => {
+					guardarBanco();
 					navigation.push("Bebidas");
 				}}
 			>

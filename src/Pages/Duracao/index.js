@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from '@react-navigation/native';
 import  Icon  from 'react-native-vector-icons/FontAwesome';
 import CardTempo from '../../Components/CardTempo';
@@ -10,6 +11,11 @@ import CardTempo from '../../Components/CardTempo';
 function Duracao() {
     const navigation = useNavigation()
     const [Tempo, setTempo] = useState('')
+
+    const guardarBanco = () => {
+			AsyncStorage.setItem("Duração", Tempo);
+		};
+
     
   return (
     <View style={style.container}>
@@ -44,7 +50,10 @@ function Duracao() {
         </View>
         <TouchableOpacity
           style={style.buttonBebidas}
-          onPress={() => {navigation.push("Receitas");}}
+          onPress={() => {
+            guardarBanco();
+            navigation.push("Receitas");
+          }}
         >
           <Text style={style.textButton}>Avançar</Text>
         </TouchableOpacity>
