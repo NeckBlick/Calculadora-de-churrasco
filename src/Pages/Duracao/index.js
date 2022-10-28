@@ -2,20 +2,14 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import  Icon  from 'react-native-vector-icons/FontAwesome';
-import CardBebida from '../../Components/CardBebida';
-import Agua from '../../Img/Agua.png'
-import Suco from '../../Img/suco.png'
-import Refrigerante from '../../Img/refrigerante.png'
-import Cerveja from '../../Img/cerveja.png'
+import CardTempo from '../../Components/CardTempo';
 
 
-function Bebidas() {
+
+
+function Duracao() {
     const navigation = useNavigation()
-    const [agua, setAgua] = useState(false)
-    const [suco, setSuco] = useState(false)
-    const [refrigerente, setRefrigerente] = useState(false)
-    const [cerveja, setCerveja] = useState(false)
-
+    const [Tempo, setTempo] = useState('')
     
   return (
     <View style={style.container}>
@@ -26,40 +20,38 @@ function Bebidas() {
             >
             <Icon name='arrow-left' size={20} color="#000"/>
             </TouchableOpacity>
-            <Text style={style.title}>Escolha as bebidas</Text>
-            <Text>(Clique para selecionar as bebidas)</Text>
+            <Text style={style.title}>Duração</Text>
         </View>
-        <View style={style.containerBebida}>
+        <View style={style.containerTempo}>
           <View style={style.containerCard}>
-            <TouchableOpacity style={agua ? style.cardActive : style.cardDesable} onPress={() => agua ? setAgua(false): setAgua(true)}>
-              <CardBebida nome="Água" img={Agua} />
+            <TouchableOpacity  value="2h" style={Tempo === '2h' ? style.cardActive : style.cardDesable} onPress={() => setTempo('2h')}>
+              <CardTempo tempo="2H"/>
             </TouchableOpacity>
-            <TouchableOpacity style={suco ? style.cardActive : style.cardDesable} onPress={() => suco ? setSuco(false): setSuco(true)}>
-              <CardBebida  img={Suco} nome="Suco"/>
+            <TouchableOpacity value="4h" style={Tempo === '4h' ? style.cardActive : style.cardDesable} onPress={() => setTempo('4h')}>
+              <CardTempo tempo="4H"/>
             </TouchableOpacity>
           </View>
           <View style={style.containerCard}>
-            <TouchableOpacity style={refrigerente ? style.cardActive : style.cardDesable} onPress={() => refrigerente ? setRefrigerente(false): setRefrigerente(true)}>
+            <TouchableOpacity value="6h" style={Tempo === '6h' ? style.cardActive : style.cardDesable} onPress={() => setTempo('6h')}>
 
-              <CardBebida nome="Refrigerante" img={Refrigerante}/>
+              <CardTempo tempo="6H"/>
             </TouchableOpacity>
-            <TouchableOpacity style={cerveja ? style.cardActive : style.cardDesable} onPress={() => cerveja ? setCerveja(false) : setCerveja(true)}>
+            <TouchableOpacity value="8h" style={Tempo === '8h' ? style.cardActive : style.cardDesable} onPress={() => setTempo('8h')}>
 
-              <CardBebida nome="Cerveja" img={Cerveja}/>
+              <CardTempo tempo="8H"/>
             </TouchableOpacity>
           </View>
         </View>
         <TouchableOpacity
           style={style.buttonBebidas}
-          onPress={() => {navigation.push("Duracao");}}
-
+          onPress={() => {navigation.push("Receitas");}}
         >
           <Text style={style.textButton}>Avançar</Text>
         </TouchableOpacity>
     </View>
   )
 }
-export default Bebidas;
+export default Duracao;
 
 
 
@@ -108,7 +100,7 @@ const style = StyleSheet.create({
       color: "#fff",
       lineHeight: 24,
     },
-    containerBebida:{
+    containerTempo:{
       width:"100%",
       height:300,
       // backgroundColor:"white",
