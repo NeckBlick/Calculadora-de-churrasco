@@ -30,23 +30,24 @@ export default function EscolhaCarnes() {
 	//pao de alho
 	const [isPao, setPao] = useState(false);
 
-	var dataCarnes = {
-		Picanha: isPicanha,
-		ContraFile: isContra,
-		CoxaoMole: isCoxao,
-		Asa: isAsa,
-		Coxa: isCoxa,
-		Coracao: isCoracao,
-		Linguica: isLinguica,
-		Bisteca: isBisteca,
-		Costela: isCostela,
-		PãodeAlho: isPao
-	}
+
+	const dataCarnes = [
+		{ carne : "Picanha" , estado:isPicanha},
+		{ carne : "ContraFile" , estado:isContra},
+		{ carne : "CoxaoMole" , estado:isCoxao},
+		{ carne : "Asa" , estado:isAsa},
+		{ carne : "Coxa" , estado:isCoxa},
+		{ carne : "Coracao" , estado:isCoracao},
+		{ carne : "Linguica" , estado:isLinguica},
+		{ carne : "Bisteca" , estado:isBisteca},
+		{ carne : "Costela" , estado:isCostela},
+		{ carne : "PaodeAlho" , estado:isPao},
+	]
 
 	const guardarBanco = () => {
-		let true_keys = Object.keys(dataCarnes).filter(key => dataCarnes[key])
-		AsyncStorage.setItem("carnes", true_keys)
-	}
+		let true_keys = dataCarnes.filter(key => key.estado === true)
+		true_keys.length > 0 ? AsyncStorage.setItem("Carnes", JSON.stringify(true_keys)) && navigation.push("Bebidas") : ""
+	};
 
 	return (
 		<View style={style.container}>
@@ -207,7 +208,6 @@ export default function EscolhaCarnes() {
 				style={style.buttonBebidas}
 				onPress={() => {
 					guardarBanco();
-					navigation.push("Bebidas");
 				}}
 			>
 				<Text style={style.textButton}>Avançar</Text>

@@ -21,7 +21,7 @@ export default function Participante() {
 const guardarBanco = () => {
 	let qtdPessoa = dataPart.filter(item => item.quantidade > 0 );
           
-  qtdPessoa.length > 0 ? AsyncStorage.setItem("Paritipantes", JSON.stringify(qtdPessoa)) && navigation.navigate("Carnes") : ""
+  qtdPessoa.length > 0 ? AsyncStorage.setItem("Participantes", JSON.stringify(qtdPessoa)) && navigation.navigate("Carnes") : ""
 };
 
   const showMessage = () => {
@@ -38,9 +38,7 @@ const guardarBanco = () => {
   return (
     <View style={style.container}>
       <Toast
-        ref={(ref) => {
-          Toast.setRef(ref);
-        }}
+     
       />
       <View style={style.header}>
         <TouchableOpacity

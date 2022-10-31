@@ -7,13 +7,40 @@ import {
   ScrollView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useEffect } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import CardResultado from "../../Components/CardResultado";
+import { data } from '../../data'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const { width, height } = Dimensions.get("screen");
-export default function index() {
+export default function Resultado() {
   const navigation = useNavigation();
+  console.log(data)
+
+
+  useEffect(() => {
+    (async ()=> {
+      let pessoas = await AsyncStorage.getItem("Participantes")
+      let carnes = await  AsyncStorage.getItem("Carnes")
+      let bebidas = await  AsyncStorage.getItem("Bebidas")
+      let duracao = await  AsyncStorage.getItem("Duracao")
+      pessoas = JSON.parse(pessoas)
+      carnes = JSON.parse(carnes)
+      bebidas = JSON.parse(bebidas)
+      duracao = parseInt(duracao)
+      console.log(pessoas)
+      console.log(carnes)
+      console.log(bebidas)
+      console.log(duracao)
+      
+    })()
+  },[])
+  const calcularNovamente = () => {
+    AsyncStorage.clear()
+    navigation.push("TelaInicial")
+  }
+
   return (
     <ScrollView style={style.container}>
       <View style={style.header}>
@@ -76,10 +103,10 @@ export default function index() {
       <TouchableOpacity
         style={style.buttonBebidas}
         onPress={() => {
-          navigation.push("TelaInicial");
+          calcularNovamente()
         }}
       >
-        <Text style={style.textButton}>Avançar</Text>
+        <Text style={style.textButton}>Calcular Novamente</Text>
       </TouchableOpacity>
     </ScrollView>
   );

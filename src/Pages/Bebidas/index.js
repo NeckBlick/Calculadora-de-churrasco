@@ -17,16 +17,16 @@ function Bebidas() {
     const [refrigerente, setRefrigerente] = useState(false)
     const [cerveja, setCerveja] = useState(false)
 
-    var dataBebidas = {
-			 Agua: agua,
-       Suco: suco,
-       Refrigerante: refrigerente,
-       Cerveja: cerveja,
-		};
+    const dataBebidas = [
+      {bebida: "Agua", estado: agua},
+      {bebida: "Suco", estado: suco},
+      {bebida: "Refrigerante", estado: refrigerente},
+      {bebida: "Cerveja", estado: cerveja},
+    ]
 
     const guardarBanco = () => {
-			let true_keys = Object.keys(dataBebidas).filter((key) => dataBebidas[key]);
-			AsyncStorage.setItem("Bebidas", true_keys);
+			let true_keys = dataBebidas.filter(key => key.estado === true)
+			true_keys.length > 0 ? AsyncStorage.setItem("Bebidas", JSON.stringify(true_keys)) && navigation.push("Duracao") : ""
 		};
     
   return (
@@ -65,7 +65,7 @@ function Bebidas() {
           style={style.buttonBebidas}
           onPress={() => {
             guardarBanco();
-            navigation.push("Duracao");
+            
           }}
         >
           <Text style={style.textButton}>Avançar</Text>

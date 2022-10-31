@@ -13,7 +13,7 @@ function Duracao() {
     const [Tempo, setTempo] = useState('')
 
     const guardarBanco = () => {
-			AsyncStorage.setItem("Duração", Tempo);
+			AsyncStorage.setItem("Duracao", Tempo);
 		};
 
     
@@ -52,7 +52,7 @@ function Duracao() {
           style={style.buttonBebidas}
           onPress={() => {
             guardarBanco();
-            navigation.push("Receitas");
+            navigation.push("Resultado");
           }}
         >
           <Text style={style.textButton}>Avançar</Text>
