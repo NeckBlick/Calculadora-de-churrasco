@@ -223,19 +223,13 @@ const style = StyleSheet.create({
 		flex: 1,
 		justifyContent: "center",
 	},
-	header: {
-		width: "100%",
-		height: 80,
-		alignItems: "center",
-		justifyContent: "center",
-	},
 	seta: {
 		width: 30,
 		height: 30,
 	},
 	titulo: {
 		color: "#fff",
-		fontWeight: 600,
+		fontWeight: "bold",
 		fontSize: 25,
 		justifyContent: "center",
 		alignItems: "center",
@@ -254,7 +248,7 @@ const style = StyleSheet.create({
 	},
 	tipocarne: {
 		marginLeft: 10,
-		fontWeight: 600,
+		fontWeight: "bold",
 		fontSize: 20,
 		marginBottom: 5,
 	},
@@ -276,7 +270,7 @@ const style = StyleSheet.create({
 		color: "#fff",
 		marginLeft: 5,
 		fontSize: 15,
-		fontWeight: 400,
+		fontWeight: "semibold",
 		alignItems: "center",
 	},
 	buttonBack: {
@@ -338,7 +332,7 @@ const style = StyleSheet.create({
 	},
 	title: {
 		fontSize: 26,
-		fontWeight: "600",
+		fontWeight: "bold",
 		color: "white",
 	},
 });
