@@ -1,4 +1,4 @@
-import MapView from "react-native-maps";
+
 import {
   View,
   Text,
@@ -10,8 +10,8 @@ import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
+const { width, height } = Dimensions.get("screen");
 export default function Localizacao() {
-  const { width, height } = Dimensions.get("screen");
   const navigation = useNavigation();
   return (
     <View style={style.container}>
@@ -24,9 +24,7 @@ export default function Localizacao() {
         </TouchableOpacity>
         <Text style={style.title}>Localização do evento</Text>
       </View>
-      <MapView
-        style={{ width: width, height: height / 2 }}
-      />
+
       <TouchableOpacity
         style={style.buttonBebidas}
         onPress={() => {

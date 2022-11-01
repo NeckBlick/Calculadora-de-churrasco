@@ -23,17 +23,6 @@ const guardarBanco = () => {
           
   qtdPessoa.length > 0 ? AsyncStorage.setItem("Participantes", JSON.stringify(qtdPessoa)) && navigation.navigate("Carnes") : ""
 };
-
-  const showMessage = () => {
-    Toast.show({
-      type: "info",
-      position: "top",
-      text1: "Bebidas alcólicas apenas para maiores de 18 anos!",
-      text2: "Não nos responsabilizamos pelo seus atos",
-      visibilityTime: 3000,
-      autoHide: true,
-    });
-  };
   console.log(child);
   return (
     <View style={style.container}>
