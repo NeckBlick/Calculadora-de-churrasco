@@ -2,8 +2,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
 
-
-import Perfil from "./src/Pages/Perfil";
 import TelaInicial from "./src/Pages/TelaInicial";
 import Participante from "./src/Pages/Participante";
 import EscolhaCarnes from "./src/Pages/EscolhaCarnes";
@@ -25,11 +23,6 @@ export default function App() {
             name="TelaInicial"
             component={TelaInicial}
             options={{ headerShown: false}}
-          />
-          <Stack.Screen
-            name="Perfil"
-            component={Perfil}
-            options={{ headerShown: false }}
           />
           <Stack.Screen
             name="Participante"

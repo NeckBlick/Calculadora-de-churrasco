@@ -5,9 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import  Icon  from 'react-native-vector-icons/FontAwesome';
 import CardTempo from '../../Components/CardTempo';
 
-
-
-
 function Duracao() {
     const navigation = useNavigation()
     const [Tempo, setTempo] = useState('')
@@ -39,11 +36,9 @@ function Duracao() {
           </View>
           <View style={style.containerCard}>
             <TouchableOpacity value="6h" style={Tempo === '6h' ? style.cardActive : style.cardDesable} onPress={() => setTempo('6h')}>
-
               <CardTempo tempo="6H"/>
             </TouchableOpacity>
             <TouchableOpacity value="8h" style={Tempo === '8h' ? style.cardActive : style.cardDesable} onPress={() => setTempo('8h')}>
-
               <CardTempo tempo="8H"/>
             </TouchableOpacity>
           </View>
@@ -52,7 +47,7 @@ function Duracao() {
           style={style.buttonBebidas}
           onPress={() => {
             guardarBanco();
-            navigation.push("Resultado");
+            navigation.push("Rateio");
           }}
         >
           <Text style={style.textButton}>Avançar</Text>
@@ -61,8 +56,6 @@ function Duracao() {
   )
 }
 export default Duracao;
-
-
 
 const style = StyleSheet.create({
     container: {
@@ -83,7 +76,7 @@ const style = StyleSheet.create({
     },
     title:{
         fontSize:26,
-        fontWeight:"600",
+        fontWeight:"bold",
         color:"white"
     },
     containerPessoa:{
@@ -110,9 +103,8 @@ const style = StyleSheet.create({
       lineHeight: 24,
     },
     containerTempo:{
-      width:"100%",
+      width:'100%',
       height:300,
-      // backgroundColor:"white",
       justifyContent:"center",
       alignItems:"center",
       marginLeft:"auto",
@@ -120,10 +112,10 @@ const style = StyleSheet.create({
       padding:8
     },
     containerCard:{
-      width:"100%",
-      height:"50%",
+      width:'100%',
+      height:'50%',
       flexDirection:'row',
-      alignItems:"center",
+      alignItems:'center',
       justifyContent:'space-evenly'
     },
     cardActive:{
@@ -148,7 +140,7 @@ const style = StyleSheet.create({
       right:50
     },
     textButton: {
-      fontWeight: "500",
+      fontWeight: '500',
       fontSize: 20,
       color: "#fff",
       lineHeight: 24,

@@ -4,6 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Checkbox from "expo-checkbox";
+import Toast from "react-native-toast-message";
 import Vaca from "../../Img/vaca.png";
 import Galo from "../../Img/frango.png";
 import Porco from "../../Img/suino.png";
@@ -32,25 +33,37 @@ export default function EscolhaCarnes() {
 
 
 	const dataCarnes = [
-		{ carne : "Picanha" , estado:isPicanha},
-		{ carne : "ContraFile" , estado:isContra},
-		{ carne : "CoxaoMole" , estado:isCoxao},
-		{ carne : "Asa" , estado:isAsa},
-		{ carne : "Coxa" , estado:isCoxa},
-		{ carne : "Coracao" , estado:isCoracao},
-		{ carne : "Linguica" , estado:isLinguica},
-		{ carne : "Bisteca" , estado:isBisteca},
-		{ carne : "Costela" , estado:isCostela},
-		{ carne : "PaodeAlho" , estado:isPao},
+		{ assado : "Picanha" , ytid:"Sy0A0pQmGPM", preco:60, estado:isPicanha},
+		{ assado : "Contra Filé" , ytid:"PyaIw9Wb_i8", preco:40, estado:isContra},
+		{ assado : "Coxão Mole" , ytid:"PyaIw9Wb_i8", preco:30, estado:isCoxao},
+		{ assado : "Asa" ,  ytid:"PyaIw9Wb_i8",preco:11, estado:isAsa},
+		{ assado : "Coxa" , ytid:"PyaIw9Wb_i8", preco:8, estado:isCoxa},
+		{ assado : "Coração" , ytid:"PyaIw9Wb_i8", preco:35, estado:isCoracao},
+		{ assado : "Linguica" , ytid:"PyaIw9Wb_i8", preco:15, estado:isLinguica},
+		{ assado : "Bisteca" , ytid:"PyaIw9Wb_i8", preco:15, estado:isBisteca},
+		{ assado : "Costela" , ytid:"PyaIw9Wb_i8", preco:29, estado:isCostela},
+		{ assado : "Pão de Alho" , ytid:"PyaIw9Wb_i8", preco:10, estado:isPao},
 	]
 
 	const guardarBanco = () => {
 		let true_keys = dataCarnes.filter(key => key.estado === true)
-		true_keys.length > 0 ? AsyncStorage.setItem("Carnes", JSON.stringify(true_keys)) && navigation.push("Bebidas") : ""
+		true_keys.length > 0 ? AsyncStorage.setItem("Carnes", JSON.stringify(true_keys)) && navigation.push("Bebidas") : 
+		Toast.show({
+			type: "info",
+			position: "top",
+			text1: "Escolha pelo menos uma opção para prosseguir!",
+			visibilityTime: 3000,
+			autoHide: true,
+			onShow: () => {},
+			onHide: () => {},
+		  });
 	};
 
 	return (
 		<View style={style.container}>
+			 <Toast
+  
+  			/>
 			<View style={style.header}>
 				<TouchableOpacity
 					style={style.botaoVoltar}
@@ -74,7 +87,7 @@ export default function EscolhaCarnes() {
 							style={style.checkbox}
 							value={isPicanha}
 							onValueChange={setPicanha}
-							color={isPicanha ? "#04CB00" : undefined}
+							color={isPicanha ? "#E95811" : undefined}
 						/>
 						<TouchableOpacity onPress={() => setPicanha(!isPicanha)}>
 							<Text style={style.nome}>Picanha</Text>
@@ -86,7 +99,7 @@ export default function EscolhaCarnes() {
 							style={style.checkbox}
 							value={isContra}
 							onValueChange={setContra}
-							color={isContra ? "#04CB00" : undefined}
+							color={isContra ? "#E95811" : undefined}
 						/>
 						<TouchableOpacity onPress={() => setContra(!isContra)}>
 							<Text style={style.nome}>Contra Fíle</Text>
@@ -98,7 +111,7 @@ export default function EscolhaCarnes() {
 							style={style.checkbox}
 							value={isCoxao}
 							onValueChange={setCoxao}
-							color={isCoxao ? "#04CB00" : undefined}
+							color={isCoxao ? "#E95811" : undefined}
 						/>
 						<TouchableOpacity onPress={() => setCoxao(!isCoxao)}>
 							<Text style={style.nome}>Coxão Mole</Text>
@@ -118,7 +131,7 @@ export default function EscolhaCarnes() {
 							style={style.checkbox}
 							value={isAsa}
 							onValueChange={setAsa}
-							color={isAsa ? "#04CB00" : undefined}
+							color={isAsa ? "#E95811" : undefined}
 						/>
 						<TouchableOpacity onPress={() => setAsa(!isAsa)}>
 							<Text style={style.nome}>Asinha</Text>
@@ -130,7 +143,7 @@ export default function EscolhaCarnes() {
 							style={style.checkbox}
 							value={isCoxa}
 							onValueChange={setCoxa}
-							color={isCoxa ? "#04CB00" : undefined}
+							color={isCoxa ? "#E95811" : undefined}
 						/>
 						<TouchableOpacity onPress={() => setCoxa(!isCoxa)}>
 							<Text style={style.nome}>Coxa</Text>
@@ -142,7 +155,7 @@ export default function EscolhaCarnes() {
 							style={style.checkbox}
 							value={isCoracao}
 							onValueChange={setCoracao}
-							color={isCoracao ? "#04CB00" : undefined}
+							color={isCoracao ? "#E95811" : undefined}
 						/>
 						<TouchableOpacity onPress={() => setCoracao(!isCoracao)}>
 							<Text style={style.nome}>Coração</Text>
@@ -162,7 +175,7 @@ export default function EscolhaCarnes() {
 							style={style.checkbox}
 							value={isLinguica}
 							onValueChange={setLinguica}
-							color={isLinguica ? "#04CB00" : undefined}
+							color={isLinguica ? "#E95811" : undefined}
 						/>
 						<TouchableOpacity onPress={() => setLinguica(!isLinguica)}>
 							<Text style={style.nome}>Linguiça</Text>
@@ -173,7 +186,7 @@ export default function EscolhaCarnes() {
 							style={style.checkbox}
 							value={isBisteca}
 							onValueChange={setBisteca}
-							color={isBisteca ? "#04CB00" : undefined}
+							color={isBisteca ? "#E95811" : undefined}
 						/>
 						<TouchableOpacity onPress={() => setBisteca(!isBisteca)}>
 							<Text style={style.nome}>Bisteca</Text>
@@ -184,7 +197,7 @@ export default function EscolhaCarnes() {
 							style={style.checkbox}
 							value={isCostela}
 							onValueChange={setCostela}
-							color={isCostela ? "#04CB00" : undefined}
+							color={isCostela ? "#E95811" : undefined}
 						/>
 						<TouchableOpacity onPress={() => setCostela(!isCostela)}>
 							<Text style={style.nome}>Costela</Text>
@@ -198,7 +211,7 @@ export default function EscolhaCarnes() {
 					style={style.checkbox1}
 					value={isPao}
 					onValueChange={setPao}
-					color={isPao ? "#04CB00" : undefined}
+					color={isPao ? "#E95811" : undefined}
 				/>
 				<TouchableOpacity onPress={() => setPao(!isPao)}>
 					<Text style={style.nome}>Pão de Alho</Text>
@@ -293,12 +306,7 @@ const style = StyleSheet.create({
 		height: 35,
 		marginLeft: 20,
 	},
-	container_pao: {
-		flexDirection: "row",
-		justifyContent: "center",
-		alignItems: "baseline",
-		marginLeft: 20,
-	},
+
 	buttonBebidas: {
 		backgroundColor: "#E95811",
 		padding: 10,
@@ -321,7 +329,7 @@ const style = StyleSheet.create({
 	},
 	header: {
 		width: "100%",
-		height: 150,
+		height: 200,
 		alignItems: "center",
 		justifyContent: "center",
 	},

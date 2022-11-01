@@ -27,7 +27,7 @@ const guardarBanco = () => {
   return (
     <View style={style.container}>
       <Toast
-     
+  
       />
       <View style={style.header}>
         <TouchableOpacity

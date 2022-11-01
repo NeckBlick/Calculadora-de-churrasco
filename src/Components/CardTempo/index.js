@@ -4,7 +4,7 @@ import React from 'react'
 export default function CardTempo({tempo}) {
   return (
     <View style={style.container}>
-      <Text style={{color:"white", fontSize:18, fontWeight:500}}>{tempo}</Text>
+      <Text style={{color:"white", fontSize:18, fontWeight:'800'}}>{tempo}</Text>
     </View>
   )
 }

@@ -9,6 +9,7 @@ import {
 import React, { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import Toast from 'react-native-toast-message'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Agua from '../../Img/Agua.png';
 import Suco from '../../Img/suco.png';
@@ -34,12 +35,23 @@ function Bebidas() {
     let true_keys = dataBebidas.filter((key) => key.estado === true);
     true_keys.length > 0
       ? AsyncStorage.setItem('Bebidas', JSON.stringify(true_keys)) &&
-        navigation.push('Duracao')
-      : '';
+        navigation.push('Duracao') :
+        Toast.show({
+          type: "info",
+          position: "top",
+          text1: "Escolha pelo menos uma opção para prosseguir!",
+          visibilityTime: 3000,
+          autoHide: true,
+          onShow: () => {},
+          onHide: () => {},
+          });;
   };
 
   return (
     <View style={style.container}>
+      <Toast
+
+      />
       <View style={style.header}>
         <TouchableOpacity
           style={style.botaoVoltar}
@@ -167,7 +179,6 @@ const style = StyleSheet.create({
   containerBebida: {
     width: '100%',
     height: 300,
-    // backgroundColor:"white",
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 'auto',
