@@ -40,7 +40,6 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
-
             name="Duracao"
             component={Duracao}
             options={{ headerShown: false }}

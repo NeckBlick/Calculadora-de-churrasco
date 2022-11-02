@@ -39,28 +39,11 @@ const style = StyleSheet.create({
     width: 250,
     height: 250,
   },
-  button: {
-    backgroundColor: "#E95811",
-    padding: 10,
-    borderRadius: 15,
-    shadowColor: "#000",
-    width: 150,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 8,
-  },
-  textButton: {
-    fontWeight: "500",
-    fontSize: 20,
-    color: "#fff",
-    lineHeight: 24,
-  },
   textCalcular: {
     fontWeight: "500",
     fontSize: 28,
     color: "#fff",
-    lineHeight: 24,
+    lineHeight: 40,
     marginTop:20
   },
 });

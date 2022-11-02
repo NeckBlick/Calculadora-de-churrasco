@@ -4,6 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import Toast from "react-native-toast-message";
 
 export default function Rateio() {
   const navigation = useNavigation();
@@ -11,11 +12,23 @@ export default function Rateio() {
   const [Rateio, setRateio] = useState(0);
 
   const guardarBanco = () => {
-    AsyncStorage.setItem("Rateio", Rateio);
+     Rateio > 0 ? AsyncStorage.setItem("Rateio", JSON.stringify(Rateio)) && navigation.navigate("Receitas") : 
+     Toast.show({
+      type: "info",
+      position: "top",
+      text1: "Selecione ao menos 1 pessoa!",
+      visibilityTime: 3000,
+      autoHide: true,
+      onShow: () => {},
+      onHide: () => {},
+      });
   };
 
   return (
     <View style={style.container}>
+      <Toast
+  
+      />
       <View style={style.header}>
         <TouchableOpacity
           style={style.botaoVoltar}
@@ -51,7 +64,7 @@ export default function Rateio() {
       <TouchableOpacity
         style={style.buttonParticipante}
         onPress={() => {
-          navigation.navigate("Receitas");
+          guardarBanco();
         }}
       >
         <Text style={style.textButton}>Avançar</Text>
@@ -123,6 +136,13 @@ const style = StyleSheet.create({
     padding: 10,
     borderRadius: 15,
     shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
     width: 150,
     height: 50,
     alignItems: "center",

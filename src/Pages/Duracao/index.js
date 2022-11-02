@@ -4,18 +4,31 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from '@react-navigation/native';
 import  Icon  from 'react-native-vector-icons/FontAwesome';
 import CardTempo from '../../Components/CardTempo';
+import Toast from "react-native-toast-message";
 
 function Duracao() {
     const navigation = useNavigation()
     const [Tempo, setTempo] = useState('')
 
     const guardarBanco = () => {
-			AsyncStorage.setItem("Duracao", Tempo);
+			Tempo ? AsyncStorage.setItem("Duracao", Tempo) && navigation.navigate("Rateio") :
+      Toast.show({
+        type: "info",
+        position: "top",
+        text1: "Selecione uma opção!",
+        visibilityTime: 3000,
+        autoHide: true,
+        onShow: () => {},
+        onHide: () => {},
+        }); 
 		};
 
     
   return (
     <View style={style.container}>
+      <Toast
+      
+      />
         <View style={style.header}>
         <TouchableOpacity
             style={style.botaoVoltar}
@@ -47,7 +60,6 @@ function Duracao() {
           style={style.buttonBebidas}
           onPress={() => {
             guardarBanco();
-            navigation.push("Rateio");
           }}
         >
           <Text style={style.textButton}>Avançar</Text>
@@ -81,20 +93,6 @@ const style = StyleSheet.create({
     },
     containerPessoa:{
       alignItems:'center',
-    },
-    button: {
-      backgroundColor: "#E95811",
-      padding: 10,
-      borderRadius: 15,
-      shadowColor: "#000",
-      width: 150,
-      height: 50,
-      alignItems: "center",
-      justifyContent: "center",
-      marginTop: 20,
-      position:"absolute",
-      bottom:80,
-      right:50
     },
     textButton: {
       fontWeight: "500",
@@ -130,6 +128,13 @@ const style = StyleSheet.create({
       padding: 10,
       borderRadius: 15,
       shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
       width: 150,
       height: 50,
       alignItems: "center",

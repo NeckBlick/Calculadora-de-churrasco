@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, SafeAreaView } from "react-native";
 import { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
@@ -68,7 +68,7 @@ export default function EscolhaCarnes() {
 				<TouchableOpacity
 					style={style.botaoVoltar}
 					onPress={() => navigation.goBack()}
-				>
+					>
 					<Icon name="arrow-left" size={20} color="#000" />
 				</TouchableOpacity>
 				<Text style={style.title}>Escolha os tipos de carne</Text>
@@ -88,7 +88,7 @@ export default function EscolhaCarnes() {
 							value={isPicanha}
 							onValueChange={setPicanha}
 							color={isPicanha ? "#E95811" : undefined}
-						/>
+							/>
 						<TouchableOpacity onPress={() => setPicanha(!isPicanha)}>
 							<Text style={style.nome}>Picanha</Text>
 						</TouchableOpacity>
@@ -100,7 +100,7 @@ export default function EscolhaCarnes() {
 							value={isContra}
 							onValueChange={setContra}
 							color={isContra ? "#E95811" : undefined}
-						/>
+							/>
 						<TouchableOpacity onPress={() => setContra(!isContra)}>
 							<Text style={style.nome}>Contra Fíle</Text>
 						</TouchableOpacity>
@@ -112,7 +112,7 @@ export default function EscolhaCarnes() {
 							value={isCoxao}
 							onValueChange={setCoxao}
 							color={isCoxao ? "#E95811" : undefined}
-						/>
+							/>
 						<TouchableOpacity onPress={() => setCoxao(!isCoxao)}>
 							<Text style={style.nome}>Coxão Mole</Text>
 						</TouchableOpacity>
@@ -132,7 +132,7 @@ export default function EscolhaCarnes() {
 							value={isAsa}
 							onValueChange={setAsa}
 							color={isAsa ? "#E95811" : undefined}
-						/>
+							/>
 						<TouchableOpacity onPress={() => setAsa(!isAsa)}>
 							<Text style={style.nome}>Asinha</Text>
 						</TouchableOpacity>
@@ -144,7 +144,7 @@ export default function EscolhaCarnes() {
 							value={isCoxa}
 							onValueChange={setCoxa}
 							color={isCoxa ? "#E95811" : undefined}
-						/>
+							/>
 						<TouchableOpacity onPress={() => setCoxa(!isCoxa)}>
 							<Text style={style.nome}>Coxa</Text>
 						</TouchableOpacity>
@@ -156,7 +156,7 @@ export default function EscolhaCarnes() {
 							value={isCoracao}
 							onValueChange={setCoracao}
 							color={isCoracao ? "#E95811" : undefined}
-						/>
+							/>
 						<TouchableOpacity onPress={() => setCoracao(!isCoracao)}>
 							<Text style={style.nome}>Coração</Text>
 						</TouchableOpacity>
@@ -187,7 +187,7 @@ export default function EscolhaCarnes() {
 							value={isBisteca}
 							onValueChange={setBisteca}
 							color={isBisteca ? "#E95811" : undefined}
-						/>
+							/>
 						<TouchableOpacity onPress={() => setBisteca(!isBisteca)}>
 							<Text style={style.nome}>Bisteca</Text>
 						</TouchableOpacity>
@@ -212,7 +212,7 @@ export default function EscolhaCarnes() {
 					value={isPao}
 					onValueChange={setPao}
 					color={isPao ? "#E95811" : undefined}
-				/>
+					/>
 				<TouchableOpacity onPress={() => setPao(!isPao)}>
 					<Text style={style.nome}>Pão de Alho</Text>
 				</TouchableOpacity>
@@ -222,9 +222,9 @@ export default function EscolhaCarnes() {
 				onPress={() => {
 					guardarBanco();
 				}}
-			>
+				>
 				<Text style={style.textButton}>Avançar</Text>
-			</TouchableOpacity>
+			</TouchableOpacity> 
 		</View>
 	);
 }
@@ -234,18 +234,12 @@ const style = StyleSheet.create({
 		width: "100%",
 		height: "100%",
 		flex: 1,
-		justifyContent: "center",
 	},
-	seta: {
-		width: 30,
-		height: 30,
-	},
-	titulo: {
-		color: "#fff",
-		fontWeight: "bold",
-		fontSize: 25,
-		justifyContent: "center",
+	header: {
+		width: "100%",
+		height: 200,
 		alignItems: "center",
+		justifyContent: "center",
 	},
 	escolha: {
 		flexDirection: "row",
@@ -286,11 +280,6 @@ const style = StyleSheet.create({
 		fontWeight: "semibold",
 		alignItems: "center",
 	},
-	buttonBack: {
-		position: "absolute",
-		top: -5,
-		left: 30,
-	},
 	card: {
 		alignItems: "center",
 		justifyContent: "center",
@@ -300,6 +289,7 @@ const style = StyleSheet.create({
 		borderRadius: 10,
 		width: 125,
 		height: 125,
+		
 	},
 	paozinho: {
 		width: 35,
@@ -312,14 +302,21 @@ const style = StyleSheet.create({
 		padding: 10,
 		borderRadius: 15,
 		shadowColor: "#000",
+		shadowOffset: {
+		width: 0,
+		height: 2,
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 3.84,
+		elevation: 5,
 		width: 150,
 		height: 50,
 		alignItems: "center",
 		justifyContent: "center",
 		marginTop: 20,
 		position: "absolute",
-		bottom: 20,
-		right: 40,
+		bottom: 80,
+		right: 50,
 	},
 	textButton: {
 		fontWeight: "500",
@@ -327,15 +324,9 @@ const style = StyleSheet.create({
 		color: "#fff",
 		lineHeight: 24,
 	},
-	header: {
-		width: "100%",
-		height: 200,
-		alignItems: "center",
-		justifyContent: "center",
-	},
 	botaoVoltar: {
 		position: "absolute",
-		top: 10,
+		top: 40,
 		left: 30,
 	},
 	title: {
