@@ -2,25 +2,26 @@ import { View, Text, StyleSheet } from 'react-native'
 import Icon from "react-native-vector-icons/FontAwesome";
 import React from 'react'
 
-export default function cardResultado({kilo, img, grama, }) {
+export default function cardResultado({ kilo, tipo, img }) {
   return (
-    <View style={style.container}>
-        <View style={style.left}>
-          <Icon name="{img}" size={20} color="#000" />
-        </View>
+		<View style={style.container}>
+			<View style={style.left}>
+				<Icon name={img} size={20} color="#000" />
+			</View>
 
-        <View style={style.right}>
-          <Text style={style.kilos}>2,3 KG de Carne</Text>
-          <Text style={style.gramas}>500g por pessoa</Text>
-        </View>
-
-    </View>
-  )
+			<View style={style.right}>
+				<Text style={style.kilos}>
+					{kilo} Kg de {tipo}
+				</Text>
+				<Text style={style.gramas}>500g por pessoa</Text>
+			</View>
+		</View>
+	);
 }
 
 const style = StyleSheet.create({
   container: {
-    width: 180,
+    width:220,
     height: 55,
     alignItems:"center",
     justifyContent:"center",
@@ -28,6 +29,7 @@ const style = StyleSheet.create({
     padding: 6,
   },
   kilos: {
+    width: "100%",
     fontSize: 18,
     fontWeight: "500",
   },

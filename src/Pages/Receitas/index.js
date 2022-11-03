@@ -32,7 +32,7 @@ export default function Receitas (){
 			</View>
       <View style={{flex:1}}>
           <FlatList data={lista}
-          renderItem={({ item }) => <CardVideo data={item}/>} />
+          renderItem={({ item }) => <CardVideo data={item}/>} />  
       </View>
 		</View>
 

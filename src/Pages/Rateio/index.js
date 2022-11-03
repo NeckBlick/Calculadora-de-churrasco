@@ -9,10 +9,10 @@ import Toast from "react-native-toast-message";
 export default function Rateio() {
   const navigation = useNavigation();
 
-  const [Rateio, setRateio] = useState(0);
+  const [Rateio, setRateio] = useState(1);
 
   const guardarBanco = () => {
-     Rateio > 0 ? AsyncStorage.setItem("Rateio", JSON.stringify(Rateio)) && navigation.navigate("Receitas") : 
+     Rateio > 0 ? AsyncStorage.setItem("Rateio", JSON.stringify(Rateio)) && navigation.navigate("Resultado") : 
      Toast.show({
       type: "info",
       position: "top",
@@ -49,7 +49,7 @@ export default function Rateio() {
               <Text style={style.icon}>-</Text>
             </TouchableOpacity>
             <Text style={{ color: "white", fontSize: 32 }}>
-              {Rateio < 0 ? setRateio(0) && Rateio : Rateio}
+              {Rateio < 1 ? setRateio(1) && Rateio : Rateio}
             </Text>
             <TouchableOpacity onPress={() => setRateio(Rateio + 1)}>
               <Text style={style.icon}>+</Text>

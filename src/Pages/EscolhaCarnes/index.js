@@ -1,4 +1,12 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, SafeAreaView } from "react-native";
+import {
+	View,
+	Text,
+	StyleSheet,
+	TouchableOpacity,
+	Image,
+	ScrollView,
+	SafeAreaView,
+} from "react-native";
 import { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
@@ -31,44 +39,97 @@ export default function EscolhaCarnes() {
 	//pao de alho
 	const [isPao, setPao] = useState(false);
 
-
 	const dataCarnes = [
-		{ assado : "Picanha" , ytid:"Sy0A0pQmGPM", preco:60, estado:isPicanha},
-		{ assado : "Contra Filé" , ytid:"PyaIw9Wb_i8", preco:40, estado:isContra},
-		{ assado : "Coxão Mole" , ytid:"PyaIw9Wb_i8", preco:30, estado:isCoxao},
-		{ assado : "Asa" ,  ytid:"PyaIw9Wb_i8",preco:11, estado:isAsa},
-		{ assado : "Coxa" , ytid:"PyaIw9Wb_i8", preco:8, estado:isCoxa},
-		{ assado : "Coração" , ytid:"PyaIw9Wb_i8", preco:35, estado:isCoracao},
-		{ assado : "Linguica" , ytid:"PyaIw9Wb_i8", preco:15, estado:isLinguica},
-		{ assado : "Bisteca" , ytid:"PyaIw9Wb_i8", preco:15, estado:isBisteca},
-		{ assado : "Costela" , ytid:"PyaIw9Wb_i8", preco:29, estado:isCostela},
-		{ assado : "Pão de Alho" , ytid:"PyaIw9Wb_i8", preco:10, estado:isPao},
-	]
+		{
+			assado: "Picanha",
+			tipo: "bovino",
+			ytid: "BImDaH_DQL4",
+			preco: 60,
+			estado: isPicanha,
+		},
+		{
+			assado: "Contra Filé",
+			tipo: "bovino",
+			ytid: "R-FRUNEvJ5Y",
+			preco: 40,
+			estado: isContra,
+		},
+		{
+			assado: "Coxão Mole",
+			tipo: "bovino",
+			ytid: "rTFAqmSzJtY",
+			preco: 30,
+			estado: isCoxao,
+		},
+		{
+			assado: "Asa",
+			tipo: "frango",
+			ytid: "jQDP2wSzzGw",
+			preco: 11,
+			estado: isAsa,
+		},
+		{
+			assado: "Coxa",
+			tipo: "frango",
+			ytid: "D3FrO5U4vJc",
+			preco: 8,
+			estado: isCoxa,
+		},
+		{
+			assado: "Coração",
+			tipo: "frango",
+			ytid: "ZM9vr8_o4i4",
+			preco: 35,
+			estado: isCoracao,
+		},
+		{
+			assado: "Linguica",
+			tipo: "suino",
+			ytid: "_EAGvTzDp_U",
+			preco: 15,
+			estado: isLinguica,
+		},
+		{
+			assado: "Bisteca",
+			tipo: "suino",
+			ytid: "ft3wQCJ4fMk",
+			preco: 15,
+			estado: isBisteca,
+		},
+		{
+			assado: "Costela",
+			tipo: "suino",
+			ytid: "9AwuyqzPNNo",
+			preco: 29,
+			estado: isCostela,
+		},
+		{ assado: "Pão de Alho", tipo:"pao", ytid: "Wby4YjWstTo", preco: 10, estado: isPao },
+	];
 
 	const guardarBanco = () => {
-		let true_keys = dataCarnes.filter(key => key.estado === true)
-		true_keys.length > 0 ? AsyncStorage.setItem("Carnes", JSON.stringify(true_keys)) && navigation.push("Bebidas") : 
-		Toast.show({
-			type: "info",
-			position: "top",
-			text1: "Escolha pelo menos uma opção para prosseguir!",
-			visibilityTime: 3000,
-			autoHide: true,
-			onShow: () => {},
-			onHide: () => {},
-		  });
+		let true_keys = dataCarnes.filter((key) => key.estado === true);
+		true_keys.length > 0
+			? AsyncStorage.setItem("Carnes", JSON.stringify(true_keys)) &&
+			  navigation.push("Bebidas")
+			: Toast.show({
+					type: "info",
+					position: "top",
+					text1: "Escolha pelo menos uma opção para prosseguir!",
+					visibilityTime: 3000,
+					autoHide: true,
+					onShow: () => {},
+					onHide: () => {},
+			  });
 	};
 
 	return (
 		<View style={style.container}>
-			 <Toast
-  
-  			/>
+			<Toast />
 			<View style={style.header}>
 				<TouchableOpacity
 					style={style.botaoVoltar}
 					onPress={() => navigation.goBack()}
-					>
+				>
 					<Icon name="arrow-left" size={20} color="#000" />
 				</TouchableOpacity>
 				<Text style={style.title}>Escolha os tipos de carne</Text>
@@ -88,7 +149,7 @@ export default function EscolhaCarnes() {
 							value={isPicanha}
 							onValueChange={setPicanha}
 							color={isPicanha ? "#E95811" : undefined}
-							/>
+						/>
 						<TouchableOpacity onPress={() => setPicanha(!isPicanha)}>
 							<Text style={style.nome}>Picanha</Text>
 						</TouchableOpacity>
@@ -100,7 +161,7 @@ export default function EscolhaCarnes() {
 							value={isContra}
 							onValueChange={setContra}
 							color={isContra ? "#E95811" : undefined}
-							/>
+						/>
 						<TouchableOpacity onPress={() => setContra(!isContra)}>
 							<Text style={style.nome}>Contra Fíle</Text>
 						</TouchableOpacity>
@@ -112,7 +173,7 @@ export default function EscolhaCarnes() {
 							value={isCoxao}
 							onValueChange={setCoxao}
 							color={isCoxao ? "#E95811" : undefined}
-							/>
+						/>
 						<TouchableOpacity onPress={() => setCoxao(!isCoxao)}>
 							<Text style={style.nome}>Coxão Mole</Text>
 						</TouchableOpacity>
@@ -132,7 +193,7 @@ export default function EscolhaCarnes() {
 							value={isAsa}
 							onValueChange={setAsa}
 							color={isAsa ? "#E95811" : undefined}
-							/>
+						/>
 						<TouchableOpacity onPress={() => setAsa(!isAsa)}>
 							<Text style={style.nome}>Asinha</Text>
 						</TouchableOpacity>
@@ -144,7 +205,7 @@ export default function EscolhaCarnes() {
 							value={isCoxa}
 							onValueChange={setCoxa}
 							color={isCoxa ? "#E95811" : undefined}
-							/>
+						/>
 						<TouchableOpacity onPress={() => setCoxa(!isCoxa)}>
 							<Text style={style.nome}>Coxa</Text>
 						</TouchableOpacity>
@@ -156,7 +217,7 @@ export default function EscolhaCarnes() {
 							value={isCoracao}
 							onValueChange={setCoracao}
 							color={isCoracao ? "#E95811" : undefined}
-							/>
+						/>
 						<TouchableOpacity onPress={() => setCoracao(!isCoracao)}>
 							<Text style={style.nome}>Coração</Text>
 						</TouchableOpacity>
@@ -187,7 +248,7 @@ export default function EscolhaCarnes() {
 							value={isBisteca}
 							onValueChange={setBisteca}
 							color={isBisteca ? "#E95811" : undefined}
-							/>
+						/>
 						<TouchableOpacity onPress={() => setBisteca(!isBisteca)}>
 							<Text style={style.nome}>Bisteca</Text>
 						</TouchableOpacity>
@@ -212,7 +273,7 @@ export default function EscolhaCarnes() {
 					value={isPao}
 					onValueChange={setPao}
 					color={isPao ? "#E95811" : undefined}
-					/>
+				/>
 				<TouchableOpacity onPress={() => setPao(!isPao)}>
 					<Text style={style.nome}>Pão de Alho</Text>
 				</TouchableOpacity>
@@ -222,9 +283,9 @@ export default function EscolhaCarnes() {
 				onPress={() => {
 					guardarBanco();
 				}}
-				>
+			>
 				<Text style={style.textButton}>Avançar</Text>
-			</TouchableOpacity> 
+			</TouchableOpacity>
 		</View>
 	);
 }
@@ -289,7 +350,6 @@ const style = StyleSheet.create({
 		borderRadius: 10,
 		width: 125,
 		height: 125,
-		
 	},
 	paozinho: {
 		width: 35,
@@ -303,8 +363,8 @@ const style = StyleSheet.create({
 		borderRadius: 15,
 		shadowColor: "#000",
 		shadowOffset: {
-		width: 0,
-		height: 2,
+			width: 0,
+			height: 2,
 		},
 		shadowOpacity: 0.25,
 		shadowRadius: 3.84,
