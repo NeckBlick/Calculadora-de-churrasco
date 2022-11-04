@@ -8,7 +8,7 @@ export const data = [
       },
       mulher:{
         carne: 400,
-        frango: 100,
+        frango: 100,    
         suino: 150
       },
       crianca:{

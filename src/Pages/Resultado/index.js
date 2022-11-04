@@ -19,20 +19,23 @@ const { width, height } = Dimensions.get("screen");
 export default function Resultado() {
 	const { CalcularCarne } = useContext(Context);
 	const navigation = useNavigation();
-	const [precos, setPrecos] = useState();
+	const [preco, setPrecos] = useState();
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		(async () => {
+			console.info(CalcularCarne())
 			setPrecos(CalcularCarne());
 			setLoading(false);
 		})();
 	}, []);
+	console.log(preco)
 	const calcularNovamente = () => {
 		AsyncStorage.clear();
+		clearCache()
 		navigation.push("TelaInicial");
 	};
-	console.log(precos);
+
 	return (
 		<ScrollView style={style.container}>
 			<View style={style.header}>
@@ -57,7 +60,7 @@ export default function Resultado() {
 						keyExtractor={(item) => item.id}
 						renderItem={({ item }) => (
 							<View style={style.containerCard}>
-								<CardResultado kilo={item.qntd} tipo={item.tipo} img="user" />
+								<CardResultado kilo={item.qntdTotal} tipo={item.tipo} img="user" />
 								<Text style={style.preco}>R$00,00</Text>
 							</View>
 						)}

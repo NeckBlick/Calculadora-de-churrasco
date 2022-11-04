@@ -26,6 +26,18 @@ export default function Provider({ children }) {
 		})();
 	}, []);
 	const CalcularCarne = () => {
+		const [carneHomem, setCarneHomem] = useState()
+		const [carneMulher, setCarneMulher] = useState()
+		const [carneCrianca, setCarneCrianca] = useState()
+		
+		const [frangoHomem, setFrangoHomem] = useState()
+		const [frangoMulher, setFrangoMulher] = useState()
+		const [frangoCrianca, setFrangoCrianca] = useState()
+		
+		const [suinoHomem, setSuinoHomem] = useState()
+		const [suinoMulher, setSuinoMulher] = useState()
+		const [suinoCrianca, setSuinoCrianca] = useState()
+
 		// Filtrar a quantiadde de pessoas
 		let qtdHomem = listaPessoas.filter(item => item.sexo == "homem")
 		let qtdMulher = listaPessoas.filter(item => item.sexo == "mulher")
@@ -34,9 +46,14 @@ export default function Provider({ children }) {
 		let tiposBov = listaCarnes.filter (item => item.tipo === "bovino")
 		let tiposFrango = listaCarnes.filter (item => item.tipo === "frango")
 		let tiposSuino = listaCarnes.filter (item => item.tipo === "suino")
+		// let tipos = listaCarnes.filter (item => item.estado == true)
 		
+
 		//Homem
 		if(qtdHomem.length >= 1){
+			setCarneHomem(qntdHomenC)
+			setFrangoHomem(qntdHomenF)
+			setSuinoHomem(qntdHomenS)
 			var numHomens = qtdHomem[0].quantidade
 			var qntdHomenC = (data[0].carne.homem.carne * numHomens) / 1000
 			var qntdHomenF = (data[0].carne.homem.frango * numHomens) / 1000
@@ -48,7 +65,10 @@ export default function Provider({ children }) {
 		}
 		// Mulher	
 		if(qtdMulher.length >= 1){
-			var numMulher = qtdMulher[0].quantidade
+			setCarneMulher(qntdMulheresC)
+			setFrangoMulher(qntdMulheresF)
+			setSuinoMulher(qntdMulheresS)
+			var numMulher = qtdMulher[1].quantidade
 			var qntdMulheresC = (data[0].carne.mulher.carne * numMulher) / 1000	
 			var qntdMulheresF = (data[0].carne.mulher.frango * numMulher) / 1000	
 			var qntdMulheresS = (data[0].carne.mulher.suino * numMulher) / 1000	
@@ -59,8 +79,11 @@ export default function Provider({ children }) {
 		}
 		//Crianca
 		if(qtdCrianca >= 1){
+			setCarneCrianca(qntdCriancaC)
+			setFrangoCrianca(qntdCriancaF)
+			setSuinoCrianca(qntdCriancaS)	
 			var numCrianca = qtdCrianca[0].quantidade
-			var qntdCriancaC = (data[0].carne.crianca.carne * numCrianca) / 1000;	
+			var qntdCriancaC = (data[0].carne.crianca.carne * numCrianca) / 1000;
 			var qntdCriancaF = (data[0].carne.crianca.frango * numCrianca) / 1000;	
 			var qntdCriancaS = (data[0].carne.crianca.suino * numCrianca) / 1000;	
 		}else{
@@ -68,48 +91,52 @@ export default function Provider({ children }) {
 			var qntdCriancaF = 0
 			var qntdCriancaS = 0
 		}
-
-		
-
 		if (tiposBov.length >= 1) {
 			tiposBov =  tiposBov.length
 		} else {
-			tiposBov = 0;
+			tiposBov = 1;	
 		}
 
 		if (tiposFrango.length >= 1) {
 			tiposFrango = tiposFrango.length
 		} else {
-			tiposFrango = 0;
+			tiposFrango = 1;
 		}
 
 		if (tiposSuino.length >= 1) {
 			tiposSuino =  tiposSuino.length
 		} else {
-			tiposSuino = 0;
+			tiposSuino = 1;
 		}
-		var dataCarnes = [
+
+		var qtdCarne = (qntdHomenC + qntdMulheresC + qntdCriancaC) / tiposBov
+		var qtdFrango = (qntdHomenF + qntdMulheresF + qntdCriancaF) / tiposFrango
+		var qtdSuino = (qntdHomenS + qntdMulheresS + qntdCriancaS) / tiposSuino
+
+		 var dataCarnes = [
 			{
 				id: 0,
 				tipo: "Carne",
-				qntd: Math.round(
-					(qntdHomenC + qntdMulheresC + qntdCriancaC) / tiposBov
-				),
+				qntdTotal: qtdCarne.toFixed(2),
+				qntdHomem:carneHomem,		
+				qntdMulher: carneMulher,		
+				qntdCrianca: carneCrianca,		
 			},
 			{
 				id: 1,
 				tipo: "Frango",
-				qntd: Math.round(
-					(qntdHomenF + qntdMulheresF + qntdCriancaF) / tiposFrango
-				),
+				qntdTotal: qtdFrango.toFixed(2),
+				qntdHomem:frangoHomem,		
+				qntdMulher: frangoMulher,		
+				qntdCrianca: frangoCrianca,		
 			},
 			{
 				id: 2,
 				tipo: "Carne Suína",
-				qntd: Math.round(
-					(qntdHomenS + qntdMulheresS + qntdCriancaS) / tiposSuino
-				),
-		
+				qntdTotal: qtdSuino.toFixed(2),
+				qntdHomem:suinoHomem,		
+				qntdMulher: suinoMulher,		
+				qntdCrianca: suinoCrianca,			
 			},
 		];
 		return dataCarnes
