@@ -1,21 +1,29 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, FlatList } from 'react-native'
 import Icon from "react-native-vector-icons/FontAwesome";
 import React from 'react'
 
-export default function cardResultado({ kilo, tipo, img, homem, mulher, crianca }) {
+export default function cardResultado({data}) {
   return (
 		<View style={style.container}>
 			<View style={style.left}>
-				<Icon name={img} size={20} color="#000" />
+				{/* <Icon name={img} size={20} color="#000" /> */}
 			</View>
 
 			<View style={style.right}>
 				<Text style={style.kilos}>
-					{kilo} Kg de {tipo}
+					{data.qntdTotal} Kg de {data.tipo}
+          {data.teste.teste1}
+          {/* <FlatList
+						data={data}
+						keyExtractor={(item) => item.id}
+						renderItem={({ item: tiposBov }) => (
+							<View style={style.containerCard}>
+								<Text style={style.preco}>{item.tipo.tiposBov}</Text>
+							</View>
+						)}
+					/> */}
+          
 				</Text>
-				{homem ? <Text style={style.gramas}>Homem: {homem}g</Text>: ""}
-				{mulher ? <Text style={style.gramas}>Mulher: {mulher}g</Text>: ""}
-				{crianca ? <Text style={style.gramas}>Criança: {crianca}g</Text> : ""}
 			</View>
 		</View>
 	);

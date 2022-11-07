@@ -46,8 +46,11 @@ export default function Provider({ children }) {
 		let tiposBov = listaCarnes.filter (item => item.tipo === "bovino")
 		let tiposFrango = listaCarnes.filter (item => item.tipo === "frango")
 		let tiposSuino = listaCarnes.filter (item => item.tipo === "suino")
-		// let tipos = listaCarnes.filter (item => item.estado == true)
+
+		console.log(tiposBov)
+		console.log(tiposFrango)
 		
+		let tipos1 = tiposBov
 
 		//Homem
 		if(qtdHomem.length >= 1){
@@ -68,7 +71,7 @@ export default function Provider({ children }) {
 			setCarneMulher(qntdMulheresC)
 			setFrangoMulher(qntdMulheresF)
 			setSuinoMulher(qntdMulheresS)
-			var numMulher = qtdMulher[1].quantidade
+			var numMulher = qtdMulher[0].quantidade
 			var qntdMulheresC = (data[0].carne.mulher.carne * numMulher) / 1000	
 			var qntdMulheresF = (data[0].carne.mulher.frango * numMulher) / 1000	
 			var qntdMulheresS = (data[0].carne.mulher.suino * numMulher) / 1000	
@@ -112,11 +115,16 @@ export default function Provider({ children }) {
 		var qtdCarne = (qntdHomenC + qntdMulheresC + qntdCriancaC) / tiposBov
 		var qtdFrango = (qntdHomenF + qntdMulheresF + qntdCriancaF) / tiposFrango
 		var qtdSuino = (qntdHomenS + qntdMulheresS + qntdCriancaS) / tiposSuino
+	
+		
 
 		 var dataCarnes = [
 			{
 				id: 0,
-				tipo: "Carne",
+				tipo: "Bovina",
+				teste: {
+					teste1: tipos1.map(tipos1.assado),
+				},
 				qntdTotal: qtdCarne.toFixed(2),
 				qntdHomem:carneHomem,		
 				qntdMulher: carneMulher,		
@@ -125,6 +133,9 @@ export default function Provider({ children }) {
 			{
 				id: 1,
 				tipo: "Frango",
+				teste: {
+					teste1: tipos1.assado,
+				},
 				qntdTotal: qtdFrango.toFixed(2),
 				qntdHomem:frangoHomem,		
 				qntdMulher: frangoMulher,		
@@ -133,6 +144,9 @@ export default function Provider({ children }) {
 			{
 				id: 2,
 				tipo: "Carne Suína",
+				teste: {
+					teste1: tipos1.assado,
+				},
 				qntdTotal: qtdSuino.toFixed(2),
 				qntdHomem:suinoHomem,		
 				qntdMulher: suinoMulher,		

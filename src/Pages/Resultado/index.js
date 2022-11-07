@@ -24,15 +24,19 @@ export default function Resultado() {
 
 	useEffect(() => {
 		(async () => {
-			console.info(CalcularCarne())
 			setPrecos(CalcularCarne());
 			setLoading(false);
 		})();
-	}, []);
-	console.log(preco)
+	},[]);
+
+	if(loading){
+		setPrecos(CalcularCarne())
+		setLoading(false)
+	}
+	// console.log(preco)
+
 	const calcularNovamente = () => {
 		AsyncStorage.clear();
-		clearCache()
 		navigation.push("TelaInicial");
 	};
 
@@ -50,17 +54,18 @@ export default function Resultado() {
 					(Esse aplicativo é apenas uma simulação, a quantidade e o preço é
 					apenas uma estimativa)
 				</Text>
+				
 			</View>
 			<View style={style.containerResultado}>
 				{loading ? (
 					""
 				) : (
 					<FlatList
-						data={precos}
+						data={preco}
 						keyExtractor={(item) => item.id}
 						renderItem={({ item }) => (
 							<View style={style.containerCard}>
-								<CardResultado kilo={item.qntdTotal} tipo={item.tipo} img="user" />
+								<CardResultado data={item} img="user" />
 								<Text style={style.preco}>R$00,00</Text>
 							</View>
 						)}
