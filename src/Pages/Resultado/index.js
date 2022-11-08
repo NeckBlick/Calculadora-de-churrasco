@@ -133,7 +133,6 @@ const style = StyleSheet.create({
 	containerBebida: {
 		width: "100%",
 		height: 300,
-		// backgroundColor:"white",
 		justifyContent: "center",
 		alignItems: "center",
 		marginLeft: "auto",
@@ -152,8 +151,9 @@ const style = StyleSheet.create({
 		padding: 10,
 		borderRadius: 15,
 		shadowColor: "#000",
-		width: 150,
-		height: 50,
+		width: 160,
+		height: 70,
+
 		alignItems: "center",
 		justifyContent: "center",
 		marginTop: 20,
@@ -163,6 +163,7 @@ const style = StyleSheet.create({
 		fontSize: 20,
 		color: "#fff",
 		lineHeight: 24,
+		textAlign:'center',
 	},
 	containerResultado: {
 		width: width,
