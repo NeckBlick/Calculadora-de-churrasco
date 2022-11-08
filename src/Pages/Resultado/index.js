@@ -74,6 +74,14 @@ export default function Resultado() {
 			>
 				<Text style={style.textButton}>Calcular Novamente</Text>
 			</TouchableOpacity>
+			<TouchableOpacity
+				style={style.buttonBebidas}
+				onPress={() => {
+					navigation.navigate("Receitas")
+				}}
+			>
+				<Text style={style.textButton}>Receitas</Text>
+			</TouchableOpacity>
 		</ScrollView>
 	);
 }
