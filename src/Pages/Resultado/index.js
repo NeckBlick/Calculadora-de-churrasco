@@ -19,21 +19,16 @@ const { width, height } = Dimensions.get("screen");
 export default function Resultado() {
 	const { CalcularCarne } = useContext(Context);
 	const navigation = useNavigation();
-	const [preco, setPrecos] = useState();
+	const [dados, setDados] = useState([]);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		(async () => {
-			setPrecos(CalcularCarne());
+			setDados(CalcularCarne());
 			setLoading(false);
+			
 		})();
 	},[]);
-
-	if(loading){
-		setPrecos(CalcularCarne())
-		setLoading(false)
-	}
-	// console.log(preco)
 
 	const calcularNovamente = () => {
 		AsyncStorage.clear();
@@ -60,16 +55,16 @@ export default function Resultado() {
 				{loading ? (
 					""
 				) : (
-					<FlatList
-						data={preco}
-						keyExtractor={(item) => item.id}
-						renderItem={({ item }) => (
-							<View style={style.containerCard}>
-								<CardResultado data={item} img="user" />
-								<Text style={style.preco}>R$00,00</Text>
+					dados.map((item => (
+						<View>
+							<Text>{item.tipo}</Text>
+							<View>
+								{item.tipos.map((item =>(
+									<Text>{item.assado}</Text>
+								)))}
 							</View>
-						)}
-					/>
+						</View>
+					)))
 				)}
 			</View>
 
@@ -82,6 +77,14 @@ export default function Resultado() {
 			>
 				<Text style={style.textButton}>Calcular Novamente</Text>
 			</TouchableOpacity>
+			<TouchableOpacity
+					style={style.buttonParticipante}
+					onPress={() => {
+						navigation.navigate("Receitas")
+					}}
+				>
+        <Text style={style.textButton}>Avançar</Text>
+      </TouchableOpacity>
 		</ScrollView>
 	);
 }
@@ -194,4 +197,25 @@ const style = StyleSheet.create({
 		color: "#fff",
 		padding: 8,
 	},
+	buttonParticipante: {
+		backgroundColor: "#E95811",
+		padding: 10,
+		borderRadius: 15,
+		shadowColor: "#000",
+		shadowOffset: {
+		  width: 0,
+		  height: 2,
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 3.84,
+		elevation: 5,
+		width: 150,
+		height: 50,
+		alignItems: "center",
+		justifyContent: "center",
+		marginTop: 20,
+		
+	
+		
+	  }
 });

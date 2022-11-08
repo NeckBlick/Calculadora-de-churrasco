@@ -12,17 +12,7 @@ export default function cardResultado({data}) {
 			<View style={style.right}>
 				<Text style={style.kilos}>
 					{data.qntdTotal} Kg de {data.tipo}
-          {data.teste.teste1}
-          {/* <FlatList
-						data={data}
-						keyExtractor={(item) => item.id}
-						renderItem={({ item: tiposBov }) => (
-							<View style={style.containerCard}>
-								<Text style={style.preco}>{item.tipo.tiposBov}</Text>
-							</View>
-						)}
-					/> */}
-          
+          {data.tipos.assado}    
 				</Text>
 			</View>
 		</View>

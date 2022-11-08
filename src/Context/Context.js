@@ -26,17 +26,7 @@ export default function Provider({ children }) {
 		})();
 	}, []);
 	const CalcularCarne = () => {
-		const [carneHomem, setCarneHomem] = useState()
-		const [carneMulher, setCarneMulher] = useState()
-		const [carneCrianca, setCarneCrianca] = useState()
-		
-		const [frangoHomem, setFrangoHomem] = useState()
-		const [frangoMulher, setFrangoMulher] = useState()
-		const [frangoCrianca, setFrangoCrianca] = useState()
-		
-		const [suinoHomem, setSuinoHomem] = useState()
-		const [suinoMulher, setSuinoMulher] = useState()
-		const [suinoCrianca, setSuinoCrianca] = useState()
+
 
 		// Filtrar a quantiadde de pessoas
 		let qtdHomem = listaPessoas.filter(item => item.sexo == "homem")
@@ -47,66 +37,60 @@ export default function Provider({ children }) {
 		let tiposFrango = listaCarnes.filter (item => item.tipo === "frango")
 		let tiposSuino = listaCarnes.filter (item => item.tipo === "suino")
 
-		console.log(tiposBov)
-		console.log(tiposFrango)
-		
 		let tipos1 = tiposBov
+		let tipos2 = tiposFrango
+		let tipos3 = tiposSuino
 
 		//Homem
-		if(qtdHomem.length >= 1){
-			setCarneHomem(qntdHomenC)
-			setFrangoHomem(qntdHomenF)
-			setSuinoHomem(qntdHomenS)
+		if(qtdHomem.length > 0){
 			var numHomens = qtdHomem[0].quantidade
 			var qntdHomenC = (data[0].carne.homem.carne * numHomens) / 1000
 			var qntdHomenF = (data[0].carne.homem.frango * numHomens) / 1000
 			var qntdHomenS = (data[0].carne.homem.suino * numHomens) / 1000
+
 		}else{
-			var qntdHomenC = 0
-			var qntdHomenF = 0
-			var qntdHomenS = 0
+			 qntdHomenC = 0
+			 qntdHomenF = 0
+			 qntdHomenS = 0
 		}
+
 		// Mulher	
-		if(qtdMulher.length >= 1){
-			setCarneMulher(qntdMulheresC)
-			setFrangoMulher(qntdMulheresF)
-			setSuinoMulher(qntdMulheresS)
+		if(qtdMulher.length > 0){
 			var numMulher = qtdMulher[0].quantidade
 			var qntdMulheresC = (data[0].carne.mulher.carne * numMulher) / 1000	
 			var qntdMulheresF = (data[0].carne.mulher.frango * numMulher) / 1000	
 			var qntdMulheresS = (data[0].carne.mulher.suino * numMulher) / 1000	
+
 		}else{
-			var qntdMulheresC = 0
-			var qntdMulheresF = 0
-			var qntdMulheresS = 0
+			 qntdMulheresC = 0
+			 qntdMulheresF = 0
+			 qntdMulheresS = 0
 		}
 		//Crianca
-		if(qtdCrianca >= 1){
-			setCarneCrianca(qntdCriancaC)
-			setFrangoCrianca(qntdCriancaF)
-			setSuinoCrianca(qntdCriancaS)	
+		if(qtdCrianca.length > 0){
 			var numCrianca = qtdCrianca[0].quantidade
 			var qntdCriancaC = (data[0].carne.crianca.carne * numCrianca) / 1000;
 			var qntdCriancaF = (data[0].carne.crianca.frango * numCrianca) / 1000;	
 			var qntdCriancaS = (data[0].carne.crianca.suino * numCrianca) / 1000;	
+
 		}else{
-			var qntdCriancaC = 0;	
-			var qntdCriancaF = 0
-			var qntdCriancaS = 0
+			 qntdCriancaC = 0;	
+			 qntdCriancaF = 0
+			 qntdCriancaS = 0
 		}
-		if (tiposBov.length >= 1) {
+		if (tiposBov.length > 0) {
 			tiposBov =  tiposBov.length
 		} else {
 			tiposBov = 1;	
 		}
 
-		if (tiposFrango.length >= 1) {
+		if (tiposFrango.length > 0) {
 			tiposFrango = tiposFrango.length
 		} else {
 			tiposFrango = 1;
 		}
 
-		if (tiposSuino.length >= 1) {
+		if (tiposSuino.length > 0 ) {
 			tiposSuino =  tiposSuino.length
 		} else {
 			tiposSuino = 1;
@@ -122,35 +106,20 @@ export default function Provider({ children }) {
 			{
 				id: 0,
 				tipo: "Bovina",
-				teste: {
-					teste1: tipos1.map(tipos1.assado),
-				},
 				qntdTotal: qtdCarne.toFixed(2),
-				qntdHomem:carneHomem,		
-				qntdMulher: carneMulher,		
-				qntdCrianca: carneCrianca,		
+				tipos: tipos1
 			},
 			{
 				id: 1,
 				tipo: "Frango",
-				teste: {
-					teste1: tipos1.assado,
-				},
 				qntdTotal: qtdFrango.toFixed(2),
-				qntdHomem:frangoHomem,		
-				qntdMulher: frangoMulher,		
-				qntdCrianca: frangoCrianca,		
+				tipos: tipos2	
 			},
 			{
 				id: 2,
 				tipo: "Carne Suína",
-				teste: {
-					teste1: tipos1.assado,
-				},
 				qntdTotal: qtdSuino.toFixed(2),
-				qntdHomem:suinoHomem,		
-				qntdMulher: suinoMulher,		
-				qntdCrianca: suinoCrianca,			
+				tipos: tipos3	
 			},
 		];
 		return dataCarnes
