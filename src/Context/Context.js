@@ -5,9 +5,9 @@ import Data, { data } from '../data'
 export const Context = createContext();
 
 export default function Provider({ children }) {
-	const [listaPessoas, setListaPessoas] = useState();
-	const [listaCarnes, setListaCarnes] = useState();
-	const [listaBebidas, setListaBebidas] = useState();
+	const [listaPessoas, setListaPessoas] = useState([]);
+	const [listaCarnes, setListaCarnes] = useState([]);
+	const [listaBebidas, setListaBebidas] = useState([]);
 	const [duracao, setDuracao] = useState();
 	useEffect(() => {
 		(async () => {
@@ -25,6 +25,7 @@ export default function Provider({ children }) {
 			setDuracao(duracao);
 		})();
 	}, []);
+
 	const CalcularCarne = () => {
 
 
@@ -74,7 +75,7 @@ export default function Provider({ children }) {
 			var qntdCriancaS = (data[0].carne.crianca.suino * numCrianca) / 1000;	
 
 		}else{
-			 qntdCriancaC = 0;	
+			 qntdCriancaC = 0
 			 qntdCriancaF = 0
 			 qntdCriancaS = 0
 		}
@@ -99,29 +100,31 @@ export default function Provider({ children }) {
 		var qtdCarne = (qntdHomenC + qntdMulheresC + qntdCriancaC) / tiposBov
 		var qtdFrango = (qntdHomenF + qntdMulheresF + qntdCriancaF) / tiposFrango
 		var qtdSuino = (qntdHomenS + qntdMulheresS + qntdCriancaS) / tiposSuino
-	
-		
 
 		 var dataCarnes = [
 			{
 				id: 0,
-				tipo: "Bovina",
+				tipo: "Carne Bovina",
 				qntdTotal: qtdCarne.toFixed(2),
+				carnes: tiposBov,
 				tipos: tipos1
 			},
 			{
 				id: 1,
-				tipo: "Frango",
+				tipo: "Carne de Frango",
 				qntdTotal: qtdFrango.toFixed(2),
+				carnes: tiposFrango,
 				tipos: tipos2	
 			},
 			{
 				id: 2,
 				tipo: "Carne Suína",
 				qntdTotal: qtdSuino.toFixed(2),
+				carnes: tiposSuino,
 				tipos: tipos3	
 			},
 		];
+		console.log(tipos1)
 		return dataCarnes
     };
 	return <Context.Provider value={{CalcularCarne}}>{children}</Context.Provider>;

@@ -5,12 +5,10 @@ import {
 	TouchableOpacity,
 	StyleSheet,
 	ScrollView,
-	FlatList,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState, useContext } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
-import CardResultado from "../../Components/CardResultado";
 import { data } from "../../data";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Context } from "../../Context/Context";
@@ -35,6 +33,8 @@ export default function Resultado() {
 		navigation.push("TelaInicial");
 	};
 
+	console.log(dados)
+
 	return (
 		<ScrollView style={style.container}>
 			<View style={style.header}>
@@ -56,19 +56,45 @@ export default function Resultado() {
 					""
 				) : (
 					dados.map((item => (
-						<View>
-							<Text>{item.tipo}</Text>
-							<View>
-								{item.tipos.map((item =>(
-									<Text>{item.assado}</Text>
-								)))}
-							</View>
+						<View style={style.container2}>
+								<View style={style.left}>
+									<Icon name='male' size={20} color="#000" />
+								</View>
+								<View style={style.right}>
+									<Text style={style.kilos}>
+										{item.qntdTotal} Kg de {item.tipo}	
+									</Text>
+									<View>
+										{item.tipos.map((data =>(
+											<View>
+												<Text>{data.assado}</Text>
+												<Text>Preço: R${(data.preco * item.qntdTotal / item.carnes).toFixed(2)}</Text>
+											</View>
+										)))}
+									</View>
+								</View>
 						</View>
+
+
+						// <View style={{index:1}}>
+						// 	<Text>{item.tipo}</Text>
+						// 	<Text>{item.qntdTotal} Kg no total</Text>
+						// 	<View>
+						// 		{item.tipos.map((data =>(
+						// 			<View>
+						// 				<Text>{data.assado}</Text>
+						// 				<Text>Preço: R${(data.preco * item.qntdTotal / item.carnes).toFixed(2)}</Text>
+						// 				<Text> </Text>
+						// 			</View>
+						// 		)))}
+						// 		<Text>      </Text>
+						// 	</View>
+						// </View>
 					)))
 				)}
 			</View>
 
-			<Text style={style.total}> Total: R$00,00</Text>
+			<Text style={style.total}> Total: </Text>
 			<TouchableOpacity
 				style={style.buttonBebidas}
 				onPress={() => {
@@ -144,7 +170,6 @@ const style = StyleSheet.create({
 	containerBebida: {
 		width: "100%",
 		height: 300,
-		// backgroundColor:"white",
 		justifyContent: "center",
 		alignItems: "center",
 		marginLeft: "auto",
@@ -214,8 +239,39 @@ const style = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 		marginTop: 20,
-		
+	  },
+	  container2: {
+		flex: 1,
+		width:220,
+		height: 'auto',
+		alignItems:"center",
+		justifyContent:"center",
+		flexDirection: "row",
+		padding: 6,
+	  },
+	  kilos: {
+		width: "100%",
+		fontSize: 18,
+		fontWeight: "500",
+	  },
+	  left: {
+		width: 40,
+		justifyContent: "center",
+		alignItems: "center",
+	  },
+	  right: {
+		width: 130,
 	
-		
-	  }
+	  },
+	  gramas: {
+		fontWeight: '300',
+		alignItems: "center",
+		marginLeft: 10,
+	  },
+	  containerCard: {
+			flexDirection: "row",
+			justifyContent: "space-around",
+			alignItems: "center",
+			marginBottom: 15,
+		},
 });

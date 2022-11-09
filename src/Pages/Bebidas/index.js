@@ -16,7 +16,6 @@ import Suco from '../../Img/suco.png';
 import Refrigerante from '../../Img/refrigerante.png';
 import Cerveja from '../../Img/cerveja.png';
 
-const { width, height } = Dimensions.get('screen');
 function Bebidas() {
   const navigation = useNavigation();
   const [agua, setAgua] = useState(false);
@@ -140,8 +139,8 @@ export default Bebidas;
 
 const style = StyleSheet.create({
   container: {
-    width: width,
-    height: height,
+    width: '100%',
+    height: '100%',
     backgroundColor: '#ED7941',
     position: 'relative',
   },
