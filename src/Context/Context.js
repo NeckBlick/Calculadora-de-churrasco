@@ -27,8 +27,6 @@ export default function Provider({ children }) {
 	}, []);
 
 	const CalcularCarne = () => {
-
-
 		// Filtrar a quantiadde de pessoas
 		let qtdHomem = listaPessoas.filter(item => item.sexo == "homem")
 		let qtdMulher = listaPessoas.filter(item => item.sexo == "mulher")
@@ -43,7 +41,7 @@ export default function Provider({ children }) {
 		let tipos3 = tiposSuino
 
 		//Homem
-		if(qtdHomem.length > 0){
+		if(qtdHomem.length >= 1){
 			var numHomens = qtdHomem[0].quantidade
 			var qntdHomenC = (data[0].carne.homem.carne * numHomens) / 1000
 			var qntdHomenF = (data[0].carne.homem.frango * numHomens) / 1000

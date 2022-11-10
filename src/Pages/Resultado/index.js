@@ -19,6 +19,7 @@ export default function Resultado() {
 	const navigation = useNavigation();
 	const [dados, setDados] = useState([]);
 	const [loading, setLoading] = useState(true);
+	const [total, setTotal] = useState(0)
 
 	useEffect(() => {
 		(async () => {
@@ -56,61 +57,54 @@ export default function Resultado() {
 					""
 				) : (
 					dados.map((item => (
-						<View style={style.container2}>
-								<View style={style.left}>
-									<Icon name='male' size={20} color="#000" />
-								</View>
-								<View style={style.right}>
-									<Text style={style.kilos}>
-										{item.qntdTotal} Kg de {item.tipo}	
-									</Text>
-									<View>
-										{item.tipos.map((data =>(
-											<View>
-												<Text>{data.assado}</Text>
-												<Text>Preço: R${(data.preco * item.qntdTotal / item.carnes).toFixed(2)}</Text>
-											</View>
-										)))}
+							<View style={style.containerGlobal}>
+								<View style={style.container2} key={item.qntdTotal}>
+									<View style={style.left}>
+	 									<Icon name='chicken' size={20} color="#000" />
+									</View>
+									<View style={style.right}>
+										<Text style={style.kilos}>
+												{item.qntdTotal} Kg de {item.tipo}	
+										</Text>
+										
+									{item.tipos.map(items => (
+												<View key={items.assado} style={style.listOpcoes}>
+													<Text>{items.assado}</Text>
+												</View>
+								
+										))}
 									</View>
 								</View>
-						</View>
-
-
-						// <View style={{index:1}}>
-						// 	<Text>{item.tipo}</Text>
-						// 	<Text>{item.qntdTotal} Kg no total</Text>
-						// 	<View>
-						// 		{item.tipos.map((data =>(
-						// 			<View>
-						// 				<Text>{data.assado}</Text>
-						// 				<Text>Preço: R${(data.preco * item.qntdTotal / item.carnes).toFixed(2)}</Text>
-						// 				<Text> </Text>
-						// 			</View>
-						// 		)))}
-						// 		<Text>      </Text>
-						// 	</View>
-						// </View>
+								{item.tipos.map(data => (
+									<View key={data.assado}>
+										<Text style={style.preco}>R${(data.preco * item.qntdTotal / item.carnes).toFixed(2)}</Text>
+									</View>
+								))}
+							</View>							
 					)))
 				)}
 			</View>
 
-			<Text style={style.total}> Total: </Text>
-			<TouchableOpacity
-				style={style.buttonBebidas}
-				onPress={() => {
-					calcularNovamente();
-				}}
-			>
-				<Text style={style.textButton}>Calcular Novamente</Text>
-			</TouchableOpacity>
-			<TouchableOpacity
-					style={style.buttonParticipante}
-					onPress={() => {
-						navigation.navigate("Receitas")
-					}}
-				>
-        <Text style={style.textButton}>Avançar</Text>
-      </TouchableOpacity>
+			<Text style={style.total}> Total:R${total} </Text>
+				<View style={style.buttons}>
+					<TouchableOpacity
+						style={style.buttonParticipante}
+						onPress={() => {
+							calcularNovamente();
+						}}
+					>
+						<Text style={style.textButton}>Calcular Novamente</Text>
+					</TouchableOpacity>
+
+					<TouchableOpacity
+							style={style.buttonParticipante}
+							onPress={() => {
+								navigation.navigate("Receitas")
+							}}
+						>
+						<Text style={style.textButton}>Receitas</Text>
+					</TouchableOpacity>
+				</View>
 		</ScrollView>
 	);
 }
@@ -183,17 +177,6 @@ const style = StyleSheet.create({
 	cardDesable: {
 		backgroundColor: "#ED7941",
 	},
-	buttonBebidas: {
-		backgroundColor: "#E95811",
-		padding: 10,
-		borderRadius: 15,
-		shadowColor: "#000",
-		width: 150,
-		height: 50,
-		alignItems: "center",
-		justifyContent: "center",
-		marginTop: 20,
-	},
 	textButton: {
 		fontWeight: "500",
 		fontSize: 20,
@@ -210,7 +193,7 @@ const style = StyleSheet.create({
 		marginBottom: 15,
 	},
 	preco: {
-		fontSize: 24,
+		fontSize: 20,
 		fontWeight: "600",
 		color: "#fff",
 	},
@@ -224,7 +207,7 @@ const style = StyleSheet.create({
 	},
 	buttonParticipante: {
 		backgroundColor: "#E95811",
-		padding: 10,
+		padding: 13,
 		borderRadius: 15,
 		shadowColor: "#000",
 		shadowOffset: {
@@ -235,14 +218,16 @@ const style = StyleSheet.create({
 		shadowRadius: 3.84,
 		elevation: 5,
 		width: 150,
-		height: 50,
+		height: 55,
 		alignItems: "center",
 		justifyContent: "center",
 		marginTop: 20,
+		marginLeft: "auto",
+		marginRight: "auto",
+		textAlign: 'center'
 	  },
 	  container2: {
-		flex: 1,
-		width:220,
+		width:240,
 		height: 'auto',
 		alignItems:"center",
 		justifyContent:"center",
@@ -251,17 +236,18 @@ const style = StyleSheet.create({
 	  },
 	  kilos: {
 		width: "100%",
-		fontSize: 18,
+		fontSize: 16,
 		fontWeight: "500",
 	  },
 	  left: {
-		width: 40,
+		width: "10%",
+		marginRight: 6,
 		justifyContent: "center",
 		alignItems: "center",
 	  },
 	  right: {
-		width: 130,
-	
+		width: "90%",
+		position: 'relative'
 	  },
 	  gramas: {
 		fontWeight: '300',
@@ -274,4 +260,20 @@ const style = StyleSheet.create({
 			alignItems: "center",
 			marginBottom: 15,
 		},
+	containerGlobal:{
+		flexDirection: 'row',
+		alignItems:'center',
+		justifyContent: 'space-between',
+		padding: 8,
+		
+	},
+	listOpcoes:{
+		marginLeft: 18,
+		position: 'absolute',
+		top: 22,
+		left: 20
+	},
+	buttons:{
+		flexDirection: 'row'
+	}
 });

@@ -2,11 +2,11 @@ import { View, Text, StyleSheet, FlatList } from 'react-native'
 import Icon from "react-native-vector-icons/FontAwesome";
 import React from 'react'
 
-export default function cardResultado({data}) {
+export default function CardResultado({data}) {
   return (
 		<View style={style.container}>
 			<View style={style.left}>
-				{/* <Icon name={img} size={20} color="#000" /> */}
+				<Icon name={img} size={20} color="#000" />
 			</View>
 
 			<View style={style.right}>
