@@ -30,24 +30,31 @@ export default function Provider({ children }) {
 
 
 		// Filtrar a quantiadde de pessoas
-		let qtdHomem = listaPessoas.filter(item => item.sexo == "homem")
-		let qtdMulher = listaPessoas.filter(item => item.sexo == "mulher")
-		let qtdCrianca = listaPessoas.filter(item => item.sexo == "crianca")
+		let qtdHomem = listaPessoas.filter(item => item.sexo === "homem")
+		let qtdMulher = listaPessoas.filter(item => item.sexo === "mulher")
+		let qtdCrianca = listaPessoas.filter(item => item.sexo === "crianca")
 		//Tipo de carne que a pessoa escolheu
 		let tiposBov = listaCarnes.filter (item => item.tipo === "bovino")
 		let tiposFrango = listaCarnes.filter (item => item.tipo === "frango")
 		let tiposSuino = listaCarnes.filter (item => item.tipo === "suino")
 
-		let tipos1 = tiposBov
-		let tipos2 = tiposFrango
-		let tipos3 = tiposSuino
+		var tipos = tiposBov
+		var tiposF = tiposFrango
+		var tiposS = tiposSuino
+		// let tipoAgua = listaBebidas.filter (item => item.bebida === "Agua")
+		// let tipoRefri = listaBebidas.filter (item => item.bebida === "Refrigerante")
+		// let tipoSuco = listaBebidas.filter (item => item.bebida === "Suco")
+		// let tipoCerveja = listaBebidas.filter (item => item.bebida === "Cerveja")
+
+		// let refri = (qtdHomem + qtdMulher + qtdCrianca) * 1000
+		// let agua = (qtdHomem + qtdMulher + qtdCrianca) * 1000
+		// let suco = (qtdHomem + qtdMulher + qtdCrianca) * 1000
+		// let refri = (qtdHomem + qtdMulher + qtdCrianca) * 1000
+		
 
 		//Homem
-		if(qtdHomem.length > 0){
+		if(qtdHomem.length >= 1){
 			var numHomens = qtdHomem[0].quantidade
-			var qntdHomenC = (data[0].carne.homem.carne * numHomens) / 1000
-			var qntdHomenF = (data[0].carne.homem.frango * numHomens) / 1000
-			var qntdHomenS = (data[0].carne.homem.suino * numHomens) / 1000
 
 		}else{
 			 qntdHomenC = 0
@@ -56,11 +63,8 @@ export default function Provider({ children }) {
 		}
 
 		// Mulher	
-		if(qtdMulher.length > 0){
+		if(qtdMulher.length >= 1){
 			var numMulher = qtdMulher[0].quantidade
-			var qntdMulheresC = (data[0].carne.mulher.carne * numMulher) / 1000	
-			var qntdMulheresF = (data[0].carne.mulher.frango * numMulher) / 1000	
-			var qntdMulheresS = (data[0].carne.mulher.suino * numMulher) / 1000	
 
 		}else{
 			 qntdMulheresC = 0
@@ -68,17 +72,38 @@ export default function Provider({ children }) {
 			 qntdMulheresS = 0
 		}
 		//Crianca
-		if(qtdCrianca.length > 0){
+		if(qtdCrianca.length >= 1){
 			var numCrianca = qtdCrianca[0].quantidade
-			var qntdCriancaC = (data[0].carne.crianca.carne * numCrianca) / 1000;
-			var qntdCriancaF = (data[0].carne.crianca.frango * numCrianca) / 1000;	
-			var qntdCriancaS = (data[0].carne.crianca.suino * numCrianca) / 1000;	
 
 		}else{
 			 qntdCriancaC = 0
 			 qntdCriancaF = 0
 			 qntdCriancaS = 0
 		}
+		
+		
+		if(tiposSuino.length >= 1 ){
+			var qntdHomenS = (data[0].carne.homem.suino * numHomens) / 1000
+			var qntdMulheresS = (data[0].carne.mulher.suino * numMulher) / 1000	
+			var qntdCriancaS = (data[0].carne.crianca.suino * numCrianca) / 1000;	
+		}
+		if(tiposBov.length >= 1){
+			var qntdHomenC = (data[0].carne.homem.carne * numHomens) / 1000
+			var qntdMulheresC = (data[0].carne.mulher.carne * numMulher) / 1000	
+			var qntdCriancaC = (data[0].carne.crianca.carne * numCrianca) / 1000;
+		}
+		if(tiposFrango.length >= 1){
+			var qntdHomenF = (data[0].carne.homem.frango * numHomens) / 1000
+			var qntdMulheresF = (data[0].carne.mulher.frango * numMulher) / 1000	
+			var qntdCriancaF = (data[0].carne.crianca.frango * numCrianca) / 1000;	
+		}
+		
+		let tipos1 = tiposBov.map((item) => item.preco);
+		// let teste = tiposBov.map((item) => item.preco)
+		let tipos2 = tiposFrango.map(item => item.preco)
+		let tipos3 = tiposSuino.map(item => item.preco)	
+
+
 		if (tiposBov.length > 0) {
 			tiposBov =  tiposBov.length
 		} else {
@@ -101,30 +126,56 @@ export default function Provider({ children }) {
 		var qtdFrango = (qntdHomenF + qntdMulheresF + qntdCriancaF) / tiposFrango
 		var qtdSuino = (qntdHomenS + qntdMulheresS + qntdCriancaS) / tiposSuino
 
+		var precoTotalC = 0
+		for(let i  = 0; i < tipos1.length; i++){
+	
+			let precoFinal = (tipos1[i] * Number(qtdCarne.toFixed(2))) / tiposBov;
+			precoTotalC += precoFinal
+			Object.assign(tipos[i], { total: precoFinal });
+			
+		}
+
+		var precoTotalF = 0;
+		for(let i  = 0; i < tipos2.length; i++){
+			let precoFinal = (tipos2[i] * Number(qtdFrango.toFixed(2))) / tiposFrango;
+			precoTotalF += precoFinal;
+			Object.assign( tiposF[i],
+				{ total: precoFinal });	
+		}
+
+		var precoTotalS = 0;
+		for(let i  = 0; i < tipos3.length; i++){
+			let precoFinal = (tipos3[i] * Number(qtdSuino.toFixed(2))) / tiposSuino;
+			precoTotalS += precoFinal;
+			Object.assign(tiposS[i], { total: precoFinal });	
+		}
+		
 		 var dataCarnes = [
 			{
 				id: 0,
 				tipo: "Carne Bovina",
 				qntdTotal: qtdCarne.toFixed(2),
 				carnes: tiposBov,
-				tipos: tipos1
+				tipos: tipos,	
+				precoFinal: precoTotalC		
 			},
 			{
 				id: 1,
-				tipo: "Carne de Frango",
+				tipo: "Frango",
 				qntdTotal: qtdFrango.toFixed(2),
 				carnes: tiposFrango,
-				tipos: tipos2	
+				tipos: tiposF,
+				precoFinal: precoTotalF	
 			},
 			{
 				id: 2,
 				tipo: "Carne Suína",
 				qntdTotal: qtdSuino.toFixed(2),
 				carnes: tiposSuino,
-				tipos: tipos3	
+				tipos: tiposS,
+				precoFinal: precoTotalS		
 			},
 		];
-		console.log(tipos1)
 		return dataCarnes
     };
 	return <Context.Provider value={{CalcularCarne}}>{children}</Context.Provider>;

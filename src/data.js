@@ -20,14 +20,17 @@ export const data = [
   },
   { 
     bebidas: { //Mililitros (ML)
+      agua: {
+        pessoa: 500,
+      },
       refrigerante: {
-        pessoa: 1500,
+        pessoa: 1000,
       },
       suco: {
-        pessoa: 1500,
+        pessoa: 1000,
       },
       cerveja: {
-        adulto: 2000,
+        adulto: 1500,
       },
     },
   },
@@ -40,14 +43,15 @@ export const data = [
       farofa: { // Gramas
         pessoa: 30,
       }, 
-      paoAlho:{
+      paoAlho:{ //unidade
         pessoa: 3,
-        crianca: 1.5
+        crianca: 2
       },   
       pao: { // Quantidade de pão
         adulto: 3,
         crianca: 2,
       },
+
     },
   },
 ];

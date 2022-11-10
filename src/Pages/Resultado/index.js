@@ -12,6 +12,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { data } from "../../data";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Context } from "../../Context/Context";
+import { askAsync } from "expo-permissions";
 
 const { width, height } = Dimensions.get("screen");
 export default function Resultado() {
@@ -19,7 +20,7 @@ export default function Resultado() {
 	const navigation = useNavigation();
 	const [dados, setDados] = useState([]);
 	const [loading, setLoading] = useState(true);
-
+	const precos = []
 	useEffect(() => {
 		(async () => {
 			setDados(CalcularCarne());
@@ -32,9 +33,16 @@ export default function Resultado() {
 		AsyncStorage.clear();
 		navigation.push("TelaInicial");
 	};
+	
+	if(!loading){
 
-	console.log(dados)
-
+		for (let i = 0; i <= dados.length; i++){
+			if(dados[i].tipos.length == 0){
+				dados.pop(i)
+			}	
+			
+		}
+		console.log(dados)
 	return (
 		<ScrollView style={style.container}>
 			<View style={style.header}>
@@ -49,54 +57,37 @@ export default function Resultado() {
 					(Esse aplicativo é apenas uma simulação, a quantidade e o preço é
 					apenas uma estimativa)
 				</Text>
-				
 			</View>
+
 			<View style={style.containerResultado}>
-				{loading ? (
-					""
-				) : (
-					dados.map((item => (
+				{dados.map((item) => (
+					<View style={style.containerGlobal} key={item.qntdTotal}>
 						<View style={style.container2}>
-								<View style={style.left}>
-									<Icon name='male' size={20} color="#000" />
-								</View>
-								<View style={style.right}>
-									<Text style={style.kilos}>
-										{item.qntdTotal} Kg de {item.tipo}	
-									</Text>
-									<View>
-										{item.tipos.map((data =>(
-											<View>
-												<Text>{data.assado}</Text>
-												<Text>Preço: R${(data.preco * item.qntdTotal / item.carnes).toFixed(2)}</Text>
-											</View>
-										)))}
+							<View style={style.left}>
+								<Icon name="chicken" size={20} color="#000" />
+							</View>
+							<View style={style.right}>
+								<Text style={style.kilos}>
+									{item.qntdTotal} Kg de {item.tipo}
+								</Text>
+
+								{item.tipos.map((items) => (
+									<View key={items.assado} style={style.listOpcoes}>
+										<Text>{items.assado} - R${items.total}</Text>
 									</View>
-								</View>
+								))}
+							</View>
 						</View>
-
-
-						// <View style={{index:1}}>
-						// 	<Text>{item.tipo}</Text>
-						// 	<Text>{item.qntdTotal} Kg no total</Text>
-						// 	<View>
-						// 		{item.tipos.map((data =>(
-						// 			<View>
-						// 				<Text>{data.assado}</Text>
-						// 				<Text>Preço: R${(data.preco * item.qntdTotal / item.carnes).toFixed(2)}</Text>
-						// 				<Text> </Text>
-						// 			</View>
-						// 		)))}
-						// 		<Text>      </Text>
-						// 	</View>
-						// </View>
-					)))
-				)}
+							<View key={item.assado}>
+								<Text style={style.preco}>R${item.precoFinal}</Text>
+							</View>
+					</View>
+				))}
 			</View>
 
 			<Text style={style.total}> Total: </Text>
 			<TouchableOpacity
-				style={style.buttonBebidas}
+				style={style.buttonParticipante}
 				onPress={() => {
 					calcularNovamente();
 				}}
@@ -104,15 +95,15 @@ export default function Resultado() {
 				<Text style={style.textButton}>Calcular Novamente</Text>
 			</TouchableOpacity>
 			<TouchableOpacity
-					style={style.buttonParticipante}
-					onPress={() => {
-						navigation.navigate("Receitas")
-					}}
-				>
-        <Text style={style.textButton}>Avançar</Text>
-      </TouchableOpacity>
+				style={style.buttonParticipante}
+				onPress={() => {
+					navigation.navigate("Receitas");
+				}}
+			>
+				<Text style={style.textButton}>Avançar</Text>
+			</TouchableOpacity>
 		</ScrollView>
-	);
+	);}
 }
 
 const style = StyleSheet.create({
@@ -183,17 +174,6 @@ const style = StyleSheet.create({
 	cardDesable: {
 		backgroundColor: "#ED7941",
 	},
-	buttonBebidas: {
-		backgroundColor: "#E95811",
-		padding: 10,
-		borderRadius: 15,
-		shadowColor: "#000",
-		width: 150,
-		height: 50,
-		alignItems: "center",
-		justifyContent: "center",
-		marginTop: 20,
-	},
 	textButton: {
 		fontWeight: "500",
 		fontSize: 20,
@@ -224,54 +204,70 @@ const style = StyleSheet.create({
 	},
 	buttonParticipante: {
 		backgroundColor: "#E95811",
-		padding: 10,
+		padding: 13,
 		borderRadius: 15,
 		shadowColor: "#000",
 		shadowOffset: {
-		  width: 0,
-		  height: 2,
+			width: 0,
+			height: 2,
 		},
 		shadowOpacity: 0.25,
 		shadowRadius: 3.84,
 		elevation: 5,
 		width: 150,
-		height: 50,
+		height: 55,
 		alignItems: "center",
 		justifyContent: "center",
 		marginTop: 20,
-	  },
-	  container2: {
-		flex: 1,
-		width:220,
-		height: 'auto',
-		alignItems:"center",
-		justifyContent:"center",
+		marginLeft: "auto",
+		marginRight: "auto",
+		textAlign: "center",
+	},
+	container2: {
+		width: 240,
+		height: "auto",
+		alignItems: "center",
+		justifyContent: "center",
 		flexDirection: "row",
 		padding: 6,
-	  },
-	  kilos: {
+	},
+	kilos: {
 		width: "100%",
 		fontSize: 18,
 		fontWeight: "500",
-	  },
-	  left: {
-		width: 40,
+	},
+	left: {
+		width: "10%",
+		marginRight: 6,
 		justifyContent: "center",
 		alignItems: "center",
-	  },
-	  right: {
-		width: 130,
-	
-	  },
-	  gramas: {
-		fontWeight: '300',
+	},
+	right: {
+		width: "90%",
+		position: "relative",
+	},
+	gramas: {
+		fontWeight: "300",
 		alignItems: "center",
 		marginLeft: 10,
-	  },
-	  containerCard: {
-			flexDirection: "row",
-			justifyContent: "space-around",
-			alignItems: "center",
-			marginBottom: 15,
-		},
+	},
+	containerCard: {
+		flexDirection: "row",
+		justifyContent: "space-around",
+		alignItems: "center",
+		marginBottom: 15,
+	},
+	containerGlobal: {
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "space-between",
+		padding: 10,
+	},
+	listOpcoes: {
+		marginLeft: 18,
+		
+	},
+	buttons: {
+		flexDirection: "row",
+	},
 });

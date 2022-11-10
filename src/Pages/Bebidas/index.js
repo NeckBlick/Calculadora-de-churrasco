@@ -39,7 +39,7 @@ function Bebidas() {
           type: "info",
           position: "top",
           text1: "Escolha pelo menos uma opção para prosseguir!",
-          visibilityTime: 3000,
+          visibilityTime: 3000, 
           autoHide: true,
           onShow: () => {},
           onHide: () => {},
