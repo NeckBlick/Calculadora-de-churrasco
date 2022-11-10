@@ -17,7 +17,6 @@ export default function Participante() {
     {sexo: "crianca", quantidade: child }
   ]
 
-
 const guardarBanco = () => {
 	let qtdPessoa = dataPart.filter(item => item.quantidade > 0 );
           
@@ -94,19 +93,9 @@ const guardarBanco = () => {
               {child < 0 ? setChild(0) && child : child}
             </Text>
             <TouchableOpacity
-              onPress={() => {
-                setChild(child + 1);
-                Toast.show({
-                  type: "info",
-                  position: "top",
-                  text1: "Bebidas alcólicas apenas para maiores de 18 anos!",
-                  text2: "Não nos responsabilizamos pelo seus atos",
-                  visibilityTime: 3000,
-                  autoHide: true,
-                  onShow: () => {},
-                  onHide: () => {},
-                });
-              }}
+              onPress={() => 
+                setChild(child + 1)
+              }
             >
               <Text style={style.icon}>+</Text>
             </TouchableOpacity>

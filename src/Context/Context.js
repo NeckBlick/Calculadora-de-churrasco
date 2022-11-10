@@ -38,7 +38,7 @@ export default function Provider({ children }) {
 		let tiposFrango = listaCarnes.filter (item => item.tipo === "frango")
 		let tiposSuino = listaCarnes.filter (item => item.tipo === "suino")
 
-		var tipos = tiposBov
+		var tiposB = tiposBov
 		var tiposF = tiposFrango
 		var tiposS = tiposSuino
 		// let tipoAgua = listaBebidas.filter (item => item.bebida === "Agua")
@@ -131,7 +131,7 @@ export default function Provider({ children }) {
 	
 			let precoFinal = (tipos1[i] * Number(qtdCarne.toFixed(2))) / tiposBov;
 			precoTotalC += precoFinal
-			Object.assign(tipos[i], { total: precoFinal });
+			Object.assign(tiposB[i], { total: precoFinal });
 			
 		}
 
@@ -156,7 +156,7 @@ export default function Provider({ children }) {
 				tipo: "Carne Bovina",
 				qntdTotal: qtdCarne.toFixed(2),
 				carnes: tiposBov,
-				tipos: tipos,	
+				tipos: tiposB,	
 				precoFinal: precoTotalC		
 			},
 			{

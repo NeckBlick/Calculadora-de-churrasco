@@ -3,7 +3,6 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Dimensions,
   Image,
 } from 'react-native';
 import React, { useState } from 'react';
@@ -44,7 +43,7 @@ function Bebidas() {
           onShow: () => {},
           onHide: () => {},
           });;
-  };
+  }
 
   return (
     <View style={style.container}>
@@ -113,7 +112,18 @@ function Bebidas() {
           </TouchableOpacity>
           <TouchableOpacity
             style={cerveja ? style.cardActive : style.cardDesable}
-            onPress={() => (cerveja ? setCerveja(false) : setCerveja(true))}>
+            onPress={() =>  {(cerveja ? setCerveja(false) : setCerveja(true));
+              Toast.show({
+                type: "info",
+                position: "top",
+                text1: "Bebidas alcólicas apenas para maiores de 18 anos!",
+                text2: "Não nos responsabilizamos pelo seus atos",
+                visibilityTime: 3000,
+                autoHide: true,
+                onShow: () => {},
+                onHide: () => {},
+              });
+            }}>
             <View style={style.containerCardbebida}>
               <Image
                 source={Cerveja}

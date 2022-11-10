@@ -91,9 +91,6 @@ const style = StyleSheet.create({
         fontWeight:"bold",
         color:"white"
     },
-    containerPessoa:{
-      alignItems:'center',
-    },
     textButton: {
       fontWeight: "500",
       fontSize: 20,
@@ -143,11 +140,5 @@ const style = StyleSheet.create({
       position:"absolute",
       bottom:80,
       right:50
-    },
-    textButton: {
-      fontWeight: '500',
-      fontSize: 20,
-      color: "#fff",
-      lineHeight: 24,
     },
   });

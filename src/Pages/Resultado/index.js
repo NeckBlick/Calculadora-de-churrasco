@@ -20,7 +20,6 @@ export default function Resultado() {
 	const navigation = useNavigation();
 	const [dados, setDados] = useState([]);
 	const [loading, setLoading] = useState(true);
-	const precos = []
 	useEffect(() => {
 		(async () => {
 			setDados(CalcularCarne());
@@ -35,14 +34,21 @@ export default function Resultado() {
 	};
 	
 	if(!loading){
-
+	
 		for (let i = 0; i <= dados.length; i++){
 			if(dados[i].tipos.length == 0){
-				dados.pop(i)
+				delete dados[i]
 			}	
-			
+			console.log(dados[i])
 		}
-		console.log(dados)
+		// dados.forEach(carne => {
+		// 	if(carne.tipos.length == 0){
+		// 		carne.pop(carne)
+		// 			console.log(carne)
+		// 	}	
+		// 	console.log(carne.tipos.length)
+		// }
+		// )
 	return (
 		<ScrollView style={style.container}>
 			<View style={style.header}>
@@ -135,45 +141,6 @@ const style = StyleSheet.create({
 		fontWeight: "400",
 		fontSize: 18,
 	},
-	containerPessoa: {
-		alignItems: "center",
-	},
-	button: {
-		backgroundColor: "#E95811",
-		padding: 10,
-		borderRadius: 15,
-		shadowColor: "#000",
-		width: 150,
-		height: 50,
-		alignItems: "center",
-		justifyContent: "center",
-		marginTop: 20,
-		position: "absolute",
-		bottom: 80,
-		right: 50,
-	},
-	textButton: {
-		fontWeight: "500",
-		fontSize: 20,
-		color: "#fff",
-		lineHeight: 24,
-	},
-	containerBebida: {
-		width: "100%",
-		height: 300,
-		justifyContent: "center",
-		alignItems: "center",
-		marginLeft: "auto",
-		marginRight: "auto",
-		padding: 8,
-	},
-	cardActive: {
-		backgroundColor: "#F1590F",
-		borderRadius: 10,
-	},
-	cardDesable: {
-		backgroundColor: "#ED7941",
-	},
 	textButton: {
 		fontWeight: "500",
 		fontSize: 20,
@@ -182,12 +149,6 @@ const style = StyleSheet.create({
 	},
 	containerResultado: {
 		width: width,
-	},
-	containerCard: {
-		flexDirection: "row",
-		justifyContent: "space-around",
-		alignItems: "center",
-		marginBottom: 15,
 	},
 	preco: {
 		fontSize: 24,
@@ -246,17 +207,6 @@ const style = StyleSheet.create({
 		width: "90%",
 		position: "relative",
 	},
-	gramas: {
-		fontWeight: "300",
-		alignItems: "center",
-		marginLeft: 10,
-	},
-	containerCard: {
-		flexDirection: "row",
-		justifyContent: "space-around",
-		alignItems: "center",
-		marginBottom: 15,
-	},
 	containerGlobal: {
 		flexDirection: "row",
 		alignItems: "center",
@@ -265,9 +215,5 @@ const style = StyleSheet.create({
 	},
 	listOpcoes: {
 		marginLeft: 18,
-		
-	},
-	buttons: {
-		flexDirection: "row",
 	},
 });
