@@ -28,27 +28,21 @@ export default function Resultado() {
 		})();
 	},[]);
 
+	console.log(dados)
 	const calcularNovamente = () => {
 		AsyncStorage.clear();
 		navigation.push("TelaInicial");
 	};
 	
 	if(!loading){
+		let carnes = dados[0].filter(item => {
+			if(item.tipos.length > 0 ){
+				return item
+			}
+		})
+		let bebidas = dados[1]
 	
-		for (let i = 0; i <= dados.length; i++){
-			if(dados[i].tipos.length == 0){
-				delete dados[i]
-			}	
-			console.log(dados[i])
-		}
-		// dados.forEach(carne => {
-		// 	if(carne.tipos.length == 0){
-		// 		carne.pop(carne)
-		// 			console.log(carne)
-		// 	}	
-		// 	console.log(carne.tipos.length)
-		// }
-		// )
+
 	return (
 		<ScrollView style={style.container}>
 			<View style={style.header}>
@@ -66,11 +60,11 @@ export default function Resultado() {
 			</View>
 
 			<View style={style.containerResultado}>
-				{dados.map((item) => (
+				{carnes.map((item) => (
 					<View style={style.containerGlobal} key={item.qntdTotal}>
 						<View style={style.container2}>
 							<View style={style.left}>
-								<Icon name="chicken" size={20} color="#000" />
+								<Icon name="money" size={20} color="#000" />
 							</View>
 							<View style={style.right}>
 								<Text style={style.kilos}>
@@ -87,6 +81,24 @@ export default function Resultado() {
 							<View key={item.assado}>
 								<Text style={style.preco}>R${item.precoFinal}</Text>
 							</View>
+					</View>
+				))}
+			</View>
+
+			<View style={style.containerResultado}>
+				{bebidas.map((item) => (
+					<View style={style.containerGlobal} key={item.bebida}>
+						<View style={style.container2}>
+							<View style={style.left}>
+								<Icon name="money" size={20} color="#000" />
+							</View>
+							<View style={style.right}>
+								<Text style={style.kilos}>
+									{item.litrosTotal} L de  {item.bebida}
+								</Text>
+								<Text style={style.preco}>R${item.total}</Text>
+							</View>
+						</View>
 					</View>
 				))}
 			</View>

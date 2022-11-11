@@ -9,6 +9,8 @@ export default function Provider({ children }) {
 	const [listaCarnes, setListaCarnes] = useState([]);
 	const [listaBebidas, setListaBebidas] = useState([]);
 	const [duracao, setDuracao] = useState();
+
+
 	useEffect(() => {
 		(async () => {
 			let pessoas = await AsyncStorage.getItem("Participantes");
@@ -38,28 +40,21 @@ export default function Provider({ children }) {
 		let tiposFrango = listaCarnes.filter (item => item.tipo === "frango")
 		let tiposSuino = listaCarnes.filter (item => item.tipo === "suino")
 
+		let Bebida = listaBebidas.filter(item => item.estado === true)
 		var tiposB = tiposBov
 		var tiposF = tiposFrango
 		var tiposS = tiposSuino
-		// let tipoAgua = listaBebidas.filter (item => item.bebida === "Agua")
-		// let tipoRefri = listaBebidas.filter (item => item.bebida === "Refrigerante")
-		// let tipoSuco = listaBebidas.filter (item => item.bebida === "Suco")
-		// let tipoCerveja = listaBebidas.filter (item => item.bebida === "Cerveja")
 
-		// let refri = (qtdHomem + qtdMulher + qtdCrianca) * 1000
-		// let agua = (qtdHomem + qtdMulher + qtdCrianca) * 1000
-		// let suco = (qtdHomem + qtdMulher + qtdCrianca) * 1000
-		// let refri = (qtdHomem + qtdMulher + qtdCrianca) * 1000
-		
 
 		//Homem
 		if(qtdHomem.length >= 1){
 			var numHomens = qtdHomem[0].quantidade
 
 		}else{
-			 qntdHomenC = 0
-			 qntdHomenF = 0
-			 qntdHomenS = 0
+			numHomens = 0
+			//  qntdHomenC = 0
+			//  qntdHomenF = 0
+			//  qntdHomenS = 0
 		}
 
 		// Mulher	
@@ -67,19 +62,26 @@ export default function Provider({ children }) {
 			var numMulher = qtdMulher[0].quantidade
 
 		}else{
-			 qntdMulheresC = 0
-			 qntdMulheresF = 0
-			 qntdMulheresS = 0
+			numMulher = 0
+			//  qntdMulheresC = 0
+			//  qntdMulheresF = 0
+			//  qntdMulheresS = 0
 		}
 		//Crianca
 		if(qtdCrianca.length >= 1){
 			var numCrianca = qtdCrianca[0].quantidade
 
 		}else{
-			 qntdCriancaC = 0
-			 qntdCriancaF = 0
-			 qntdCriancaS = 0
+			numCrianca = 0
+			//  qntdCriancaC = 0
+			//  qntdCriancaF = 0
+			//  qntdCriancaS = 0
 		}
+
+
+		let litrosAdult = (numHomens + numMulher) * 1500 / Bebida.length
+		let litrosCrianca = numCrianca * 1000 / Bebida.filter(item => item.bebida != "Cerveja").length
+		let litrostotal = ((litrosAdult + litrosCrianca) / 1000) / Bebida.length
 		
 		
 		if(tiposSuino.length >= 1 ){
@@ -98,8 +100,7 @@ export default function Provider({ children }) {
 			var qntdCriancaF = (data[0].carne.crianca.frango * numCrianca) / 1000;	
 		}
 		
-		let tipos1 = tiposBov.map((item) => item.preco);
-		// let teste = tiposBov.map((item) => item.preco)
+		let tipos1 = tiposBov.map(item => item.preco);
 		let tipos2 = tiposFrango.map(item => item.preco)
 		let tipos3 = tiposSuino.map(item => item.preco)	
 
@@ -125,13 +126,15 @@ export default function Provider({ children }) {
 		var qtdCarne = (qntdHomenC + qntdMulheresC + qntdCriancaC) / tiposBov
 		var qtdFrango = (qntdHomenF + qntdMulheresF + qntdCriancaF) / tiposFrango
 		var qtdSuino = (qntdHomenS + qntdMulheresS + qntdCriancaS) / tiposSuino
+		
+
+		
 
 		var precoTotalC = 0
 		for(let i  = 0; i < tipos1.length; i++){
-	
 			let precoFinal = (tipos1[i] * Number(qtdCarne.toFixed(2))) / tiposBov;
 			precoTotalC += precoFinal
-			Object.assign(tiposB[i], { total: precoFinal });
+			Object.assign(tiposB[i], { total: precoFinal.toFixed(2) });
 			
 		}
 
@@ -139,44 +142,53 @@ export default function Provider({ children }) {
 		for(let i  = 0; i < tipos2.length; i++){
 			let precoFinal = (tipos2[i] * Number(qtdFrango.toFixed(2))) / tiposFrango;
 			precoTotalF += precoFinal;
-			Object.assign( tiposF[i],
-				{ total: precoFinal });	
+			Object.assign(tiposF[i], { total: precoFinal.toFixed(2) });	
 		}
 
 		var precoTotalS = 0;
 		for(let i  = 0; i < tipos3.length; i++){
 			let precoFinal = (tipos3[i] * Number(qtdSuino.toFixed(2))) / tiposSuino;
 			precoTotalS += precoFinal;
-			Object.assign(tiposS[i], { total: precoFinal });	
+			Object.assign(tiposS[i], { total: precoFinal.toFixed(2) });	
 		}
-		
+
+		for(let i  = 0; i < Bebida.length; i++){
+			let precoFinal = (Bebida[i].preco * Number(litrostotal.toFixed(2)));
+			Object.assign(Bebida[i], { total: precoFinal.toFixed(2) });	
+			Object.assign(Bebida[i], { litrosTotal: (litrostotal / Bebida[i].litragem).toFixed(2) });	
+		}
+
+		console.log(Bebida);
+
+	
 		 var dataCarnes = [
-			{
-				id: 0,
-				tipo: "Carne Bovina",
-				qntdTotal: qtdCarne.toFixed(2),
-				carnes: tiposBov,
-				tipos: tiposB,	
-				precoFinal: precoTotalC		
-			},
-			{
-				id: 1,
-				tipo: "Frango",
-				qntdTotal: qtdFrango.toFixed(2),
-				carnes: tiposFrango,
-				tipos: tiposF,
-				precoFinal: precoTotalF	
-			},
-			{
-				id: 2,
-				tipo: "Carne Suína",
-				qntdTotal: qtdSuino.toFixed(2),
-				carnes: tiposSuino,
-				tipos: tiposS,
-				precoFinal: precoTotalS		
-			},
-		];
-		return dataCarnes
+				{
+					id: 0,
+					tipo: "Carne Bovina",
+					qntdTotal: qtdCarne.toFixed(2),
+					carnes: tiposBov,
+					tipos: tiposB,
+					precoFinal: precoTotalC.toFixed(2),
+				},
+				{
+					id: 1,
+					tipo: "Frango",
+					qntdTotal: qtdFrango.toFixed(2),
+					carnes: tiposFrango,
+					tipos: tiposF,
+					precoFinal: precoTotalF.toFixed(2),
+				},
+				{
+					id: 2,
+					tipo: "Carne Suína",
+					qntdTotal: qtdSuino.toFixed(2),
+					carnes: tiposSuino,
+					tipos: tiposS,
+					precoFinal: precoTotalS.toFixed(2),
+				},
+			];
+		var bebidas = Bebida
+		return [dataCarnes, Bebida]
     };
 	return <Context.Provider value={{CalcularCarne}}>{children}</Context.Provider>;
 }
