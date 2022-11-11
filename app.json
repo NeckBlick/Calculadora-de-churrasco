@@ -2,9 +2,9 @@
   "expo": {
     "name": "Carneats",
     "slug": "Carneats",
-    "version": "1.0.0",
+    "version": "1.0.7",
     "orientation": "portrait",
-    "icon": "./assets/icon.jpeg",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -18,16 +18,21 @@
       "**/*"
     ],
     "ios": {
+      "config": {
+        "googleMapsApiKey": "AIzaSyA2GXAqzhcPkWq61Z68JDhCrcyMymjB_CY"
+      },
       "supportsTablet": true
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/icon.jpeg",
-        "backgroundColor": "#FFFFFF"
-      }
+      "config":{
+        "googleMaps":{
+          "apiKey": "AIzaSyA2GXAqzhcPkWq61Z68JDhCrcyMymjB_CY"
+        }
+      },
+      "package": "com.miguelsoares.Carneats"
     },
     "web": {
-      "favicon": "./assets/icon.jpeg"
+      "favicon": "./assets/icon.png"
     }
   }
 }

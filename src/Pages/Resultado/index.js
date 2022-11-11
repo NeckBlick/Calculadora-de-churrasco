@@ -85,6 +85,7 @@ export default function Resultado() {
 				)}
 			</View>
 
+
 			<Text style={style.total}> Total:R${total} </Text>
 				<View style={style.buttons}>
 					<TouchableOpacity
@@ -105,6 +106,7 @@ export default function Resultado() {
 						<Text style={style.textButton}>Receitas</Text>
 					</TouchableOpacity>
 				</View>
+
 		</ScrollView>
 	);
 }
@@ -182,6 +184,7 @@ const style = StyleSheet.create({
 		fontSize: 20,
 		color: "#fff",
 		lineHeight: 24,
+		textAlign:'center',
 	},
 	containerResultado: {
 		width: width,

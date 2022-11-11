@@ -11,10 +11,11 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import axios from "axios";
-// import { useNavigation } from "@react-navigation/native";
+
+import { useNavigation } from "@react-navigation/native";
 
 export default function App() {
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
   const [location, setLocation] = useState({
     latitude: "",
     longitude: "",
@@ -40,6 +41,7 @@ export default function App() {
         setErrorMsg("Permission to access location was denied");
         return;
       }
+
 
       let local = await Location.getCurrentPositionAsync({});
       setLocation({
@@ -89,6 +91,7 @@ export default function App() {
     setLoadingAcougue(false)
   }
   console.log(markers)
+
   return (
     <View style={style.container}>
       <View style={style.header}>
@@ -114,6 +117,7 @@ export default function App() {
           <Icon name="search" size={20} color="#000" />
         </TouchableOpacity>
       </View>
+
       <Text style={style.subtitle}>Após digitar o CEP</Text>
       <Text style={style.subtitle2}>Clique para buscar açougues na região</Text>
       <View style={style.mapContainer}>
@@ -168,6 +172,7 @@ export default function App() {
         style={style.buttonParticipante}
         onPress={() => {
           // navigation.navigate("Resultado")
+
         }}
       >
         <Text style={style.textButton}>Avançar</Text>
@@ -237,10 +242,12 @@ const style = StyleSheet.create({
   },
   mapContainer: {
     backgroundColor: "#fff",
+
     width: 350,
     height: 420,
     marginLeft: "auto",
     marginRight: "auto",
+
     shadowOffset: {
       width: 0,
       height: 2,
@@ -250,8 +257,25 @@ const style = StyleSheet.create({
     elevation: 5,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 10,
-
+    borderRadius: 10
+  },
+  titleMap:{
+    fontSize: 18,
+    fontWeight: '500',
+    marginBottom: 10,
+    paddingBottom: 6
+  },
+  titleScroll:{
+    marginLeft: "auto",
+    marginRight: "auto",
+    fontSize: 18,
+    fontWeight: "700"
+  },
+  subtitleScroll:{
+    marginLeft: "auto",
+    marginRight: "auto",
+    fontSize: 16,
+    fontWeight: "500"
   },
   buttonParticipante: {
     backgroundColor: "#E95811",
@@ -312,3 +336,4 @@ const style = StyleSheet.create({
     marginBottom: 20
   }
 });
+
