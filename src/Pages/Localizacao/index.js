@@ -11,6 +11,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import axios from "axios";
+
 import { useNavigation } from "@react-navigation/native";
 
 export default function App() {
@@ -22,9 +23,11 @@ export default function App() {
     longitudeDelta: 0.0421,
   });
   const [loading, setLoading] = useState(true);
-  const [cep, setCep] = useState();
-  const [local, setLocal] = useState();
   const [loadingCep, setLoadingCep] = useState(true);
+  const [loadingAcougue, setLoadingAcougue] = useState(true)
+  const [cep, setCep] = useState();
+  const [markers, setMarkers] = useState([])
+  const [local, setLocal] = useState();
   const [mapRegion, setMapRegion] = useState({
     latitude: "",
     longitude: "",
@@ -38,6 +41,7 @@ export default function App() {
         setErrorMsg("Permission to access location was denied");
         return;
       }
+
 
       let local = await Location.getCurrentPositionAsync({});
       setLocation({
@@ -79,13 +83,21 @@ export default function App() {
     });
     setLoadingCep(false);
   };
+  const buscarAcougue = async () => {
+    let lat = mapRegion.latitude
+    let lng = mapRegion.longitude
+    let { data } = await axios.get(`https://discover.search.hereapi.com/v1/discover?at=${lat},${lng}&q=a%C3%A7ougue&apiKey=vpElMOWqr4ByGBopvqPMFd1XGwI2kg0ah8R0q32Mieg`)
+    setMarkers(data.items)
+    setLoadingAcougue(false)
+  }
+  console.log(markers)
 
   return (
     <View style={style.container}>
       <View style={style.header}>
         <TouchableOpacity
           style={style.botaoVoltar}
-          onPress={() => navigation.goBack()}
+          // onPress={() => navigation.goBack()}
         >
           <Icon name="arrow-left" size={20} color="#000" />
         </TouchableOpacity>
@@ -105,81 +117,62 @@ export default function App() {
           <Icon name="search" size={20} color="#000" />
         </TouchableOpacity>
       </View>
-      <Text style={style.titleScroll}>Arraste para o lado</Text>
-      <Text style={style.subtitleScroll}>para obter mais informações</Text>
+
+      <Text style={style.subtitle}>Após digitar o CEP</Text>
+      <Text style={style.subtitle2}>Clique para buscar açougues na região</Text>
+      <View style={style.mapContainer}>
       {loading ? (
         ""
-      ) : (
-        <ScrollView style={{padding:15}} horizontal>
+      ) : (      
           
-          {/* Mapa Local do churrasco */}
-          <View style={style.mapContainer}>
-          <Text style={style.titleMap}>Localização do seu churrasco</Text>
-          <MapView
-            initialRegion={location}
-            region={mapRegion}
-            style={style.map}
-            showsMyLocationButton={true}
-          >
-            <Marker
-              coordinate={{
-                latitude: location.latitude,
-                longitude: location.longitude,
-              }}
-              title="Sua Localização"
-              description="Você está aqui"
-            />
-            {loadingCep ? (
-              ""
-            ) : (
+            <MapView
+              initialRegion={location}
+              region={mapRegion}
+              style={style.map}
+              showsMyLocationButton={true}
+            >
               <Marker
                 coordinate={{
-                  latitude: mapRegion.latitude,
-                  longitude: mapRegion.longitude,
+                  latitude: location.latitude,
+                  longitude: location.longitude,
                 }}
-                title="Local do churrasco"
-                description="Aqui será realizado o churrasco"
+                title="Sua Localização"
+                description="Você está aqui"
               />
-            )}
-          </MapView>
-          </View>
-          {/* Mapa Açougues próximos */}
-          <View style={style.mapContainer}>
-          <Text style={style.titleMap}>Açougues próximos do local do churrasco</Text>
-          <MapView
-            initialRegion={location}
-            region={mapRegion}
-            style={style.map}
-            showsMyLocationButton={true}
-          >
-            <Marker
-              coordinate={{
-                latitude: location.latitude,
-                longitude: location.longitude,
-              }}
-              title="Sua Localização"
-              description="Você está aqui"
-            />
-            {loadingCep ? (
-              ""
-            ) : (
-              <Marker
-                coordinate={{
-                  latitude: mapRegion.latitude,
-                  longitude: mapRegion.longitude,
-                }}
-                title="Local do churrasco"
-                description="Aqui será realizado o churrasco"
-              />
-            )}
-          </MapView>
-          </View>
-        </ScrollView>
+              {loadingCep ? (
+                ""
+              ) : (
+                <Marker
+                  coordinate={{
+                    latitude: mapRegion.latitude,
+                    longitude: mapRegion.longitude,
+                  }}
+                  title="Local do churrasco"
+                  description="Aqui será realizado o churrasco"
+                />
+              )}
+              {loadingAcougue ? "" : markers.map(item => (
+                 <Marker
+                 
+                  coordinate={{
+                    latitude: item.position.lat,
+                    longitude: item.position.lng,
+                  }}
+                  title={item.title}
+                  description={`${item.distance} metros de você`}
+                />
+              ))}
+            </MapView>
       )}
+       </View>
+       <TouchableOpacity style={style.lugaresProx} onPress={buscarAcougue}>
+        <Text style={{fontSize:16, color:"#fff"}}>Clique para buscar açougues próximos</Text>
+        </TouchableOpacity>
       <TouchableOpacity
         style={style.buttonParticipante}
         onPress={() => {
-          navigation.navigate("Resultado")
+          // navigation.navigate("Resultado")
+
         }}
       >
         <Text style={style.textButton}>Avançar</Text>
@@ -249,10 +242,12 @@ const style = StyleSheet.create({
   },
   mapContainer: {
     backgroundColor: "#fff",
-    width: 370,
-    height: 450,
+
+    width: 350,
+    height: 420,
     marginLeft: "auto",
-    marginRight: 50,
+    marginRight: "auto",
+
     shadowOffset: {
       width: 0,
       height: 2,
@@ -309,4 +304,36 @@ const style = StyleSheet.create({
     color: "#fff",
     lineHeight: 24,
   },
+  lugaresProx:{
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: -10,
+    width: 350,
+    height: 30,
+    backgroundColor: "#E95811",
+    borderBottomLeftRadius:10,
+    borderBottomRightRadius:10,
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+  },
+  subtitle:{
+    marginLeft: "auto",
+    marginRight: "auto",
+    fontSize: 16
+  },
+  subtitle2:{
+    marginLeft: "auto",
+    marginRight: "auto",
+    fontSize: 16,
+    marginBottom: 20
+  }
 });
+

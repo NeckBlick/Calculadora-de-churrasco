@@ -7,13 +7,13 @@ import { Context } from "../../Context/Context";
 export default function TelaInicial() {
 	const navigation = useNavigation();
 	const { teste } = useContext(Context);
-	console.log(teste);
+
 	return (
 		<View style={style.container}>
 			<Image source={Logo} alt="Logo" style={style.logo} />
 			<TouchableOpacity
 				onPress={() => {
-					navigation.navigate("Participante");
+					navigation.navigate("Resultado");
 				}}
 			>
 				<Text style={style.textCalcular}>Calcular seu churrasco</Text>
