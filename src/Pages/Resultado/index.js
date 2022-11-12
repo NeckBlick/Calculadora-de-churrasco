@@ -24,11 +24,9 @@ export default function Resultado() {
 		(async () => {
 			setDados(CalcularCarne());
 			setLoading(false);
-			
 		})();
 	},[]);
 
-	console.log(dados)
 	const calcularNovamente = () => {
 		AsyncStorage.clear();
 		navigation.push("TelaInicial");
@@ -41,7 +39,6 @@ export default function Resultado() {
 			}
 		})
 		let bebidas = dados[1]
-	
 
 	return (
 		<ScrollView style={style.container}>
@@ -58,6 +55,8 @@ export default function Resultado() {
 					apenas uma estimativa)
 				</Text>
 			</View>
+
+			<Text style={style.subtitle}>Carnes:</Text>
 
 			<View style={style.containerResultado}>
 				{carnes.map((item) => (
@@ -85,6 +84,8 @@ export default function Resultado() {
 				))}
 			</View>
 
+			<Text style={style.subtitle}>Bebidas:</Text>
+
 			<View style={style.containerResultado}>
 				{bebidas.map((item) => (
 					<View style={style.containerGlobal} key={item.bebida}>
@@ -94,14 +95,18 @@ export default function Resultado() {
 							</View>
 							<View style={style.right}>
 								<Text style={style.kilos}>
-									{item.litrosTotal} L de  {item.bebida}
+									{item.litrosTotal}L de  {item.bebida}
 								</Text>
-								<Text style={style.preco}>R${item.total}</Text>
 							</View>
 						</View>
+								<View>
+									<Text style={style.preco}>R${item.total}</Text>
+								</View>
 					</View>
 				))}
 			</View>
+
+			<Text style={style.subtitle}>Outros: </Text>
 
 			<Text style={style.total}> Total: </Text>
 			<TouchableOpacity
@@ -152,6 +157,13 @@ const style = StyleSheet.create({
 		justifyContent: "center",
 		fontWeight: "400",
 		fontSize: 18,
+	},
+	subtitle: {
+		fontSize: 28,
+		fontWeight: "600",
+		color: "white",
+		justifyContent: 'center',
+		textAlign: 'center'
 	},
 	textButton: {
 		fontWeight: "500",

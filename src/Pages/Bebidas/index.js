@@ -23,22 +23,10 @@ function Bebidas() {
   const [cerveja, setCerveja] = useState(false);
 
   const dataBebidas = [
-		{ bebida: "Agua", litragem: 1, tipo: "Garrafa(s)", preco: 2, estado: agua },
-		{ bebida: "Suco", litragem: 1, tipo: "Caixa(s)", preco: 8, estado: suco },
-		{
-			bebida: "Refrigerante",
-			litragem: 2,
-			tipo: "Garrafa(s)",
-			preco: 9,
-			estado: refrigerente,
-		},
-		{
-			bebida: "Cerveja",
-			litragem: 0.35,
-			tipo: "Lata(s)",
-			preco: 10,
-			estado: cerveja,
-		},
+		{ bebida: "Água", preco: 2, estado: agua },
+		{ bebida: "Suco", preco: 8, estado: suco },
+		{ bebida: "Refrigerante", preco: 9, estado: refrigerente },
+		{ bebida: "Cerveja", preco: 10, estado: cerveja },
 	];
 
   const guardarBanco = () => {
