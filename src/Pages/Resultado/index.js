@@ -5,6 +5,7 @@ import {
 	TouchableOpacity,
 	StyleSheet,
 	ScrollView,
+	ActivityIndicator,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState, useContext } from "react";
@@ -39,7 +40,22 @@ export default function Resultado() {
 			}
 		})
 		let bebidas = dados[1]
-
+		var precoFinalC = dados[0].map(item => item.precoFinal)
+		var precoFinalB = dados[1].map(item => item.total)
+		var total = 0
+		var precosTotal = []
+		console.log(precoFinalC)
+		for(let i=0; i < precoFinalC.length; i++){
+			precosTotal.push(Number(precoFinalC[i])) 	
+		}
+		for(let i=0; i < precoFinalB.length; i++){
+			precosTotal.push(Number(precoFinalB[i])) 	
+		}
+		for(let i=0; i < precosTotal.length; i++){
+			total += precosTotal[i]
+		}
+		console.log(precosTotal)
+		console.log(total)
 	return (
 		<ScrollView style={style.container}>
 			<View style={style.header}>
@@ -108,7 +124,7 @@ export default function Resultado() {
 
 			<Text style={style.subtitle}>Outros: </Text>
 
-			<Text style={style.total}> Total: </Text>
+			<Text style={style.total}> Total:R${total.toFixed(2)} </Text>
 			<TouchableOpacity
 				style={style.buttonParticipante}
 				onPress={() => {
@@ -126,13 +142,13 @@ export default function Resultado() {
 				<Text style={style.textButton}>Avançar</Text>
 			</TouchableOpacity>
 		</ScrollView>
-	);}
+	)}
 }
 
 const style = StyleSheet.create({
 	container: {
-		width: width,
-		height: height,
+		width: "100%",
+		height: "100%",
 		backgroundColor: "#ED7941",
 	},
 	header: {
@@ -172,7 +188,7 @@ const style = StyleSheet.create({
 		lineHeight: 24,
 	},
 	containerResultado: {
-		width: width,
+		width: "100%",
 	},
 	preco: {
 		fontSize: 24,

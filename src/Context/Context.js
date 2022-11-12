@@ -14,39 +14,31 @@ export default function Provider({ children }) {
 
 	useEffect(() => {
 		(async () => {
-			let pessoas = await AsyncStorage.getItem("Participantes");
-			let carnes = await AsyncStorage.getItem("Carnes");
-			let bebidas = await AsyncStorage.getItem("Bebidas");
-			let duracao = await AsyncStorage.getItem("Duracao");
-			pessoas = JSON.parse(pessoas);
-			carnes = JSON.parse(carnes);
-			bebidas = JSON.parse(bebidas);
-			duracao = parseInt(duracao);
-			setListaPessoas(pessoas);
-			setListaCarnes(carnes);
-			setListaBebidas(bebidas);
-			setDuracao(duracao);
+				var pessoas = await AsyncStorage.getItem("Participantes");
+				var carnes = await AsyncStorage.getItem("Carnes");
+				var bebidas = await AsyncStorage.getItem("Bebidas");
+				var duracao = await AsyncStorage.getItem("Duracao");
+						pessoas = JSON.parse(pessoas);
+						carnes = JSON.parse(carnes);
+						bebidas = JSON.parse(bebidas);
+						duracao = parseInt(duracao);
+						setListaPessoas(pessoas);
+						setListaCarnes(carnes);
+						setListaBebidas(bebidas);
+						setDuracao(duracao);
+						setLoading(false)
+				
 
-
-			if(listaPessoas.length >= 1 && listaCarnes.length >= 1 && listaBebidas.length >= 1){
-				setLoading(false)
-				console.log(listaPessoas)
-				console.log(listaCarnes)
-				console.log(listaBebidas)
-			}
-			
-
+			// if(listaPessoas !== null && listaCarnes !== null && listaBebidas !== null){
+			// 	console.log(listaPessoas)
+			// 	console.log(listaCarnes)
+			// 	console.log(listaBebidas)
+			// }
 		})();
 	}, []);
-	
-	// if(!loading){
-		const CalcularCarne = () => {
 
-			console.log(loading)
-			console.log(listaPessoas)
-			console.log(listaCarnes)
-			console.log(listaBebidas)
-			// Filtrar a quantiadde de pessoas
+		const CalcularCarne = () => {
+			//Filtrar a quantiadde de pessoas
 			let qtdHomem = listaPessoas.filter(item => item.sexo === "homem")
 			let qtdMulher = listaPessoas.filter(item => item.sexo === "mulher")
 			let qtdCrianca = listaPessoas.filter(item => item.sexo === "crianca")
@@ -64,7 +56,6 @@ export default function Provider({ children }) {
 			//Homem
 			if(qtdHomem.length >= 1){
 				var numHomens = qtdHomem[0].quantidade
-
 			}else{
 				numHomens = 0
 			}
@@ -163,20 +154,18 @@ export default function Provider({ children }) {
 
 			//preço da bebida
 			for(let i  = 0; i < Bebida.length; i++){
-				let precoFinal = (Bebida[i].preco * Number(litrostotal.toFixed(2)));
-				Object.assign(Bebida[i], { total: precoFinal.toFixed(2) });	
 				if(Bebida[i].bebida === "Cerveja"){
 					let precoFinal = (Bebida[i].preco * Number(litrosAlcool.toFixed(2)));
 					Object.assign(Bebida[i], { litrosTotal: litrosAlcool.toFixed(2) });	 
+					Object.assign(Bebida[i], { total: precoFinal.toFixed(2) });	
 				}else{
+					let precoFinal = (Bebida[i].preco * Number(litrostotal.toFixed(2)));
+					Object.assign(Bebida[i], { total: precoFinal.toFixed(2) });	
 					Object.assign(Bebida[i], { litrosTotal: litrostotal.toFixed(2) });	 
 				}
 			}
 
 			//consumo
-
-
-		
 			var dataCarnes = [
 					{
 						id: 0,
@@ -204,7 +193,7 @@ export default function Provider({ children }) {
 					},
 				];
 			return [dataCarnes, Bebida]
-		};
+		}
 		return <Context.Provider value={{CalcularCarne}}>{children}</Context.Provider>;
-	// }
+	
 }
