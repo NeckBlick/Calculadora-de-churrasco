@@ -8,8 +8,8 @@ export default function Provider({ children }) {
 	const [listaPessoas, setListaPessoas] = useState([]);
 	const [listaCarnes, setListaCarnes] = useState([]);
 	const [listaBebidas, setListaBebidas] = useState([]);
-	const [loading, setLoading] = useState(true)
 	const [duracao, setDuracao] = useState();
+	const [loading, setLoading] = useState(true)
 
 
 	useEffect(() => {
@@ -28,16 +28,10 @@ export default function Provider({ children }) {
 						setDuracao(duracao);
 						setLoading(false)
 				
-
-			// if(listaPessoas !== null && listaCarnes !== null && listaBebidas !== null){
-			// 	console.log(listaPessoas)
-			// 	console.log(listaCarnes)
-			// 	console.log(listaBebidas)
-			// }
 		})();
 	}, []);
 
-		const CalcularCarne = () => {
+		const CalcularCarne = (listaPessoas,listaCarnes, listaBebidas) => {
 			//Filtrar a quantiadde de pessoas
 			let qtdHomem = listaPessoas.filter(item => item.sexo === "homem")
 			let qtdMulher = listaPessoas.filter(item => item.sexo === "mulher")
@@ -51,7 +45,7 @@ export default function Provider({ children }) {
 			var tiposB = tiposBov
 			var tiposF = tiposFrango
 			var tiposS = tiposSuino
-
+			//teste
 
 			//Homem
 			if(qtdHomem.length >= 1){

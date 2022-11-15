@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { View, StyleSheet, Text, Modal, TouchableOpacity } from "react-native";
 import YoutubePlayer from "react-native-youtube-iframe";
+import  Icon  from 'react-native-vector-icons/MaterialIcons'
 
 export default function CardVideo({ data }) {
   const [verModal, setVerModal] = useState(false);
@@ -14,12 +15,23 @@ export default function CardVideo({ data }) {
   };
   return (
     <View style={style.containervideo}>
-      <TouchableOpacity onPress={() => setVerModal(true)}>
-        <Text style={style.titulo_video}>Receita com {data.assado}</Text>
+      <TouchableOpacity style={style.button} onPress={() => setVerModal(true)}>
+		<View style={style.containerButton}>
+			<View style={style.left}>
+				<Icon name="menu-book" size={40} color="#000"/>
+			</View>
+			<View style={style.right}>
+        		<Text style={style.tituloContainer}>Receita com {data.assado}</Text>
+        		<Text style={style.subtituloContainer}>Clique para abrir a receita</Text>
+			</View>
+		</View>
       </TouchableOpacity>
       <Modal animationType="slide" visible={verModal} transparent={true} >
         <View style={style.container}>
           <View style={style.modalContainer}>
+            <TouchableOpacity style={style.btnVoltar} onPress={() => {setVerModal(false)}}>
+                <Text style={style.texto}>Voltar</Text>
+            </TouchableOpacity>
             <YoutubePlayer
             height={205}
             ref={controlRef}
@@ -27,9 +39,6 @@ export default function CardVideo({ data }) {
             videoId={data.ytid}
             onChangeState={onStateChange}
             />
-            <TouchableOpacity style={style.btnVoltar} onPress={() => {setVerModal(false)}}>
-                <Text style={style.texto}>Voltar</Text>
-            </TouchableOpacity>
           </View>
         </View>
       </Modal>
@@ -40,18 +49,18 @@ export default function CardVideo({ data }) {
 const style = StyleSheet.create({
 	containervideo: {
 		width: 350,
+		height: 100,
 		marginLeft: "auto",
 		marginRight: "auto",
 	},
-	titulo_video: {
-		fontSize: 20,
-		fontWeight: "500",
-		color: "#fff",
-		textAlign: "center",
+	containerButton:{
+		backgroundColor: "#E95612",
+		height: 80,
+		flexDirection: "row",
+		alignItems: 'center',
+		justifyContent: 'space-around',
+		marginTop: 20,	
 		marginBottom: 20,
-		backgroundColor: "#E95811",
-		padding: 15,
-		borderRadius: 15,
 		shadowColor: "#000",
 		shadowOffset: {
 			width: 0,
@@ -60,11 +69,32 @@ const style = StyleSheet.create({
 		shadowOpacity: 0.25,
 		shadowRadius: 3.84,
 		elevation: 5,
-		width: "auto",
-		height: "auto",
-		alignItems: "center",
-		justifyContent: "center",
-		marginTop: 20,
+		borderRadius: 8,
+	},
+	tituloContainer:{
+		width: '100%',
+		fontSize: 18,
+		fontWeight: "500",
+		textAlign: 'center'
+	},
+	subtituloContainer:{
+		width: '100%',
+		fontSize: 14,
+		fontWeight: "400",
+		textAlign: 'center'
+	},
+	left:{
+		width: "30%",
+		height: "100%",
+		alignItems: 'center',
+		justifyContent: "center"
+	},
+	right:{
+		width: "70%",
+		height: "100%",
+		padding: 3,
+		alignItems: 'center',
+		justifyContent: "center"
 	},
 	container: {
 		marginLeft: 10,
@@ -78,17 +108,21 @@ const style = StyleSheet.create({
 		width: "100%",
 		height: "auto",
 		backgroundColor: "#fff",
-		borderBottomLeftRadius: 5,
-		borderBottomRightRadius: 5,
+		borderTopLeftRadius: 5,
+		borderTopRightRadius: 5,
 	},
 	btnVoltar: {
+		
 		backgroundColor: "#E95811",
 		padding: 10,
-		borderBottomLeftRadius: 5,
-		borderBottomRightRadius: 5,
+		borderTopLeftRadius: 5,
+		borderTopRightRadius: 5,
 	},
 	texto: {
-		color: "#fff",
-		fontSize: 16,
+		fontSize: 18,
+		textAlign: 'center',
+		fontWeight: '500',
+		color: "#fff"
 	},
+
 });
