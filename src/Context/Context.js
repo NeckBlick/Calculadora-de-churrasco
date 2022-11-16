@@ -5,32 +5,6 @@ import Data, { data } from '../data'
 export const Context = createContext();
 
 export default function Provider({ children }) {
-	const [listaPessoas, setListaPessoas] = useState([]);
-	const [listaCarnes, setListaCarnes] = useState([]);
-	const [listaBebidas, setListaBebidas] = useState([]);
-	const [duracao, setDuracao] = useState();
-	const [loading, setLoading] = useState(true)
-
-
-	// useEffect(() => {
-	// 	(async () => {
-	// 			var pessoas = await AsyncStorage.getItem("Participantes");
-	// 			var carnes = await AsyncStorage.getItem("Carnes");
-	// 			var bebidas = await AsyncStorage.getItem("Bebidas");
-	// 			var duracao = await AsyncStorage.getItem("Duracao");
-	// 					pessoas = JSON.parse(pessoas);
-	// 					carnes = JSON.parse(carnes);
-	// 					bebidas = JSON.parse(bebidas);
-	// 					duracao = parseInt(duracao);
-	// 					setListaPessoas(pessoas);
-	// 					setListaCarnes(carnes);
-	// 					setListaBebidas(bebidas);
-	// 					setDuracao(duracao);
-	// 					setLoading(false)
-				
-	// 	})();
-	// }, []);
-
 		const CalcularCarne = (listaPessoas,listaCarnes, listaBebidas) => {
 			//Filtrar a quantiadde de pessoas
 			let qtdHomem = listaPessoas.filter(item => item.sexo === "homem")
