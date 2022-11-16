@@ -10,6 +10,8 @@ import React, { useEffect, useState, useContext } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Context } from "../../Context/Context";
+import * as Print from 'expo-print'
+import { shareAsync } from 'expo-sharing'
 
 
 export default function Resultado() {
@@ -18,7 +20,65 @@ export default function Resultado() {
   const [dados, setDados] = useState([]);
   const [loading, setLoading] = useState(true);
   const [rateio, setRateio] = useState(0)
-	
+  const gerarPdf = async  (dadosC, dadosB, dadosE ) => {
+    const htmlpdf = `
+    <!DOCTYPE html>
+    <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lista de compra</title>
+    </head>
+    <style>
+        th{
+            font-size: 24px;
+            font-weight: 600;
+            padding: 0.5rem;
+        }
+        td{
+            font-size: 18px;
+            font-weight: 500;
+        }
+        td,tr{
+            text-align: center;
+        }
+    </style>
+    <body>
+        <center>
+            <h1>Lista de compra</h1>
+            <table>
+                <thead>
+                <tr>
+                    <th>Carne</th>
+                    <th>Frango</th>
+                    <th>Carne suina</th>
+                    <th>Bebidas</th>
+                    <th>Acompanhamentos</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    ${dadosC.map(item => (
+                        `<td>${item.qntd} Kg de ${item.tipo}</td>`
+                    ))}
+                    <td>dsasdsa</td>
+                    <td>dsasdsa</td>
+                    <td>dsasdsa</td>
+                    <td>dsasdsa</td>
+                </tr>
+                </tbody>
+            </table>
+        </center>
+    </body>
+    </html>
+    `
+	const file = await Print.printToFileAsync({
+		html: htmlpdf,
+		base64: false
+	})
+	await shareAsync(file.uri)
+}
 
   useEffect(() => {
     (async () => {
@@ -190,6 +250,14 @@ export default function Resultado() {
 				<Text style={style.textButton}>Receitas</Text>
 			</TouchableOpacity>
 		</View>
+		<TouchableOpacity
+			style={style.buttonParticipante}
+			onPress={() => {
+				gerarPdf(carnes)
+			}}
+			>
+				<Text style={style.textButton}>Pdf</Text>
+			</TouchableOpacity>
       </ScrollView>
     );
   }
