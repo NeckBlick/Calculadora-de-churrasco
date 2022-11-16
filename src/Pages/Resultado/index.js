@@ -179,7 +179,7 @@ export default function Resultado() {
 				calcularNovamente();
 			}}
 			>
-				<Text style={style.textButton}>Calcular Novamente</Text>
+			  <Icon name="arrow-left" size={20} color="#000" />
 			</TouchableOpacity>
 			<TouchableOpacity
 			style={style.buttonParticipante}
