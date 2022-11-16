@@ -12,24 +12,24 @@ export default function Provider({ children }) {
 	const [loading, setLoading] = useState(true)
 
 
-	useEffect(() => {
-		(async () => {
-				var pessoas = await AsyncStorage.getItem("Participantes");
-				var carnes = await AsyncStorage.getItem("Carnes");
-				var bebidas = await AsyncStorage.getItem("Bebidas");
-				var duracao = await AsyncStorage.getItem("Duracao");
-						pessoas = JSON.parse(pessoas);
-						carnes = JSON.parse(carnes);
-						bebidas = JSON.parse(bebidas);
-						duracao = parseInt(duracao);
-						setListaPessoas(pessoas);
-						setListaCarnes(carnes);
-						setListaBebidas(bebidas);
-						setDuracao(duracao);
-						setLoading(false)
+	// useEffect(() => {
+	// 	(async () => {
+	// 			var pessoas = await AsyncStorage.getItem("Participantes");
+	// 			var carnes = await AsyncStorage.getItem("Carnes");
+	// 			var bebidas = await AsyncStorage.getItem("Bebidas");
+	// 			var duracao = await AsyncStorage.getItem("Duracao");
+	// 					pessoas = JSON.parse(pessoas);
+	// 					carnes = JSON.parse(carnes);
+	// 					bebidas = JSON.parse(bebidas);
+	// 					duracao = parseInt(duracao);
+	// 					setListaPessoas(pessoas);
+	// 					setListaCarnes(carnes);
+	// 					setListaBebidas(bebidas);
+	// 					setDuracao(duracao);
+	// 					setLoading(false)
 				
-		})();
-	}, []);
+	// 	})();
+	// }, []);
 
 		const CalcularCarne = (listaPessoas,listaCarnes, listaBebidas) => {
 			//Filtrar a quantiadde de pessoas
@@ -40,6 +40,7 @@ export default function Provider({ children }) {
 			let tiposBov = listaCarnes.filter (item => item.tipo === "bovino")
 			let tiposFrango = listaCarnes.filter (item => item.tipo === "frango")
 			let tiposSuino = listaCarnes.filter (item => item.tipo === "suino")
+			let paoDeAlho = listaCarnes.filter (item => item.tipo === "pao" && item.estado === true)
 
 			let Bebida = listaBebidas.filter(item => item.estado === true)
 			var tiposB = tiposBov
@@ -69,7 +70,7 @@ export default function Provider({ children }) {
 				numCrianca = 0
 			}
 
-
+			//calculo de litros de bebida
 			let litrosAdult = (numHomens + numMulher) * 1500
 			let litrosCrianca = (numCrianca * 1000) / Bebida.filter(item => item.bebida != "Cerveja").length
 			let litrostotal = litrosAdult / Bebida.length
@@ -121,13 +122,17 @@ export default function Provider({ children }) {
 			var qtdFrango = (qntdHomenF + qntdMulheresF + qntdCriancaF) / tiposFrango
 			var qtdSuino = (qntdHomenS + qntdMulheresS + qntdCriancaS) / tiposSuino
 			
+			var carvao = 0
+			var sal = 0
+			
 			//preço da carne bovina
 			var precoTotalC = 0
 			for(let i  = 0; i < tipos1.length; i++){
 				let precoFinal = (tipos1[i] * Number(qtdCarne.toFixed(2))) / tiposBov;
 				precoTotalC += precoFinal
 				Object.assign(tiposB[i], { total: precoFinal.toFixed(2) });
-				
+				carvao += Number(qtdCarne.toFixed(2))
+				sal += Number(qtdCarne.toFixed(2))
 			}
 
 			//preço do frango
@@ -136,6 +141,8 @@ export default function Provider({ children }) {
 				let precoFinal = (tipos2[i] * Number(qtdFrango.toFixed(2))) / tiposFrango;
 				precoTotalF += precoFinal;
 				Object.assign(tiposF[i], { total: precoFinal.toFixed(2) });	
+				carvao += Number(qtdFrango.toFixed(2))
+				sal += Number(qtdFrango.toFixed(2))
 			}
 
 			//preço da carne suina
@@ -143,7 +150,9 @@ export default function Provider({ children }) {
 			for(let i  = 0; i < tipos3.length; i++){
 				let precoFinal = (tipos3[i] * Number(qtdSuino.toFixed(2))) / tiposSuino;
 				precoTotalS += precoFinal;
-				Object.assign(tiposS[i], { total: precoFinal.toFixed(2) });	
+				Object.assign(tiposS[i], { total: precoFinal.toFixed(2) });
+				carvao += Number(qtdSuino.toFixed(2))	
+				sal += Number(qtdSuino.toFixed(2))	
 			}
 
 			//preço da bebida
@@ -158,6 +167,19 @@ export default function Provider({ children }) {
 					Object.assign(Bebida[i], { litrosTotal: litrostotal.toFixed(2) });	 
 				}
 			}
+
+			//outros
+			carvao = (carvao * 0.66).toFixed(2)
+			sal = (sal * 20).toFixed(2)
+
+			var arroz = (numHomens + numMulher) * 0.1 + numCrianca * 0.09
+			arroz.toFixed(2)
+
+			var farofa = (numHomens + numMulher + numCrianca) * 30
+
+			var pao = (numHomens + numMulher) * 3 + numCrianca * 2
+
+			paoDeAlho = (numHomens + numMulher) * 3 + numCrianca * 2	
 
 			//consumo
 			var dataCarnes = [
@@ -186,7 +208,39 @@ export default function Provider({ children }) {
 						precoFinal: precoTotalS.toFixed(2),
 					},
 				];
-			return [dataCarnes, Bebida]
+			var outros = [
+				{
+					tipo: "Carvão",
+					qntdTotal: carvao + " Kg",
+					precoFinal: (carvao * 3.5).toFixed(2),
+				},
+				{
+					tipo: "Sal Grosso",
+					qntdTotal: sal + "g",
+					precoFinal: (sal * 0.002).toFixed(2),
+				},
+				{
+					tipo: "Arroz",
+					qntdTotal: arroz + " Kg",
+					precoFinal: (arroz * 5).toFixed(2),
+				},
+				{
+					tipo: "Farofa",
+					qntdTotal: farofa + "g",
+					precoFinal: (farofa * 0.02).toFixed(2),
+				},
+				{
+					tipo: "Pão Francês",
+					qntdTotal: pao + " Un",
+					precoFinal: (pao * 0.5).toFixed(2),
+				},
+				{
+					tipo: "Pão de Alho",
+					qntdTotal: paoDeAlho + " Un",
+					precoFinal: (paoDeAlho * 2).toFixed(2),
+				},
+			]
+			return [dataCarnes, Bebida, outros]
 		}
 		return <Context.Provider value={{CalcularCarne}}>{children}</Context.Provider>;
 	
