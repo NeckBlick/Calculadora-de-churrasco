@@ -3,7 +3,6 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Dimensions,
   Image,
 } from 'react-native';
 import React, { useState } from 'react';
@@ -24,11 +23,11 @@ function Bebidas() {
   const [cerveja, setCerveja] = useState(false);
 
   const dataBebidas = [
-    { bebida: 'Agua', estado: agua },
-    { bebida: 'Suco', estado: suco },
-    { bebida: 'Refrigerante', estado: refrigerente },
-    { bebida: 'Cerveja', estado: cerveja },
-  ];
+		{ bebida: "Água", preco: 2, estado: agua },
+		{ bebida: "Suco", preco: 8, estado: suco },
+		{ bebida: "Refrigerante", preco: 9, estado: refrigerente },
+		{ bebida: "Cerveja", preco: 10, estado: cerveja },
+	];
 
   const guardarBanco = () => {
     let true_keys = dataBebidas.filter((key) => key.estado === true);
@@ -39,12 +38,12 @@ function Bebidas() {
           type: "info",
           position: "top",
           text1: "Escolha pelo menos uma opção para prosseguir!",
-          visibilityTime: 3000,
+          visibilityTime: 3000, 
           autoHide: true,
           onShow: () => {},
           onHide: () => {},
           });;
-  };
+  }
 
   return (
     <View style={style.container}>
@@ -113,7 +112,18 @@ function Bebidas() {
           </TouchableOpacity>
           <TouchableOpacity
             style={cerveja ? style.cardActive : style.cardDesable}
-            onPress={() => (cerveja ? setCerveja(false) : setCerveja(true))}>
+            onPress={() =>  {(cerveja ? setCerveja(false) : setCerveja(true));
+              Toast.show({
+                type: "info",
+                position: "top",
+                text1: "Bebidas alcólicas apenas para maiores de 18 anos!",
+                text2: "Não nos responsabilizamos pelo seus atos",
+                visibilityTime: 3000,
+                autoHide: true,
+                onShow: () => {},
+                onHide: () => {},
+              });
+            }}>
             <View style={style.containerCardbebida}>
               <Image
                 source={Cerveja}

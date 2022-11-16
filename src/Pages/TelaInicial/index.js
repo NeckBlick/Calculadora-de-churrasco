@@ -1,12 +1,10 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import React, { useContext } from "react";
+import React from "react";
 import Logo from "../../Img/Logo.png";
 import { useNavigation } from "@react-navigation/native";
-import { Context } from "../../Context/Context";
 
 export default function TelaInicial() {
 	const navigation = useNavigation();
-	const { teste } = useContext(Context);
 
 	return (
 		<View style={style.container}>
