@@ -1,129 +1,221 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { createContext, useEffect, useState } from "react";
+import { View, createContext, useEffect, useState, ActivityIndicator } from "react";
 import Data, { data } from '../data'
 
 export const Context = createContext();
 
 export default function Provider({ children }) {
-	const [listaPessoas, setListaPessoas] = useState([]);
-	const [listaCarnes, setListaCarnes] = useState([]);
-	const [listaBebidas, setListaBebidas] = useState([]);
-	const [duracao, setDuracao] = useState();
-	useEffect(() => {
-		(async () => {
-			let pessoas = await AsyncStorage.getItem("Participantes");
-			let carnes = await AsyncStorage.getItem("Carnes");
-			let bebidas = await AsyncStorage.getItem("Bebidas");
-			let duracao = await AsyncStorage.getItem("Duracao");
-			pessoas = JSON.parse(pessoas);
-			carnes = JSON.parse(carnes);
-			bebidas = JSON.parse(bebidas);
-			duracao = parseInt(duracao);
-			setListaPessoas(pessoas);
-			setListaCarnes(carnes);
-			setListaBebidas(bebidas);
-			setDuracao(duracao);
-		})();
-	}, []);
+		const CalcularCarne = (listaPessoas,listaCarnes, listaBebidas) => {
+			//Filtrar a quantiadde de pessoas
+			let qtdHomem = listaPessoas.filter(item => item.sexo === "homem")
+			let qtdMulher = listaPessoas.filter(item => item.sexo === "mulher")
+			let qtdCrianca = listaPessoas.filter(item => item.sexo === "crianca")
+			//Tipo de carne que a pessoa escolheu
+			let tiposBov = listaCarnes.filter (item => item.tipo === "bovino")
+			let tiposFrango = listaCarnes.filter (item => item.tipo === "frango")
+			let tiposSuino = listaCarnes.filter (item => item.tipo === "suino")
+			let paoDeAlho = listaCarnes.filter (item => item.tipo === "pao" && item.estado === true)
 
-	const CalcularCarne = () => {
-		// Filtrar a quantiadde de pessoas
-		let qtdHomem = listaPessoas.filter(item => item.sexo == "homem")
-		let qtdMulher = listaPessoas.filter(item => item.sexo == "mulher")
-		let qtdCrianca = listaPessoas.filter(item => item.sexo == "crianca")
-		//Tipo de carne que a pessoa escolheu
-		let tiposBov = listaCarnes.filter (item => item.tipo === "bovino")
-		let tiposFrango = listaCarnes.filter (item => item.tipo === "frango")
-		let tiposSuino = listaCarnes.filter (item => item.tipo === "suino")
+			let Bebida = listaBebidas.filter(item => item.estado === true)
+			var tiposB = tiposBov
+			var tiposF = tiposFrango
+			var tiposS = tiposSuino
+			//teste
 
-		let tipos1 = tiposBov
-		let tipos2 = tiposFrango
-		let tipos3 = tiposSuino
+			//Homem
+			if(qtdHomem.length >= 1){
+				var numHomens = qtdHomem[0].quantidade
+			}else{
+				numHomens = 0
+			}
 
-		//Homem
-		if(qtdHomem.length >= 1){
-			var numHomens = qtdHomem[0].quantidade
-			var qntdHomenC = (data[0].carne.homem.carne * numHomens) / 1000
-			var qntdHomenF = (data[0].carne.homem.frango * numHomens) / 1000
-			var qntdHomenS = (data[0].carne.homem.suino * numHomens) / 1000
+			// Mulher	
+			if(qtdMulher.length >= 1){
+				var numMulher = qtdMulher[0].quantidade
 
-		}else{
-			 qntdHomenC = 0
-			 qntdHomenF = 0
-			 qntdHomenS = 0
+			}else{
+				numMulher = 0
+			}
+			//Crianca
+			if(qtdCrianca.length >= 1){
+				var numCrianca = qtdCrianca[0].quantidade
+
+			}else{
+				numCrianca = 0
+			}
+
+			//calculo de litros de bebida
+			let litrosAdult = (numHomens + numMulher) * 1500
+			let litrosCrianca = (numCrianca * 1000) / Bebida.filter(item => item.bebida != "Cerveja").length
+			let litrostotal = litrosAdult / Bebida.length
+			litrostotal += litrosCrianca
+			litrostotal = litrostotal / 1000
+			var litrosAlcool = (litrosAdult / 1000) / Bebida.length
+
+			
+			if(tiposSuino.length >= 1 ){
+				var qntdHomenS = (data[0].carne.homem.suino * numHomens) / 1000
+				var qntdMulheresS = (data[0].carne.mulher.suino * numMulher) / 1000	
+				var qntdCriancaS = (data[0].carne.crianca.suino * numCrianca) / 1000;	
+			}
+			if(tiposBov.length >= 1){
+				var qntdHomenC = (data[0].carne.homem.carne * numHomens) / 1000
+				var qntdMulheresC = (data[0].carne.mulher.carne * numMulher) / 1000	
+				var qntdCriancaC = (data[0].carne.crianca.carne * numCrianca) / 1000;
+			}
+			if(tiposFrango.length >= 1){
+				var qntdHomenF = (data[0].carne.homem.frango * numHomens) / 1000
+				var qntdMulheresF = (data[0].carne.mulher.frango * numMulher) / 1000	
+				var qntdCriancaF = (data[0].carne.crianca.frango * numCrianca) / 1000;	
+			}
+			
+			let tipos1 = tiposBov.map(item => item.preco);
+			let tipos2 = tiposFrango.map(item => item.preco)
+			let tipos3 = tiposSuino.map(item => item.preco)	
+
+
+			if (tiposBov.length > 0) {
+				tiposBov =  tiposBov.length
+			} else {
+				tiposBov = 1;	
+			}
+
+			if (tiposFrango.length > 0) {
+				tiposFrango = tiposFrango.length
+			} else {
+				tiposFrango = 1;
+			}
+
+			if (tiposSuino.length > 0 ) {
+				tiposSuino =  tiposSuino.length
+			} else {
+				tiposSuino = 1;
+			}
+
+			var qtdCarne = (qntdHomenC + qntdMulheresC + qntdCriancaC) / tiposBov
+			var qtdFrango = (qntdHomenF + qntdMulheresF + qntdCriancaF) / tiposFrango
+			var qtdSuino = (qntdHomenS + qntdMulheresS + qntdCriancaS) / tiposSuino
+			
+			var carvao = 0
+			var sal = 0
+			
+			//preço da carne bovina
+			var precoTotalC = 0
+			for(let i  = 0; i < tipos1.length; i++){
+				let precoFinal = (tipos1[i] * Number(qtdCarne.toFixed(2))) / tiposBov;
+				precoTotalC += precoFinal
+				Object.assign(tiposB[i], { total: precoFinal.toFixed(2) });
+				carvao += Number(qtdCarne.toFixed(2))
+				sal += Number(qtdCarne.toFixed(2))
+			}
+
+			//preço do frango
+			var precoTotalF = 0;
+			for(let i  = 0; i < tipos2.length; i++){
+				let precoFinal = (tipos2[i] * Number(qtdFrango.toFixed(2))) / tiposFrango;
+				precoTotalF += precoFinal;
+				Object.assign(tiposF[i], { total: precoFinal.toFixed(2) });	
+				carvao += Number(qtdFrango.toFixed(2))
+				sal += Number(qtdFrango.toFixed(2))
+			}
+
+			//preço da carne suina
+			var precoTotalS = 0;
+			for(let i  = 0; i < tipos3.length; i++){
+				let precoFinal = (tipos3[i] * Number(qtdSuino.toFixed(2))) / tiposSuino;
+				precoTotalS += precoFinal;
+				Object.assign(tiposS[i], { total: precoFinal.toFixed(2) });
+				carvao += Number(qtdSuino.toFixed(2))	
+				sal += Number(qtdSuino.toFixed(2))	
+			}
+
+			//preço da bebida
+			for(let i  = 0; i < Bebida.length; i++){
+				if(Bebida[i].bebida === "Cerveja"){
+					let precoFinal = (Bebida[i].preco * Number(litrosAlcool.toFixed(2)));
+					Object.assign(Bebida[i], { litrosTotal: litrosAlcool.toFixed(2) });	 
+					Object.assign(Bebida[i], { total: precoFinal.toFixed(2) });	
+				}else{
+					let precoFinal = (Bebida[i].preco * Number(litrostotal.toFixed(2)));
+					Object.assign(Bebida[i], { total: precoFinal.toFixed(2) });	
+					Object.assign(Bebida[i], { litrosTotal: litrostotal.toFixed(2) });	 
+				}
+			}
+
+			//outros
+			carvao = (carvao * 0.66).toFixed(2)
+			sal = (sal * 20).toFixed(2)
+
+			var arroz = (numHomens + numMulher) * 0.1 + numCrianca * 0.09
+			arroz.toFixed(2)
+
+			var farofa = (numHomens + numMulher + numCrianca) * 30
+
+			var pao = (numHomens + numMulher) * 3 + numCrianca * 2
+
+			paoDeAlho = (numHomens + numMulher) * 3 + numCrianca * 2	
+
+			//consumo
+			var dataCarnes = [
+					{
+						id: 0,
+						tipo: "Carne Bovina",
+						qntdTotal: (qtdCarne * tiposBov).toFixed(2),
+						carnes: tiposBov,
+						tipos: tiposB,
+						precoFinal: precoTotalC.toFixed(2),
+					},
+					{
+						id: 1,
+						tipo: "Frango",
+						qntdTotal: (qtdFrango * tiposFrango).toFixed(2),
+						carnes: tiposFrango,
+						tipos: tiposF,
+						precoFinal: precoTotalF.toFixed(2),
+					},
+					{
+						id: 2,
+						tipo: "Carne Suína",
+						qntdTotal: (qtdSuino * tiposSuino).toFixed(2),
+						carnes: tiposSuino,
+						tipos: tiposS,
+						precoFinal: precoTotalS.toFixed(2),
+					},
+				];
+			var outros = [
+				{
+					tipo: "Carvão",
+					qntdTotal: carvao + " Kg",
+					precoFinal: (carvao * 3.5).toFixed(2),
+				},
+				{
+					tipo: "Sal Grosso",
+					qntdTotal: sal + "g",
+					precoFinal: (sal * 0.002).toFixed(2),
+				},
+				{
+					tipo: "Arroz",
+					qntdTotal: arroz + " Kg",
+					precoFinal: (arroz * 5).toFixed(2),
+				},
+				{
+					tipo: "Farofa",
+					qntdTotal: farofa + "g",
+					precoFinal: (farofa * 0.02).toFixed(2),
+				},
+				{
+					tipo: "Pão Francês",
+					qntdTotal: pao + " Un",
+					precoFinal: (pao * 0.5).toFixed(2),
+				},
+				{
+					tipo: "Pão de Alho",
+					qntdTotal: paoDeAlho + " Un",
+					precoFinal: (paoDeAlho * 2).toFixed(2),
+				},
+			]
+			return [dataCarnes, Bebida, outros]
 		}
-
-		// Mulher	
-		if(qtdMulher.length > 0){
-			var numMulher = qtdMulher[0].quantidade
-			var qntdMulheresC = (data[0].carne.mulher.carne * numMulher) / 1000	
-			var qntdMulheresF = (data[0].carne.mulher.frango * numMulher) / 1000	
-			var qntdMulheresS = (data[0].carne.mulher.suino * numMulher) / 1000	
-
-		}else{
-			 qntdMulheresC = 0
-			 qntdMulheresF = 0
-			 qntdMulheresS = 0
-		}
-		//Crianca
-		if(qtdCrianca.length > 0){
-			var numCrianca = qtdCrianca[0].quantidade
-			var qntdCriancaC = (data[0].carne.crianca.carne * numCrianca) / 1000;
-			var qntdCriancaF = (data[0].carne.crianca.frango * numCrianca) / 1000;	
-			var qntdCriancaS = (data[0].carne.crianca.suino * numCrianca) / 1000;	
-
-		}else{
-			 qntdCriancaC = 0
-			 qntdCriancaF = 0
-			 qntdCriancaS = 0
-		}
-		if (tiposBov.length > 0) {
-			tiposBov =  tiposBov.length
-		} else {
-			tiposBov = 1;	
-		}
-
-		if (tiposFrango.length > 0) {
-			tiposFrango = tiposFrango.length
-		} else {
-			tiposFrango = 1;
-		}
-
-		if (tiposSuino.length > 0 ) {
-			tiposSuino =  tiposSuino.length
-		} else {
-			tiposSuino = 1;
-		}
-
-		var qtdCarne = (qntdHomenC + qntdMulheresC + qntdCriancaC) / tiposBov
-		var qtdFrango = (qntdHomenF + qntdMulheresF + qntdCriancaF) / tiposFrango
-		var qtdSuino = (qntdHomenS + qntdMulheresS + qntdCriancaS) / tiposSuino
-
-		 var dataCarnes = [
-			{
-				id: 0,
-				tipo: "Carne Bovina",
-				qntdTotal: qtdCarne.toFixed(2),
-				carnes: tiposBov,
-				tipos: tipos1
-			},
-			{
-				id: 1,
-				tipo: "Carne de Frango",
-				qntdTotal: qtdFrango.toFixed(2),
-				carnes: tiposFrango,
-				tipos: tipos2	
-			},
-			{
-				id: 2,
-				tipo: "Carne Suína",
-				qntdTotal: qtdSuino.toFixed(2),
-				carnes: tiposSuino,
-				tipos: tipos3	
-			},
-		];
-		console.log(tipos1)
-		return dataCarnes
-    };
-	return <Context.Provider value={{CalcularCarne}}>{children}</Context.Provider>;
+		return <Context.Provider value={{CalcularCarne}}>{children}</Context.Provider>;
+	
 }
