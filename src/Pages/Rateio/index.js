@@ -12,7 +12,7 @@ export default function Rateio() {
   const [Rateio, setRateio] = useState(1);
 
   const guardarBanco = () => {
-     Rateio > 0 ? AsyncStorage.setItem("Rateio", JSON.stringify(Rateio)) && navigation.navigate("Localizacao") : 
+     Rateio > 0 ? AsyncStorage.setItem("Rateio", JSON.stringify(Rateio)) && navigation.navigate("Resultado") : 
      Toast.show({
       type: "info",
       position: "top",

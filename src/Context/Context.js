@@ -5,10 +5,6 @@ import Data, { data } from '../data'
 export const Context = createContext();
 
 export default function Provider({ children }) {
-<<<<<<< HEAD
-
-=======
->>>>>>> 015facb84976d11675f1821d1d13e61873ada558
 		const CalcularCarne = (listaPessoas,listaCarnes, listaBebidas) => {
 			//Filtrar a quantiadde de pessoas
 			let qtdHomem = listaPessoas.filter(item => item.sexo === "homem")
@@ -151,7 +147,7 @@ export default function Provider({ children }) {
 			sal = (sal * 20).toFixed(2)
 
 			var arroz = (numHomens + numMulher) * 0.1 + numCrianca * 0.09
-			arroz.toFixed(2)
+			
 
 			var farofa = (numHomens + numMulher + numCrianca) * 30
 
@@ -199,7 +195,7 @@ export default function Provider({ children }) {
 				},
 				{
 					tipo: "Arroz",
-					qntdTotal: arroz + " Kg",
+					qntdTotal: (arroz).toFixed(2) + " Kg",
 					precoFinal: (arroz * 5).toFixed(2),
 				},
 				{

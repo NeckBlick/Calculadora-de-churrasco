@@ -1,19 +1,16 @@
 import {
   View,
   Text,
-  Dimensions,
   TouchableOpacity,
   StyleSheet,
   ScrollView,
-  ActivityIndicator,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState, useContext } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { data } from "../../data";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Context } from "../../Context/Context";
-import { askAsync } from "expo-permissions";
+
 
 export default function Resultado() {
   const { CalcularCarne } = useContext(Context);
@@ -21,6 +18,7 @@ export default function Resultado() {
   const [dados, setDados] = useState([]);
   const [loading, setLoading] = useState(true);
   const [rateio, setRateio] = useState(0)
+	
 
   useEffect(() => {
     (async () => {
@@ -78,6 +76,8 @@ export default function Resultado() {
     if( rateio > 1){
       var totalRateio = total / rateio
     }
+
+
     return (
       <ScrollView style={style.container}>
         <View style={style.header}>
