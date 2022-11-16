@@ -5,7 +5,10 @@ import Data, { data } from '../data'
 export const Context = createContext();
 
 export default function Provider({ children }) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 015facb84976d11675f1821d1d13e61873ada558
 		const CalcularCarne = (listaPessoas,listaCarnes, listaBebidas) => {
 			//Filtrar a quantiadde de pessoas
 			let qtdHomem = listaPessoas.filter(item => item.sexo === "homem")
