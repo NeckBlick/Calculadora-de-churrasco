@@ -41,7 +41,7 @@ Você pode visualizar o layout do projeto através [desse link](https://www.figm
 
 ## :memo: Roando a aplicação
 
-####Após clonar o repositório, para instalar todas as dependências, utilize o comando:
+#### Após clonar o repositório, para instalar todas as dependências, utilize o comando:
 
 Instalação e vizualização do projeto:
 
