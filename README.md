@@ -1,6 +1,3 @@
-<h1 align="center">
-  <img alt="Carneats" title="Carneats" src="./src/Img/Logo.png" width="140"/>
-</h1>
 
 ## <img align="center" alt="Carneats" title="Carneats" src="./src/Img/Logo.png" width="30"/> Carneats  
 Aplicativo criado com o Expo que calcula o seu churrasco
