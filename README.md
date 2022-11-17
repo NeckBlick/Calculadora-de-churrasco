@@ -2,7 +2,7 @@
 Aplicativo criado com o Expo que calcula seu churrasco
 
 <h1 align="center">
-  <img alt="Carneats" title="Carneats" src="./Img/Logo.png" width="220px" />
+  <img alt="Carneats" title="Carneats" src="../Img/Logo.png" width="220px" />
 </h1>
 
 <p align="center">
@@ -39,22 +39,17 @@ A aplicação possui um usuário administrador, no qual, no painel de administra
 
 Você pode visualizar o layout do projeto através [desse link](https://www.figma.com/file/CZps7zB5MgH6Xiqo2DbPZi/Passagem_aerea?node-id=0%3A1). 
 
-## :memo: Como rodar a aplicação
+## :memo: Roando a aplicação
 
-Após clonar o repositório, para instalar todas as dependências, utilize o comando:
-
-### `npm install`
+####Após clonar o repositório, para instalar todas as dependências, utilize o comando:
 
 Instalação e vizualização do projeto:
 
 ```
 npm install 
-# --- ou ---
+--- ou ---
 yarn add
 ```
-### `npm start`
-
-Abra [http://localhost:3000](http://localhost:3000) para vizualizar no navegador.
 
 ---
 
