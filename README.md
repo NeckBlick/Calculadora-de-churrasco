@@ -34,7 +34,7 @@ O Carneats calcula a quantidade de carne e bebida necessária para um churrasco 
 </p>
 
 
-Você pode visualizar o layout do projeto através [desse link]([https://www.figma.com/file/EIKrn5JYGKPcrU7wpZckb4/Figma?node-id=0%3A1]). 
+Você pode visualizar o layout do projeto através [desse link]([https://www.figma.com/file/EIKrn5JYGKPcrU7wpZckb4/Figma?node-id=0%3A1](https://www.figma.com/file/EIKrn5JYGKPcrU7wpZckb4/Figma?node-id=0%3A1)). 
 
 ## :memo: Roando a aplicação
 
