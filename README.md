@@ -12,9 +12,9 @@ Aplicativo criado com o Expo que calcula o seu churrasco
 
 Esse projeto foi desenvolvido com as seguintes tecnologias:
 
-- React Native Versão:0.69.6
-- JavaScript   Versão:EC6
-- Expo         Versão:~46.0.16
+- React Native   `Versão:0.69.6`
+- JavaScript     `Versão:EC6`
+- Expo           `Versão:~46.0.16`
 
 
 ## 💻 Projeto
