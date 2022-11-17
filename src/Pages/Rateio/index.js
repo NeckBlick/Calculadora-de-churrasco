@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity, TextInput } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView } from "react-native";
 import { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
@@ -21,7 +21,7 @@ export default function Rateio() {
 				: Toast.show({
 						type: "info",
 						position: "top",
-						text1: "Selecione ao menos 1 pessoa!",
+						text1: "Preencha todos os campos",
 						visibilityTime: 3000,
 						autoHide: true,
 						onShow: () => {},
@@ -45,7 +45,7 @@ export default function Rateio() {
   }
 
   return (
-		<View style={style.container}>
+		<ScrollView style={style.container}>
 			<Toast />
 			<View style={style.header}>
 				<TouchableOpacity
@@ -81,7 +81,7 @@ export default function Rateio() {
 
 				<View style={style.containerInput}></View>
 				<Text style={style.title2}>Informações de contato:</Text>
-				<View>
+				<View style={style.containerfinal}>
 					<TextInput
 						style={style.input}
 						onChangeText={onChangeNome}
@@ -107,7 +107,7 @@ export default function Rateio() {
 			>
 				<Text style={style.textButton}>Avançar</Text>
 			</TouchableOpacity>
-		</View>
+		</ScrollView>
 	);
 }
 
@@ -193,8 +193,9 @@ const style = StyleSheet.create({
 		justifyContent: "center",
 		marginTop: 20,
 		position: "absolute",
-		bottom: 80,
+		bottom: "0%",
 		right: 50,
+		marginBottom: 20,
 	},
 	textButton: {
 		fontWeight: "500",
@@ -216,5 +217,8 @@ const style = StyleSheet.create({
 		marginRight: "auto",
 		padding: 10,
 		borderRadius: 10,
+	},
+	containerfinal:{
+		marginBottom: 150
 	},
 });

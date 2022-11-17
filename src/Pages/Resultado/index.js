@@ -207,7 +207,7 @@ export default function Resultado() {
 							calcularNovamente();
 						}}
 					>
-						<Icon name="arrow-left" size={20} color="#000" />
+					<Text style={style.textButton}>Resetar</Text>
 					</TouchableOpacity>
 					<TouchableOpacity
 						style={style.buttonParticipante}

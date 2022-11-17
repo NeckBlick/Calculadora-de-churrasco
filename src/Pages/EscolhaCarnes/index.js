@@ -123,7 +123,7 @@ export default function EscolhaCarnes() {
 	};
 
 	return (
-		<View style={style.container}>
+		<ScrollView style={style.container}>
 			<Toast />
 			<View style={style.header}>
 				<TouchableOpacity
@@ -266,7 +266,7 @@ export default function EscolhaCarnes() {
 					</View>
 				</View>
 			</View>
-			<View style={style.escolha}>
+			<View style={style.final}>
 				<Image source={Paozinho} style={style.paozinho} alt="pao de alho" />
 				<Checkbox
 					style={style.checkbox1}
@@ -286,7 +286,7 @@ export default function EscolhaCarnes() {
 			>
 				<Text style={style.textButton}>Avançar</Text>
 			</TouchableOpacity>
-		</View>
+		</ScrollView>
 	);
 }
 const style = StyleSheet.create({
@@ -304,6 +304,10 @@ const style = StyleSheet.create({
 	},
 	escolha: {
 		flexDirection: "row",
+	},
+	final: {
+		flexDirection: "row",
+		marginBottom: 130
 	},
 	tipo: {
 		flexDirection: "row",
@@ -375,8 +379,9 @@ const style = StyleSheet.create({
 		justifyContent: "center",
 		marginTop: 20,
 		position: "absolute",
-		bottom: 80,
+		bottom: "0%",
 		right: 50,
+		marginBottom: 20,
 	},
 	textButton: {
 		fontWeight: "500",

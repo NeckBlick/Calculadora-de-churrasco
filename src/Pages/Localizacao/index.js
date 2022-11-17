@@ -24,6 +24,7 @@ export default function App() {
   });
   const [loading, setLoading] = useState(true);
   const [loadingCep, setLoadingCep] = useState(true);
+  const [loadingMercado, setLoadingMercado] = useState(true)
   const [loadingAcougue, setLoadingAcougue] = useState(true)
   const [cep, setCep] = useState();
   const [markers, setMarkers] = useState([])
@@ -80,6 +81,14 @@ export default function App() {
     let { data } = await axios.get(`https://discover.search.hereapi.com/v1/discover?at=${lat},${lng}&q=a%C3%A7ougue&apiKey=vpElMOWqr4ByGBopvqPMFd1XGwI2kg0ah8R0q32Mieg`)
     setMarkers(data.items)
     setLoadingAcougue(false)
+  }
+  
+  const buscarMercado = async () => {
+    let lat = mapRegion.latitude
+    let lng = mapRegion.longitude
+    let { data } = await axios.get(`https://discover.search.hereapi.com/v1/discover?at=${lat},${lng}&q=mercado&apiKey=vpElMOWqr4ByGBopvqPMFd1XGwI2kg0ah8R0q32Mieg`)
+    setMarkers(data.items)
+    setLoadingMercado(false)
   }
 
   return (
@@ -152,21 +161,23 @@ export default function App() {
                   description={`${item.distance} metros de você`}
                 />
               ))}
+              {loadingMercado ? "" : markers.map(item => (
+                 <Marker
+                 key={item.position.lat}
+                  coordinate={{
+                    latitude: item.position.lat,
+                    longitude: item.position.lng,
+                  }}
+                  title={item.title}
+                  description={`${item.distance} metros de você`}
+                />
+              ))}
             </MapView>
       )}
        </View>
-       <TouchableOpacity style={style.lugaresProx} onPress={buscarAcougue}>
-        <Text style={{fontSize:16, color:"#fff"}}>Clique para buscar açougues próximos</Text>
+       <TouchableOpacity style={style.lugaresProx} onPress={buscarAcougue && buscarMercado}>
+        <Text style={{fontSize:16, color:"#fff"}}>Clique para buscar comercios próximos</Text>
         </TouchableOpacity>
-      <TouchableOpacity
-        style={style.buttonParticipante}
-        onPress={() => {
-          navigation.navigate("Resultado")
-
-        }}
-      >
-        <Text style={style.textButton}>Avançar</Text>
-      </TouchableOpacity>
     </View>
   );
 }
