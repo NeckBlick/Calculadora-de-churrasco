@@ -1,9 +1,9 @@
-## Carneats
-Aplicativo criado com o Expo que calcula seu churrasco
-
 <h1 align="center">
   <img alt="Carneats" title="Carneats" src="../Img/Logo.png" width="220px" />
 </h1>
+
+## Carneats
+Aplicativo criado com o Expo que calcula seu churrasco
 
 <p align="center">
   <a href="#-tecnologias">Tecnologias</a>&nbsp;|&nbsp;
@@ -43,7 +43,7 @@ Você pode visualizar o layout do projeto através [desse link](https://www.figm
 
 #### Após clonar o repositório, para instalar todas as dependências, utilize o comando:
 
-Instalação e vizualização do projeto:
+Instale as dependências com [![npm version](https://img.shields.io/npm/v/react-native-maps.svg?style=flat)]:
 
 ```
 npm install 
