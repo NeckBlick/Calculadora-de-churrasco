@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img alt="Carneats" title="Carneats" src="./Img/Logo.png" width="220px" />
+  <img alt="Carneats" title="Carneats" src="./src/Img/Logo.png" width="220px" />
 </h1>
 
 ## Carneats
