@@ -43,7 +43,7 @@ Você pode visualizar o layout do projeto através [desse link](https://www.figm
 
 #### Após clonar o repositório, para instalar todas as dependências, utilize o comando:
 
-Instale as dependências com [![npm version](https://img.shields.io/npm/v/react-native-maps.svg?style=flat)]:
+Instale as dependências com [![npm version](https://img.shields.io/npm/v/react-native-maps.svg?style=flat)](https://docs.npmjs.com/getting-started):
 
 ```
 npm install 
