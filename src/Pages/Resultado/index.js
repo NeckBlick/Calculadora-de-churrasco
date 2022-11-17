@@ -11,6 +11,8 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Context } from "../../Context/Context";
 import { GerarPdf } from './html'
+import * as Print from "expo-print";
+import { shareAsync } from "expo-sharing";
 
 
 export default function Resultado() {
@@ -18,7 +20,9 @@ export default function Resultado() {
   const navigation = useNavigation();
   const [dados, setDados] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [rateio, setRateio] = useState(0)
+  const [rateio, setRateio] = useState(0);
+  const [contato, setContato] = useState();
+  const [duracao, setDuracao] = useState();
  
 
   useEffect(() => {
@@ -28,15 +32,18 @@ export default function Resultado() {
       var bebidas = await AsyncStorage.getItem("Bebidas");
       var duracao = await AsyncStorage.getItem("Duracao");
       var rateio = await AsyncStorage.getItem("Rateio");
+      var contato = await AsyncStorage.getItem("Contato");
       pessoas = JSON.parse(pessoas);
       carnes = JSON.parse(carnes);
       bebidas = JSON.parse(bebidas);
+      contato = JSON.parse(contato)
       duracao = parseInt(duracao);
       rateio = parseInt(rateio);
-      setRateio(rateio)
+      setRateio(rateio);
+      setDuracao(duracao);
       setDados(CalcularCarne(pessoas, carnes, bebidas));
+      setContato(contato);
       setLoading(false);
-      console.log(dados)
     })();
   }, []);
 
@@ -78,129 +85,160 @@ export default function Resultado() {
       var totalRateio = total / rateio
     }
 
+    const mascaraTel = (tel) => {
+			if (tel) {
+				if (tel.length == 11) {
+					tel = tel.replace(/^(\d\d)(\d)/g, "($1)$2");
+					tel = tel.replace(/(\d{5})(\d)/, "$1-$2");
+					return tel;
+				}
+			}
+		};
 
     return (
-      <ScrollView style={style.container}>
-        <View style={style.header}>
-          <TouchableOpacity
-            style={style.botaoVoltar}
-            onPress={() => navigation.goBack()}
+			<ScrollView style={style.container}>
+				<View style={style.header}>
+					<TouchableOpacity
+						style={style.botaoVoltar}
+						onPress={() => navigation.goBack()}
+					>
+						<Icon name="arrow-left" size={20} color="#000" />
+					</TouchableOpacity>
+					<Text style={style.title}>Resultado final</Text>
+				</View>
+
+					<Text style={style.subtitle2}>Informações adicionais</Text>
+				<View style={style.texto}>
+					<Text style={style.contato}>Responsável: {contato.responsavel} </Text>
+					<Text style={style.contato}>
+						Tel. para contato: {mascaraTel(contato.telContato)}
+					</Text>
+          <Text style={style.contato}>Duração do evento: {duracao} horas  </Text>
+				</View>
+
+				<Text style={style.subtitle}>Carnes:</Text>
+
+				<View style={style.containerResultado}>
+					
+
+					{carnes.map((item) => (
+						<View style={style.containerGlobal} key={item.qntdTotal}>
+							<View style={style.container2}>
+								<View style={style.left}>
+									<Icon name="money" size={20} color="#000" />
+								</View>
+								<View style={style.right}>
+									<Text style={style.kilos}>
+										{item.qntdTotal} Kg de {item.tipo}
+									</Text>
+
+									{item.tipos.map((items) => (
+										<View key={items.assado} style={style.listOpcoes}>
+											<Text>
+												{items.assado} - R${items.total}
+											</Text>
+										</View>
+									))}
+								</View>
+							</View>
+							<View key={item.assado}>
+								<Text style={style.preco}>R${item.precoFinal}</Text>
+							</View>
+						</View>
+					))}
+				</View>
+
+				<Text style={style.subtitle}>Bebidas:</Text>
+
+				<View style={style.containerResultado}>
+					{bebidas.map((item) => (
+						<View style={style.containerGlobal} key={item.bebida}>
+							<View style={style.container2}>
+								<View style={style.left}>
+									<Icon name="money" size={20} color="#000" />
+								</View>
+								<View style={style.right}>
+									<Text style={style.kilos}>
+										{item.litrosTotal}L de {item.bebida}
+									</Text>
+								</View>
+							</View>
+							<View>
+								<Text style={style.preco}>R${item.total}</Text>
+							</View>
+						</View>
+					))}
+				</View>
+
+				<Text style={style.subtitle}>Outros: </Text>
+				<View style={style.containerResultado}>
+					{outros.map((item) => (
+						<View style={style.containerGlobal} key={item.tipo}>
+							<View style={style.container2}>
+								<View style={style.left}>
+									<Icon name="money" size={20} color="#000" />
+								</View>
+								<View style={style.right}>
+									<Text style={style.kilos}>
+										{item.qntdTotal} de {item.tipo}
+									</Text>
+								</View>
+							</View>
+							<View>
+								<Text style={style.preco}>R${item.precoFinal}</Text>
+							</View>
+						</View>
+					))}
+				</View>
+
+				<Text style={style.total}> Total: R${total.toFixed(2)} </Text>
+				{totalRateio ? (
+					<Text style={style.total}>
+						{" "}
+						Total dividido: R${totalRateio.toFixed(2)}{" "}
+					</Text>
+				) : (
+					<Text></Text>
+				)}
+				<View style={style.buttons}>
+					<TouchableOpacity
+						style={style.buttonParticipante}
+						onPress={() => {
+							calcularNovamente();
+						}}
+					>
+						<Icon name="arrow-left" size={20} color="#000" />
+					</TouchableOpacity>
+					<TouchableOpacity
+						style={style.buttonParticipante}
+						onPress={() => {
+							navigation.navigate("Receitas");
+						}}
+					>
+						<Text style={style.textButton}>Receitas</Text>
+					</TouchableOpacity>
+          </View>
+          <View style={style.buttons}>
+				<TouchableOpacity
+					style={style.buttonParticipante}
+					onPress={() => {
+            GerarPdf(carnes, bebidas, outros, contato);
+					}}
+				>
+					<Text style={style.textButton}>Salvar PDF</Text>
+				</TouchableOpacity>
+
+				<TouchableOpacity
+					style={style.buttonParticipante}
+					onPress={() => {
+            navigation.push("Localizacao");
+					}}
           >
-            <Icon name="arrow-left" size={20} color="#000" />
-          </TouchableOpacity>
-          <Text style={style.title}>Lista de Compra</Text>
-          <Text style={style.title2}>
-            (Esse aplicativo é apenas uma simulação, a quantidade e o preço é
-            apenas uma estimativa)
-          </Text>
+					<Text style={style.textButton}>Localização</Text>
+				</TouchableOpacity>
         </View>
-
-        <Text style={style.subtitle}>Carnes:</Text>
-
-        <View style={style.containerResultado}>
-          {carnes.map((item) => (
-            <View style={style.containerGlobal} key={item.qntdTotal}>
-              <View style={style.container2}>
-                <View style={style.left}>
-                  <Icon name="money" size={20} color="#000" />
-                </View>
-                <View style={style.right}>
-                  <Text style={style.kilos}>
-                    {item.qntdTotal} Kg de {item.tipo}
-                  </Text>
-
-                  {item.tipos.map((items) => (
-                    <View key={items.assado} style={style.listOpcoes}>
-                      <Text>
-                        {items.assado} - R${items.total}
-                      </Text>
-                    </View>
-                  ))}
-                </View>
-              </View>
-              <View key={item.assado}>
-                <Text style={style.preco}>R${item.precoFinal}</Text>
-              </View>
-            </View>
-          ))}
-        </View>
-
-        <Text style={style.subtitle}>Bebidas:</Text>
-
-        <View style={style.containerResultado}>
-          {bebidas.map((item) => (
-            <View style={style.containerGlobal} key={item.bebida}>
-              <View style={style.container2}>
-                <View style={style.left}>
-                  <Icon name="money" size={20} color="#000" />
-                </View>
-                <View style={style.right}>
-                  <Text style={style.kilos}>
-                    {item.litrosTotal}L de {item.bebida}
-                  </Text>
-                </View>
-              </View>
-              <View>
-                <Text style={style.preco}>R${item.total}</Text>
-              </View>
-            </View>
-          ))}
-        </View>
-
-        <Text style={style.subtitle}>Outros: </Text>
-        <View style={style.containerResultado}>
-          {outros.map((item) => (
-            <View style={style.containerGlobal} key={item.tipo}>
-              <View style={style.container2}>
-                <View style={style.left}>
-                  <Icon name="money" size={20} color="#000" />
-                </View>
-                <View style={style.right}>
-                  <Text style={style.kilos}>
-                    {item.qntdTotal} de {item.tipo}
-                  </Text>
-                </View>
-              </View>
-              <View>
-                <Text style={style.preco}>R${item.precoFinal}</Text>
-              </View>
-            </View>
-          ))}
-        </View>
-
-        <Text style={style.total}> Total: R${total.toFixed(2)} </Text>
-        {totalRateio ? 
-        <Text style={style.total}> Total dividido: R${totalRateio.toFixed(2)} </Text>
-        : <Text></Text>
-        }
-		<View style={style.buttons}>
-			<TouchableOpacity
-			style={style.buttonParticipante}
-			onPress={() => {
-				calcularNovamente();
-			}}
-			>
-			  <Icon name="arrow-left" size={20} color="#000" />
-			</TouchableOpacity>
-			<TouchableOpacity
-			style={style.buttonParticipante}
-			onPress={() => {
-				navigation.navigate("Receitas");
-			}}
-			>
-				<Text style={style.textButton}>Receitas</Text>
-			</TouchableOpacity>
-		</View>
-		<TouchableOpacity
-			style={style.buttonPdf}
-			onPress={() => {
-				GerarPdf(carnes, bebidas,outros)
-			}}
-			>
-				<Text style={style.textButton}>Salvar PDF</Text>
-			</TouchableOpacity>
-      </ScrollView>
-    );
+			</ScrollView>
+		);
   }
 }
 
@@ -212,7 +250,7 @@ const style = StyleSheet.create({
   },
   header: {
     width: "100%",
-    height: 200,
+    height: 150,
     alignItems: "center",
     justifyContent: "center",
     padding: 9,
@@ -231,7 +269,11 @@ const style = StyleSheet.create({
     textAlign: "center",
     justifyContent: "center",
     fontWeight: "400",
-    fontSize: 18,
+    fontSize: 14,
+  },
+  texto:{
+    marginLeft: 15,
+    marginBottom: 20,
   },
   subtitle: {
     fontSize: 28,
@@ -239,6 +281,12 @@ const style = StyleSheet.create({
     color: "white",
     justifyContent: "center",
     textAlign: "center",
+  },
+  subtitle2: {
+    fontSize: 28,
+    fontWeight: "600",
+    color: "white",
+    marginLeft: 15,
   },
   textButton: {
     fontWeight: "500",
@@ -315,6 +363,10 @@ const style = StyleSheet.create({
   kilos: {
     width: "100%",
     fontSize: 18,
+    fontWeight: "500",
+  },
+  contato: {
+    fontSize: 15,
     fontWeight: "500",
   },
   left: {

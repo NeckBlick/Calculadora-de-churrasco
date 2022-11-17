@@ -72,9 +72,7 @@ export default function App() {
         `https://geocode.search.hereapi.com/v1/geocode?q=${data.logradouro}+${data.bairro}&apiKey=vpElMOWqr4ByGBopvqPMFd1XGwI2kg0ah8R0q32Mieg`
       )
       .catch((erro) => {
-        console.log(err);
       });
-    console.log(response.data.items[0].position);
     setMapRegion({
       latitude: response.data.items[0].position.lat,
       longitude: response.data.items[0].position.lng,
@@ -90,7 +88,6 @@ export default function App() {
     setMarkers(data.items)
     setLoadingAcougue(false)
   }
-  console.log(markers)
 
   return (
     <View style={style.container}>
@@ -171,7 +168,7 @@ export default function App() {
       <TouchableOpacity
         style={style.buttonParticipante}
         onPress={() => {
-          // navigation.navigate("Resultado")
+          navigation.navigate("Resultado")
 
         }}
       >
