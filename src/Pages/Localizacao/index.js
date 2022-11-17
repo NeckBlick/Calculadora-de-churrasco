@@ -53,13 +53,6 @@ export default function App() {
       setLoading(false);
     })();
   }, []);
-  const mascaraCep = (cep) => {
-    if (cep) {
-      if (cep.length == 8) {
-        return cep.replace(/(\d{5})/g, "$1-", cep);
-      }
-    }
-  };
   const buscarCep = async () => {
     let { data } = await axios
       .get(`https://viacep.com.br/ws/${cep}/json/`)
@@ -94,7 +87,7 @@ export default function App() {
       <View style={style.header}>
         <TouchableOpacity
           style={style.botaoVoltar}
-          // onPress={() => navigation.goBack()}
+          onPress={() => navigation.goBack()}
         >
           <Icon name="arrow-left" size={20} color="#000" />
         </TouchableOpacity>
@@ -105,7 +98,7 @@ export default function App() {
         <TextInput
           placeholder="Digite o CEP do local"
           onChangeText={setCep}
-          value={mascaraCep(cep)}
+          value={cep}
           keyboardType="numeric"
           maxLength={9}
           style={style.cep}
@@ -150,7 +143,7 @@ export default function App() {
               )}
               {loadingAcougue ? "" : markers.map(item => (
                  <Marker
-                 
+                 key={item.position.lat}
                   coordinate={{
                     latitude: item.position.lat,
                     longitude: item.position.lng,

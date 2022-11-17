@@ -222,7 +222,7 @@ export default function Resultado() {
 				<TouchableOpacity
 					style={style.buttonParticipante}
 					onPress={() => {
-            GerarPdf(carnes, bebidas, outros, contato);
+            GerarPdf(carnes, bebidas, outros, contato, total, totalRateio);
 					}}
 				>
 					<Text style={style.textButton}>Salvar PDF</Text>

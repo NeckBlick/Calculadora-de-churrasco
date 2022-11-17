@@ -14,7 +14,7 @@ export default function Rateio() {
   const [tel, onChangeTel] = useState();
 
   const guardarBanco = () => {
-     Rateio > 0 && nome && tel
+     Rateio > 0 && contato
 				? AsyncStorage.setItem("Rateio", JSON.stringify(Rateio)) &&
 				  AsyncStorage.setItem("Contato", JSON.stringify(contato)) &&
 				  navigation.navigate("Resultado")
@@ -93,9 +93,9 @@ export default function Rateio() {
 						style={style.input}
 						onChangeText={onChangeTel}
 						value={mascaraTel(tel)}
-						placeholder= "Telefone"
-            keyboardType="numeric"
-            maxLength={14}
+						placeholder= "(00)12345-6789"
+            			keyboardType="numeric"
+            			maxLength={14}
 					/>
 				</View>
 			</View>
@@ -203,13 +203,13 @@ const style = StyleSheet.create({
 		lineHeight: 24,
 	},
 	containerInput: {
-		width: "100",
-    marginTop: 50,
+		width: "100%",
+    	marginTop: 50,
 	},
 	input: {
-    marginBottom: 20,
+    	marginBottom: 20,
 		backgroundColor: "#ffff",
-    color: "#000",
+    	color: "#000",
 		width: 300,
 		height: 50,
 		marginLeft: "auto",
