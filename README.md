@@ -12,9 +12,9 @@ Aplicativo criado com o Expo que calcula o seu churrasco
 
 Esse projeto foi desenvolvido com as seguintes tecnologias:
 
-- React Native
-- JavaScript
-- Expo
+- React Native Versão:0.69.6
+- JavaScript   Versão:EC6
+- Expo         Versão:~46.0.16
 
 
 ## 💻 Projeto
@@ -105,7 +105,7 @@ Essa tela possue sugestões de receitas de acordo com o tipo de carne que escolh
 
 Você pode visualizar o layout do projeto através [desse link]([https://www.figma.com/file/EIKrn5JYGKPcrU7wpZckb4/Figma?node-id=0%3A1](https://www.figma.com/file/EIKrn5JYGKPcrU7wpZckb4/Figma?node-id=0%3A1)). 
 
-## :memo: Roando a aplicação
+## :memo: Rodando a aplicação
 
 Instale as dependências com [![npm version](https://img.shields.io/npm/v/react-native-maps.svg?style=flat)](https://docs.npmjs.com/getting-started):
 
