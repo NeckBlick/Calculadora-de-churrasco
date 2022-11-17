@@ -10,6 +10,7 @@ import React, { useEffect, useState, useContext } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Context } from "../../Context/Context";
+import { GerarPdf } from './html'
 
 
 export default function Resultado() {
@@ -18,7 +19,7 @@ export default function Resultado() {
   const [dados, setDados] = useState([]);
   const [loading, setLoading] = useState(true);
   const [rateio, setRateio] = useState(0)
-	
+ 
 
   useEffect(() => {
     (async () => {
@@ -190,6 +191,14 @@ export default function Resultado() {
 				<Text style={style.textButton}>Receitas</Text>
 			</TouchableOpacity>
 		</View>
+		<TouchableOpacity
+			style={style.buttonPdf}
+			onPress={() => {
+				GerarPdf(carnes, bebidas,outros)
+			}}
+			>
+				<Text style={style.textButton}>Salvar PDF</Text>
+			</TouchableOpacity>
       </ScrollView>
     );
   }
@@ -252,6 +261,27 @@ const style = StyleSheet.create({
     alignItems: "center",
     color: "#fff",
     padding: 8,
+  },
+  buttonPdf:{
+	backgroundColor: "#E95811",
+    padding: 10,
+    borderRadius: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    width: 150,
+    height: 55,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 10,
+    marginLeft: "auto",
+    marginRight: "auto",
+    textAlign: "center",
   },
   buttonParticipante: {
     backgroundColor: "#E95811",
