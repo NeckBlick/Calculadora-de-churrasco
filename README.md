@@ -14,6 +14,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 - React Native   `Versão:0.69.6`
 - JavaScript     `Versão:EC6`
+- Node           `Versão:16.6.1`
 - Expo           `Versão:46.0.16`
 
 
