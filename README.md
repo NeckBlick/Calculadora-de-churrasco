@@ -101,9 +101,7 @@ Essa tela possue sugestões de receitas de acordo com o tipo de carne que escolh
 </p>    
 
 
-
-
-Você pode visualizar o layout do projeto através [desse link]([https://www.figma.com/file/EIKrn5JYGKPcrU7wpZckb4/Figma?node-id=0%3A1](https://www.figma.com/file/EIKrn5JYGKPcrU7wpZckb4/Figma?node-id=0%3A1)). 
+[`Clique aqui para vizualizar o prototipo do projeto`](https://www.figma.com/file/EIKrn5JYGKPcrU7wpZckb4/Figma?node-id=0%3A1)
 
 ## :memo: Rodando a aplicação
 
