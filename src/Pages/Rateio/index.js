@@ -14,7 +14,7 @@ export default function Rateio() {
   const [tel, onChangeTel] = useState();
 
   const guardarBanco = () => {
-     Rateio > 0 && contato
+     Rateio > 0 && nome && tel
 				? AsyncStorage.setItem("Rateio", JSON.stringify(Rateio)) &&
 				  AsyncStorage.setItem("Contato", JSON.stringify(contato)) &&
 				  navigation.navigate("Resultado")
