@@ -28,7 +28,7 @@ O Carneats calcula a quantidade de carne e bebida necessária para um churrasco 
 Aperte `"Calcular seu churrasco"` para começar a calcualar.
 
 <p align="center">
-  <img alt="Parte de cima do home" src="./src/Img/inicial.jpeg" width="300" height="550">
+  <img alt="Tela inicial" src="./src/Img/inicial.jpeg" width="300" height="550">
 </p>
 
 
@@ -37,7 +37,7 @@ Aperte `"Calcular seu churrasco"` para começar a calcualar.
 Escolha a quantidade de pessoas para seu churrasco.
 
 <p align="center">
-  <img alt="Parte de cima do home" src="./src/Img/participante.jpeg"  width="300" height="550">
+  <img alt="Tela de participantes" src="./src/Img/participante.jpeg"  width="300" height="550">
 </p>
 
 #### Tela de Carnes
@@ -45,7 +45,7 @@ Escolha a quantidade de pessoas para seu churrasco.
 Escolha os tipos de carne boniva, suína ou frango.
 
 <p align="center">
-  <img alt="Parte de cima do home" src="./src/Img/carnes.jpeg" width="300" height="550">
+  <img alt="Tela de carnes" src="./src/Img/carnes.jpeg" width="300" height="550">
 </p>
 
 #### Tela de Bebidas
@@ -53,7 +53,7 @@ Escolha os tipos de carne boniva, suína ou frango.
 Escolha as bebidas que estarão presentes.
 
 <p align="center">
-  <img alt="Parte de cima do home" src="./src/Img/bebidas.jpeg" width="300" height="550">
+  <img alt="Tela de bebidas" src="./src/Img/bebidas.jpeg" width="300" height="550">
 </p>
 
 #### Tela de Duração
@@ -61,7 +61,7 @@ Escolha as bebidas que estarão presentes.
 Escolha quanto tempo irá durar seu churrasco.
 
 <p align="center">
-  <img alt="Parte de cima do home" src="./src/Img/duracao.jpeg" width="300" height="550">
+  <img alt="Tela de duração" src="./src/Img/duracao.jpeg" width="300" height="550">
 </p>
 
 #### Tela de Rateio
@@ -69,7 +69,7 @@ Escolha quanto tempo irá durar seu churrasco.
 Escolha quantas pessoas vão pagar.
 
 <p align="center">
-  <img alt="Parte de cima do home" src="./src/Img/rateio.jpeg" width="300" height="550">
+  <img alt="Tela de rateio" src="./src/Img/rateio.jpeg" width="300" height="550">
 </p>
 
 #### Tela de Localização
@@ -77,7 +77,7 @@ Escolha quantas pessoas vão pagar.
 Indique o Cep do local do churrasco e clique para mostrar os açougues próximos.
 
 <p align="center">
-  <img alt="Parte de cima do home" src="./src/Img/localizacao.jpeg" width="100%">
+  <img alt="Tela de localização" src="./src/Img/localizacao.jpeg" width="100%">
 </p>    
 
 #### Tela de Resultado
@@ -85,10 +85,10 @@ Indique o Cep do local do churrasco e clique para mostrar os açougues próximos
 Essa tela exibe a quantidade e o valor detalhadamente de cada item para o seu churrasco.
 
 <p align="center">
-  <img alt="Parte de cima do home" src="./src/Img/final1.jpeg" width="300" height="550">
+  <img alt="Parte de cima da tela de resultado" src="./src/Img/final1.jpeg" width="300" height="550">
 </p>    
 <p align="center">
-  <img alt="Parte de cima do home" src="./src/Img/final2.jpeg" width="300" >
+  <img alt="Parte debaixo da tela de resultado" src="./src/Img/final2.jpeg" width="300">
 </p>    
 
 
@@ -97,7 +97,7 @@ Essa tela exibe a quantidade e o valor detalhadamente de cada item para o seu ch
 Essa tela possue sugestões de receitas de acordo com o tipo de carne que escolheu.
 
 <p align="center">
-  <img alt="Parte de cima do home" src="./src/Img/receitas.jpeg" width="300" height="550">
+  <img alt="Tela de receitas" src="./src/Img/receitas.jpeg" width="300" height="550">
 </p>    
 
 
