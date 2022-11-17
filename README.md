@@ -8,7 +8,7 @@ Aplicativo criado com o Expo que calcula seu churrasco
 <p align="center">
   <a href="#-tecnologias">Tecnologias</a>&nbsp;|&nbsp;
   <a href="#-projeto">Projeto</a>&nbsp;|&nbsp;
-  <a href="#-layout">Layout</a>&nbsp;|&nbsp;
+  <a href="#-layout">Layout</a>
 </p>
 
 ## 🚀 Tecnologias
