@@ -133,34 +133,69 @@ export default function Provider({ children }) {
 			for(let i  = 0; i < Bebida.length; i++){
 				if(Bebida[i].bebida === "Cerveja"){
 					let precoFinal = (Bebida[i].preco * Number(litrosAlcool.toFixed(2)));
-					Object.assign(Bebida[i], { litrosTotal: litrosAlcool.toFixed(2) });	 
+					Object.assign(Bebida[i], { litrosTotal: Math.round(litrostotal) });	 
 					Object.assign(Bebida[i], { total: precoFinal.toFixed(2) });	
 				}else{
 					let precoFinal = (Bebida[i].preco * Number(litrostotal.toFixed(2)));
 					Object.assign(Bebida[i], { total: precoFinal.toFixed(2) });	
-					Object.assign(Bebida[i], { litrosTotal: litrostotal.toFixed(2) });	 
+					Object.assign(Bebida[i], { litrosTotal: Math.round(litrostotal) });	 
 				}
 			}
 
 			//outros
 			carvao = (carvao * 0.66).toFixed(2)
-			sal = (sal * 20).toFixed(2)
-
+			carvao = Math.round(carvao/2.5)
+			
+			if (sal <= 16){
+				sal = 1
+			}else{
+				let pacote = sal
+				let pacotesal = 0
+				while(pacote > 1){
+					pacote /= 16
+					pacotesal += 1
+				}
+				sal = pacotesal
+			}
+			
+			
 			var arroz = (numHomens + numMulher) * 0.1 + numCrianca * 0.09
+			if (arroz <= 1){
+				arroz = 1
+			}else{
+				let pacote = arroz
+				let pacotearroz = 0
+				while(pacote >= 1){
+					pacote -= 1
+					pacotearroz += 1
+				}
+				arroz = pacotearroz
+			}
 			
 
 			var farofa = (numHomens + numMulher + numCrianca) * 30
+			if (farofa <= 500){
+				farofa = 1
+			}else{
+				let pacote = farofa
+				let pacotefarofa = 0
+				while(pacote > 1){
+					pacote /= 500
+					pacotefarofa += 1
+				}
+				farofa = pacotefarofa
+			}
 
-			var pao = (numHomens + numMulher) * 3 + numCrianca * 2
+			var pao = (numHomens + numMulher) * 2 + numCrianca * 1
 
-			paoDeAlho = (numHomens + numMulher) * 3 + numCrianca * 2	
+			paoDeAlho = (numHomens + numMulher) * 2 + numCrianca * 1	
 
 			//consumo
 			var dataCarnes = [
 					{
 						id: 0,
 						tipo: "Carne Bovina",
-						qntdTotal: (qtdCarne * tiposBov).toFixed(2),
+						qntdTotal: (qtdCarne * tiposBov).toFixed(3),
 						carnes: tiposBov,
 						tipos: tiposB,
 						precoFinal: precoTotalC.toFixed(2),
@@ -168,7 +203,7 @@ export default function Provider({ children }) {
 					{
 						id: 1,
 						tipo: "Frango",
-						qntdTotal: (qtdFrango * tiposFrango).toFixed(2),
+						qntdTotal: (qtdFrango * tiposFrango).toFixed(3),
 						carnes: tiposFrango,
 						tipos: tiposF,
 						precoFinal: precoTotalF.toFixed(2),
@@ -176,7 +211,7 @@ export default function Provider({ children }) {
 					{
 						id: 2,
 						tipo: "Carne Suína",
-						qntdTotal: (qtdSuino * tiposSuino).toFixed(2),
+						qntdTotal: (qtdSuino * tiposSuino).toFixed(3),
 						carnes: tiposSuino,
 						tipos: tiposS,
 						precoFinal: precoTotalS.toFixed(2),
@@ -185,23 +220,23 @@ export default function Provider({ children }) {
 			var outros = [
 				{
 					tipo: "Carvão",
-					qntdTotal: carvao + " Kg",
-					precoFinal: (carvao * 3.5).toFixed(2),
+					qntdTotal: carvao + " Sacos(2.5kg)",
+					precoFinal: Math.round(carvao * 3.5),
 				},
 				{
 					tipo: "Sal Grosso",
-					qntdTotal: sal + "g",
-					precoFinal: (sal * 0.002).toFixed(2),
+					qntdTotal: sal + " Pacote(s)",
+					precoFinal: Math.round(sal * 2),
 				},
 				{
 					tipo: "Arroz",
-					qntdTotal: (arroz).toFixed(2) + " Kg",
-					precoFinal: (arroz * 5).toFixed(2),
+					qntdTotal: arroz + " Kg",
+					precoFinal: Math.round(arroz * 5),
 				},
 				{
 					tipo: "Farofa",
-					qntdTotal: farofa + "g",
-					precoFinal: (farofa * 0.02).toFixed(2),
+					qntdTotal: farofa + " Pacote(s)",
+					precoFinal: Math.round(farofa * 10),
 				},
 				{
 					tipo: "Pão Francês",

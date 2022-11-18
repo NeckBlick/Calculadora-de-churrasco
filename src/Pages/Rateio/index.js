@@ -96,6 +96,7 @@ export default function Rateio() {
 						placeholder= "(00)12345-6789"
             			keyboardType="numeric"
             			maxLength={14}
+            			minLength={14}
 					/>
 				</View>
 			</View>

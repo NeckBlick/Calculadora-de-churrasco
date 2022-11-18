@@ -11,7 +11,7 @@ export default function TelaInicial() {
 			<Image source={Logo} alt="Logo" style={style.logo} />
 			<TouchableOpacity
 				onPress={() => {
-					navigation.navigate("Participante");
+					navigation.navigate("Resultado");
 				}}
 			>
 				<Text style={style.textCalcular}>Calcular seu churrasco</Text>
