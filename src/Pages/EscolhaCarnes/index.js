@@ -55,10 +55,10 @@ export default function EscolhaCarnes() {
 			estado: isContra,
 		},
 		{
-			assado: "Coxão Mole",
+			assado: "Cupim",
 			tipo: "bovino",
 			ytid: "rTFAqmSzJtY",
-			preco: 30,
+			preco: 34,
 			estado: isCoxao,
 		},
 		{
@@ -175,7 +175,7 @@ export default function EscolhaCarnes() {
 							color={isCoxao ? "#E95811" : undefined}
 						/>
 						<TouchableOpacity onPress={() => setCoxao(!isCoxao)}>
-							<Text style={style.nome}>Coxão Mole</Text>
+							<Text style={style.nome}>Cupim</Text>
 						</TouchableOpacity>
 					</View>
 				</View>

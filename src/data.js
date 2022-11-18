@@ -44,12 +44,12 @@ export const data = [
         pessoa: 30,
       }, 
       paoAlho:{ //unidade
-        pessoa: 3,
-        crianca: 2
+        pessoa: 2,
+        crianca: 1
       },   
       pao: { // Quantidade de pão
-        adulto: 3,
-        crianca: 2,
+        adulto: 2,
+        crianca: 1,
       },
 
     },
