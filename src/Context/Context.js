@@ -15,7 +15,7 @@ export default function Provider({ children }) {
 			let tiposFrango = listaCarnes.filter (item => item.tipo === "frango")
 			let tiposSuino = listaCarnes.filter (item => item.tipo === "suino")
 			let paoDeAlho = listaCarnes.filter (item => item.tipo === "pao" && item.estado === true)
-
+			
 			let Bebida = listaBebidas.filter(item => item.estado === true)
 			var tiposB = tiposBov
 			var tiposF = tiposFrango
@@ -188,7 +188,9 @@ export default function Provider({ children }) {
 
 			var pao = (numHomens + numMulher) * 2 + numCrianca * 1
 
-			paoDeAlho = (numHomens + numMulher) * 2 + numCrianca * 1	
+			paoDeAlho.length > 0 ? paoDeAlho = (numHomens + numMulher) * 3 + numCrianca * 2 : null
+
+
 
 			//consumo
 			var dataCarnes = [
@@ -243,12 +245,15 @@ export default function Provider({ children }) {
 					qntdTotal: pao + " Un",
 					precoFinal: (pao * 0.5).toFixed(2),
 				},
-				{
+			]
+
+			if(paoDeAlho.length > 0 || paoDeAlho > 0){
+				outros.push({
 					tipo: "Pão de Alho",
 					qntdTotal: paoDeAlho + " Un",
 					precoFinal: (paoDeAlho * 2).toFixed(2),
-				},
-			]
+				});
+			}
 			return [dataCarnes, Bebida, outros]
 		}
 		return <Context.Provider value={{CalcularCarne}}>{children}</Context.Provider>;
