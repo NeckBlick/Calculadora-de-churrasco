@@ -222,8 +222,8 @@ export default function Provider({ children }) {
 			var outros = [
 				{
 					tipo: "Carvão",
-					qntdTotal: carvao + " Sacos(2.5kg)",
-					precoFinal: Math.round(carvao * 3.5),
+					qntdTotal: carvao + " Saco(s) - (2.5kg)",
+					precoFinal: Math.round(carvao * 18),
 				},
 				{
 					tipo: "Sal Grosso",
@@ -259,4 +259,3 @@ export default function Provider({ children }) {
 		return <Context.Provider value={{CalcularCarne}}>{children}</Context.Provider>;
 	
 }
-
