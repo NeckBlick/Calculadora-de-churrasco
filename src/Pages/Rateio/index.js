@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView } from "react-native";
-import { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView, } from "react-native";
+import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -12,6 +12,15 @@ export default function Rateio() {
   const [Rateio, setRateio] = useState(1);
   const [nome, onChangeNome] = useState();
   const [tel, onChangeTel] = useState();
+
+  useEffect(() => {
+		navigation.addListener("focus", async () => {
+			let Rateio = await AsyncStorage.getItem("Rateio");
+			if (Rateio == null) {
+				setRateio(1);
+			}
+		});
+	}, []); 
 
   const guardarBanco = () => {
      Rateio > 0 && nome && tel

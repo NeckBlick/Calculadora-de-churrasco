@@ -11,6 +11,16 @@ export default function Participante() {
   const [child, setChild] = useState(0);
   const navigation = useNavigation();
 
+  useEffect (() => { 
+    navigation.addListener('focus', async () => {
+      let participantes = await AsyncStorage.getItem("Participantes")
+      if(participantes == null){
+        setMale(0)
+        setFemale(0)
+        setChild(0)
+      }
+    } )
+  },[]) 
   var dataPart = [
     {sexo: "homem", quantidade: male },
     {sexo: "mulher", quantidade: female },
@@ -20,16 +30,17 @@ export default function Participante() {
 const guardarBanco = () => {
 	let qtdPessoa = dataPart.filter(item => item.quantidade > 0 );
           
-  qtdPessoa.length > 0 ? AsyncStorage.setItem("Participantes", JSON.stringify(qtdPessoa)) && navigation.navigate("Carnes") : 
-  Toast.show({
-    type: "info",
-    position: "top",
-    text1: "Selecione ao menos 1 participante!",
-    visibilityTime: 3000,
-    autoHide: true,
-    onShow: () => {},
-    onHide: () => {},
-    });
+  qtdPessoa.length > 0
+		? AsyncStorage.setItem("Participantes", JSON.stringify(qtdPessoa)) && navigation.navigate("Carnes")
+		: Toast.show({
+				type: "info",
+				position: "top",
+				text1: "Selecione ao menos 1 participante!",
+				visibilityTime: 3000,
+				autoHide: true,
+				onShow: () => {},
+				onHide: () => {},
+		  });
 };
   return (
     <View style={style.container}>
